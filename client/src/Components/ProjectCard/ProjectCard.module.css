@@ -1,0 +1,43 @@
+#mainDiv {
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgb(0 0 0 / 3%);
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 25px;
+    margin: 25px 0px;
+    width: 90%;
+    justify-content: space-between;
+}
+
+#imgDiv {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid rgb(231, 231, 231);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+}
+
+#icon {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.redirectDiv {
+    margin-right: 25px;
+    font-size: 16px;
+    font-weight: 200;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

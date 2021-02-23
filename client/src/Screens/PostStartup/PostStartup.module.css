@@ -1,0 +1,189 @@
+#fixedDiv {
+    position: fixed;
+    background: black;
+    height: 100%;
+    width: 240px;
+    color: white;
+}
+
+#invertedLogo {
+    height: 50px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+#userDiv {
+    width: 50%;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#miniLoading {
+    height: 20px;
+}
+
+#founder {
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#PPic {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 50%;
+    margin-right: 25px;
+}
+
+#invertedLogoSettings {
+    max-width: 200px;
+    margin-right: 15px;
+    max-height: 75px;
+}
+
+#logoDivS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+#logoDiv {
+    display: flex;
+    align-items: center;
+    padding: 34px 12px;
+}
+
+#link {
+    text-decoration: none;
+    color: white;
+}
+
+#secondDiv {
+    margin-left: 250px;
+    color: black;
+    width: 100%;
+    padding: 34px 48px 0 64px;
+}
+
+#profilePicDiv {
+    display: flex;
+    align-items: center;
+    margin: 25px 0px;
+}
+
+#profilePic {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 5px solid rgb(231, 231, 231);
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    object-fit: contain;
+    height: 75px;
+    width: 75px;
+}
+
+.input {
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 5px;
+    background: transparent;
+    font-size: 17.5px;
+    font-family: 'Nunito';
+    outline: none;
+    padding: 10px;
+    margin: 15px 0px;
+    width: 50%;
+}
+
+#alert {
+    width: 50%;
+    margin-top: 25px;
+}
+
+#loading {
+    margin: 25px 0px;
+}
+
+.socialMediaInput {
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 5px;
+    background: transparent;
+    font-size: 15px;
+    font-family: 'Nunito';
+    outline: none;
+    padding: 10px;
+    margin: 15px 0px;
+    width: 300px;
+}
+
+#socialDiv {
+    margin: 25px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#fileDrop {
+    display: none;
+}
+
+#logoLabel {
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 5px;
+    font-weight: 500;
+    width: 25%;
+    font-size: 17.5px;
+    padding: 15px;
+    text-align: center;
+    margin: 15px 0px;
+    cursor: pointer;
+}
+
+#logoLabel:hover {
+    background: black;
+    border: 2px solid black;
+    color: white;
+}
+
+.textarea {
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 5px;
+    background: transparent;
+    font-size: 17.5px;
+    font-family: 'Nunito';
+    outline: none;
+    padding: 10px;
+    margin: 15px 0px;
+    width: 50%;
+    height: 200px;
+}
+
+#uploadBtn {
+    border-radius: 5px;
+    font-weight: 600;
+    width: 23%;
+    font-size: 17.5px;
+    padding: 15px;
+    text-align: center;
+    margin: 15px 0px;
+    cursor: pointer;
+    background: black;
+    color: white;
+    border: 2px solid black;
+    font-family: 'Nunito';
+}
+
+#link {
+    text-decoration: none;
+    color: white;
+}

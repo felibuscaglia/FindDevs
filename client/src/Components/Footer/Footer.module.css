@@ -1,0 +1,38 @@
+#footer {
+    background: black;
+    color: #ffffff;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#verification { 
+    height: 25px;
+    margin-right: 5px;
+}
+
+.footerDiv {
+    padding: 10px;
+    border: 2px solid white;
+    font-size: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin: 0px 100px;
+}
+
+.footerDiv:hover {
+    color: black;
+    background: white;
+    cursor: pointer;
+}
+
+.links {
+    color: white;
+    text-decoration: none;
+}
+
+.links:hover {
+    color: white;
+}

@@ -1,0 +1,102 @@
+#header {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.dropdownIcn {
+    font-family: 'Nunito';
+    font-weight: 200;
+    font-size: 20px;
+}
+
+#icon {
+    max-height: 100px;
+    max-width: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.dropdownBtn {
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#profilePic {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.dropdown {
+    text-align: left;
+    margin-right: 50px;
+    font-family: 'Nunito';
+    font-weight: 400;
+    width: 100%;
+}
+
+#dropdownDiv {
+    display: flex;
+    width: 15%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#postBtn {
+    font-family: 'Nunito';
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#postBtn:hover {
+    background: whitesmoke
+}
+
+.notificationDiv {
+    margin-top: 50px;
+}
+
+#alert {
+    height: 10px;
+    width: 10px;
+    background: red;
+    border-radius: 50%;
+}
+
+#alert {
+    font-size: 10px;
+    color: red;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+}
+
+#input {
+    background: transparent;
+    border: none;
+    font-family: 'Nunito';
+    margin-left: 10px;
+}
+
+#inputDiv {
+    background: whitesmoke;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin-right: 50px;
+}

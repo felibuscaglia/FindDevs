@@ -1,0 +1,120 @@
+#goPremiumBtn {
+    padding: 10px;
+    font-family: 'Nunito';
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+#goPremiumBtn:hover {
+    color: #f9f9f9;
+    background: black;
+}
+
+#mainDiv {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form {
+    background-color: #181818;
+    width: 60%;
+    height: 85%;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 150px;
+    padding: 25px;
+    color: white;
+}
+
+#icon {
+    height: 20px;
+    margin-right: 5px;
+}
+
+#firstDiv {
+    text-align: left;
+    margin-right: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pro {
+    margin: 10px 0px;
+}
+
+#price {
+    background-color: #8c50ff;
+    padding: 10px 40px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.advert {
+    font-size: 12px;
+    font-weight: 200;
+    margin: 10px 0px;
+    color: rgb(202, 202, 202);
+    font-size: 14px;
+    margin: 0px;
+}
+
+
+#paymentDiv {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#advertPay {
+    padding: 5px 20px;
+    font-size: 14px;
+    border:  2px solid #8c50ff;
+    color: #8c50ff;
+    border-radius: 5px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+#titleGP {
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+#btn {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    font-family: 'Nunito';
+    font-weight: 800;
+    padding: 10px;
+    cursor: pointer;  
+    background-color: #8c50ff;
+    border: 3px solid #8c50ff;
+    width: 50%;
+}
+
+#btn:hover {
+    background-color: transparent;
+    color: #8c50ff;;
+}

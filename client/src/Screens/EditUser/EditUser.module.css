@@ -1,0 +1,187 @@
+#mainImage {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: -10;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    background: #f9f9f9;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+#form {
+    background-color: white;
+    border-radius: 10px;
+    width: 80%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+#profilePic {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+#fileDrop {
+    display: none;
+}
+
+
+#logoLabel {
+    border: 2px solid rgb(231, 231, 231);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 17.5px;
+    padding: 15px;
+    text-align: center;
+    margin: 25px 0px;
+    cursor: pointer;
+    width: 230px;
+}
+
+#logoLabel:hover {
+    background: black;
+    border: 2px solid black;
+    color: white;
+}
+
+#verification {
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#GPdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 25px 0px;
+}
+
+#imageDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 150px;
+}
+
+.dropdown {
+    margin: 5px 0px;
+    font-family: 'Nunito';
+    font-size: 17px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(231, 231, 231);
+    width: 400px;
+}
+
+.input {
+    margin: 5px 0px;
+    font-family: 'Nunito';
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(231, 231, 231);
+    width: 300px;
+}
+
+.biggerInput {
+    margin: 5px 0px;
+    font-family: 'Nunito';
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(231, 231, 231);
+    width: 400px;
+    margin-right: 25px;
+}
+
+.textarea {
+    margin: 5px 0px;
+    font-family: 'Nunito';
+    font-size: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(231, 231, 231);
+    width: 400px;
+    height: 200px;
+}
+
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0px;
+}
+
+#skillBtn {
+    font-size: 17px;
+    font-weight: 200;
+    margin-right: 25px;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    font-family: 'Nunito';
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#skillDiv {
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#lowEnphasis {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+  }
+
+#btn {
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    font-family: 'Nunito';
+    font-weight: 800;
+    padding: 10px;
+    cursor: pointer;
+    width: 300px;
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+
+  #btn:disabled {
+      cursor: not-allowed;
+  }
+
+  .errors {
+      font-size: 12px;
+      color: red;
+  }
+
+  #socialDiv {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+  }

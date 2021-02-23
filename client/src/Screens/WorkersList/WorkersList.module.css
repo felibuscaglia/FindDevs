@@ -1,0 +1,117 @@
+#mainImage {
+    background-image: url(https://images.pexels.com/photos/5749152/pexels-photo-5749152.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    width: 100%;
+    height: 400px;
+    background-position: bottom;
+    display: flex;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+
+#loading {
+    height: 75px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#searchDiv {
+    background-color: white;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 35px;
+    margin-bottom: 100px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+#empty {
+    height: 500px;
+}
+
+#emptyDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 100px;
+}
+
+::-webkit-scrollbar {display:none;}
+
+#searchInput {
+    width: 340px;
+    color: black;
+    border: none;
+    margin-left: 10px;
+    font-family: 'Nunito';
+    font-size: 20px;
+    font-weight: 600;
+    z-index: 11;
+}
+
+#secondDivEmpty {
+    margin-left: 270px;
+    color: black;
+    width: 90%;
+    padding: 34px 48px 0 0px;
+    margin-top: 90px;
+}
+
+#userCards {
+    display: flex;
+    overflow-x: auto;
+    max-width: 100%;
+    margin-bottom: 100px;
+    padding: 25px 0px;
+}
+
+#verification {
+    height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#filteredDiv {
+    background-color: #f9f9f9;
+    padding: 25px 50px;
+    border-radius: 5px;
+    margin: 25px 0px;
+    width: 81%;
+    align-self: center;
+    z-index: 1000;
+}
+
+#GPdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#skillSpan {
+    font-size: 12.5px;
+    font-weight: 800;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
+#goPremiumBtn {
+    padding: 10px;
+    font-family: 'Nunito';
+    font-weight: 600;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+#goPremiumBtn:hover {
+    color: #f9f9f9;
+    background: black;
+}
