@@ -30,13 +30,11 @@ function JobPanel({ projectID }) {
                     </div>
                     <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn}>Post a job</span></Link>
                 </div> :
-                <div id={style.secondDivEmpty}>
-                    <div className='displayFlex' id='alignItemsCenter'>
-                        <img src={Empty} id={style.empty} />
-                        <div>
-                            <h1 style={{ marginBottom: '25px' }} className='font800'>Start gathering the team.</h1>
-                            <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn2}>Post a job</span></Link>
-                        </div>
+                <div id={style.emptyDiv}>
+                    <img src={Empty} id={style.empty} />
+                    <div>
+                        <h1 style={{ marginBottom: '25px' }} className='font800'>No jobs posted.</h1>
+                        <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn2}>Post a job</span></Link>
                     </div>
                 </div>}
         </div>

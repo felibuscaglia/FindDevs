@@ -11,7 +11,7 @@ server.get('/', (req, res, next) => {
 server.get('/:jobId/jobInfo', (req, res, next) => {
     const { jobId } = req.params;
 
-    JobOpportunity.findByPk(jobId, { include: [{ model: User, as: 'Applicants' }, { model: Project }, { model: Skills }] })
+    JobOpportunity.findByPk(jobId, { include: [{ model: User, as: 'Applicants' }, { model: Project, include: { model: User } }, { model: Skills }] })
         .then(job => res.status(200).json(job))
         .catch(next)
 })

@@ -33,7 +33,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                         {screen &&
                             <div>
                                 <h1 className='font800'>Select a project</h1>
-                                <div className='displayFlex' id='flexWrap'>
+                                <div className='justifyCenter' id='flexWrap'>
                                     {user.projects && user.projects.map(project =>
                                         project.userXprojects.isFounder ?
                                             <div style={{ background: selection.project && selection.project.name === project.name ? 'rgb(231,231,231' : null }} onClick={() => getInfoAndSetProject(project)} id={style.projectDiv}>

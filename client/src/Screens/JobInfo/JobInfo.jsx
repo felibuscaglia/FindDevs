@@ -9,13 +9,17 @@ function JobInfo({ jobID, user }) {
     const [job, setJob] = useState({});
     const [applied, setApplied] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isMember, setIsMember] = useState (false);
 
     useLayoutEffect(() => {
         axios.get(`http://localhost:5001/jobs/${jobID}/jobInfo`)
             .then(jobInfo => {
                 setJob(jobInfo.data);
                 const found = jobInfo.data.Applicants.find (applicant => applicant.id === user.id);
-                if (found && found.username) setApplied (true);
+                const findMember = jobInfo.data.project.users.find (member => member.id === user.id );
+                if (findMember) {
+                    setIsMember (true);
+                } else if (found && found.username) setApplied (true)
                 setLoading (false);
             })
             .catch(err => console.log(err))
@@ -27,24 +31,27 @@ function JobInfo({ jobID, user }) {
             .catch(err => console.log(err))
     }
 
+    console.log ('JOB: ', job);
+
     return (
         <div>
             {!loading ?
                 <div>
                     {job.project &&
                         <div style={{ background: job.project && job.project.mainColor }} id={style.mainDiv}>
-                            <Link className='links' to='/jobs'><span id={style.goBack}><i style={{ marginRight: '10px' }} class="fas fa-arrow-left"></i>More jobs</span></Link>
+                            <Link className='links' to='/jobs'><span style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000' }} id={style.goBack}><i style={{ marginRight: '10px' }} class="fas fa-arrow-left"></i>More jobs</span></Link>
                             <Link className='links' to={`/project/profile/${job.project.id}`}>
                                 <div className='displayFlex' id='alignItemsCenter'>
                                     <div id={style.projectLogoDiv}>
                                         <img src={job.project.logo} id={style.logo} />
                                     </div>
-                                    <h5 className='font800'>{job.project.name}</h5>
+                                    <h5 style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000' }} className='font800'>{job.project.name}</h5>
                                 </div>
                             </Link>
                             <h1 id={style.jobTitle}>{job.title}</h1>
                             <div id={style.btnDiv}>
-                                {applied ?
+                                {isMember ? <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You are already part of {job.project.name}.</span> :
+                                applied ?
                                     <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You have applied to this job</span> :
                                     <button onClick={applyToJob} style={{ color: job.project.mainColor }} id={style.applyBtn}>Apply to this job</button>
                                 }

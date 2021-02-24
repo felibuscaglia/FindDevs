@@ -115,7 +115,7 @@ function HeaderUser(props) {
                                     onClose={handleClose2}
                                     className={style.notificationDiv}
                                 >
-                                    <MenuItem onClick={() => window.location.replace(`/edit/user/${props.userInfo.username}`)}>
+                                    <MenuItem onClick={() => window.location.replace('/edit/user/me')}>
                                         <div class={style.dropdown}>
                                             <span>Edit your profile</span>
                                         </div>

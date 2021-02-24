@@ -27,8 +27,6 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
         return <img id={style.loading} src={Loading} />
     }
 
-    console.log(userInfo, 'user info')
-
     return (
         <div className='displayFlexColumn'>
             <div id={style.mainImage}>

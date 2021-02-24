@@ -9,7 +9,7 @@ server.post("/register", async function (req, res, next) {
     const { id, username } = user;
     res.send(jwt.sign({ id, username }, "Crazygol1!"));
   } catch (error) {
-    next(error)
+    next (error)
   }
 });
 

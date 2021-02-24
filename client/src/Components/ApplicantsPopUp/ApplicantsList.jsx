@@ -3,7 +3,7 @@ import style from './ApplicantsPopUp.module.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Loading from '../../Media/Loading.gif';
-import Empty from '../../Media/Empty.svg';
+import Empty from '../../Media/JobApplicants.svg';
 
 function ApplicantsList({ job, projectName, applicants, close, setDecided, setApplicants }) {
 

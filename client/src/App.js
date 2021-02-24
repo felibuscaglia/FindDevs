@@ -42,13 +42,13 @@ function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotificat
             <Route path='/' render={({ location }) => < HeaderUser pathname={location} />} />
             <Switch>
                 <Route exact path='/' component={Homepage} />
+                <Route exact path='/jobs' component={JobListings} />
                 <Route exact path='/user/:username' render={({ match, location }) => < UserProfile pathname={location} username={match.params.username} />} />
                 <Route exact path='/project/post' component={PostStartup} />
                 <Route exact path='/project/profile/:projectId' render={({ match }) => < ProjectProfile projectID={match.params.projectId} />} />
                 <Route exact path='/admin/panel' component={StartupAdminPanel} />
                 <Route exact path='/project/jobPanel/:projectId' render={({ match }) => < JobPanel projectID={match.params.projectId} />} />
                 <Route exact path='/project/addJob/:projectId' render={({ match }) => < AddJob projectID={match.params.projectId} />} />
-                <Route exact path='/jobs' component={JobListings} />
                 <Route exact path='/project/settings/:projectId' render={({ match }) => <SettingsPanel projectID={match.params.projectId} />} />
                 <Route exact path='/job/info/:jobId' render={({ match }) => < JobInfo jobID={match.params.jobId} />} />
                 <Route exact path='/edit/user/me' component={EditUser} />
@@ -56,7 +56,6 @@ function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotificat
                 <Route exact path='/suggestions' render={({ location }) => <Suggestions pathname={location} />} />
                 <NotFound />
             </Switch>
-            <Route path='/' component={NavBar} />
             <Route exact path='/' component={Footer} />
         </div>
     )

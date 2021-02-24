@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import style from './PopUpStyle.module.css';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 import randomColor from 'randomcolor';
 import { getBrightness } from '../../utils';
 
@@ -40,11 +39,10 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
         axios.post('http://localhost:5001/auth/register', input)
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res.data));
-                const user = jwt.decode(res.data);
                 window.location.replace('/edit/user/me');
             })
             .catch(err => {
-                setErrors({ ...errors, username: 'Username already taken' });
+                setErrors({ ...errors, username: 'Username already taken', email: 'A user with this email already exists.' });
                 setDisabled(true);
             })
     }
@@ -93,4 +91,5 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
     )
 }
 
-export default RegisterPopUp;
+
+export default RegisterPopUp

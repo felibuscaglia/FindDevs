@@ -9,8 +9,10 @@ import Loading from '../../Media/Loading.gif';
 import { BlockPicker } from 'react-color';
 import axios from 'axios';
 import { getBrightness } from '../../utils';
+import jwt from 'jsonwebtoken';
+import { setUserInfo } from '../../Actions/index';
 
-function EditUser({ user, skills }) {
+function EditUser({ user, skills, setUserInfo }) {
 
     const [input, setInput] = useState({
         email: user.email,
@@ -30,26 +32,30 @@ function EditUser({ user, skills }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    async function asyncUseEffect (username) {
+        await (setUserInfo (username));
+    }
+
     useLayoutEffect(() => {
-        if (user.username) {
-            setPreview(user.profilePic);
-            setInput({
-                email: user.email,
-                color: user.color,
-                gitHub: user.gitHub,
-                linkedIn: user.linkedIn,
-                twitter: user.twitter,
-                description: user.description,
-                country: user.country,
-                region: user.region
-            })
-            setSelectedSkills(user.skills);
-            setLoading(false)
-        } else {
-            setTimeout (() => {
-                window.location.replace ('/error');
-            }, 1000)
+        if (!user.username) {
+            const user = jwt.decode (JSON.parse(localStorage.getItem ('user')))
+            if (user) {
+                asyncUseEffect (user.username);
+            } else window.location.replace('/error');
         }
+        setPreview(user.profilePic);
+        setInput({
+            email: user.email,
+            color: user.color,
+            gitHub: user.gitHub,
+            linkedIn: user.linkedIn,
+            twitter: user.twitter,
+            description: user.description,
+            country: user.country,
+            region: user.region
+        })
+        setSelectedSkills(user.skills);
+        setLoading(false)
     }, [user])
 
     function check(e) {
@@ -211,4 +217,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(EditUser);
+function mapDispatchToProps (dispatch) {
+    return {
+        setUserInfo: username => setUserInfo (username)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser);
