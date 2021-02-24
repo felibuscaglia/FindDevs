@@ -5,7 +5,6 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import randomColor from 'randomcolor';
 import { getBrightness } from '../../utils';
-import LogIn from './LoginPopUp';
 
 function RegisterPopUp({ isHomepage, isLogin, isMain }) {
 
@@ -17,17 +16,17 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
     function handleInputChange(e) {
         if (e.target.name === 'email') {
             if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(e.target.value))) {
-                setErrors({ ...errors, [e.target.name]: 'Please enter a valid email.' });
+                setErrors({ ...errors, email: 'Please enter a valid email.' });
                 setDisabled(true);
             } else {
-                setErrors({ ...errors, [e.target.name]: false })
+                setErrors ({ ...errors, email: false });
+                setDisabled (false);
             }
-        } else if (e.target.name === 'username') {
-            if (errors.username) setErrors({ ...errors, username: false })
-        } else {
-            if (errors.password) setErrors ({ ...errors, password: false })
         }
-        if (!errors['username'] && !errors['email'] && !errors['password']) setDisabled(false);
+        if (e.target.name === 'username' && errors.username) {
+            setErrors({ ...errors, username: false });
+            setDisabled(false);
+        }
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -35,16 +34,14 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
     }
 
     function handleSubmit() {
-        if (!input.password) return setErrors ({ ...errors, password: 'Please enter a password.'})
         input.color = randomColor();
-        console.log(typeof input.color, randomColor(), 'RANDOM COLOR')
         input.brightness = getBrightness(input.color);
         input.profilePic = 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png';
         axios.post('http://localhost:5001/auth/register', input)
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res.data));
                 const user = jwt.decode(res.data);
-                window.location.replace(`/edit/user/${user.username}`);
+                window.location.replace('/edit/user/me');
             })
             .catch(err => {
                 setErrors({ ...errors, username: 'Username already taken' });
@@ -87,7 +84,7 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
                                 <button id={style.showPassBtn} onClick={() => setShowPass(!showPass)}>{showPass ? 'Hide' : 'Show'}</button>
                             </div>
                             {errors['password'] && <span id={style.alertSpan}>{errors['password']}</span>}
-                            <button disabled={disabled} id={style.createBtn} onClick={() => handleSubmit()} >Create your account.</button>
+                            <button disabled={!input.username || !input.password || !input.email || disabled ? true : false} id={style.createBtn} onClick={() => handleSubmit()} >Create your account.</button>
                         </div>
                     </div>
                 </div>

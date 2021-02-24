@@ -112,6 +112,13 @@ button {
   height: 50px;
 }
 
+@media screen and (max-width: 480px) {
+  #icon {
+      height: 25px;
+  }
+}
+
+
 #lowEnphasis {
   color: rgba(0, 0, 0, 0.6);
 }

@@ -61,7 +61,7 @@ function UserProfile({ username, pathname }) {
                     <div style={{ backgroundColor: color, height: '125px', width: '100%', position: 'absolute', top: '96px', zIndex: '-10' }}></div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
                         <div id={style.socialMediaDiv} style={{ color: color }}>
-                            {isUser ? <Link className='link' to={`/edit/user/${user.username}`}><button style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id='btn'>UPDATE PROFILE</button></Link> : <HirePopUp applicantUsername={user.username} color={color} />}
+                            {isUser ? <Link className='link' to='/edit/user/me'><button style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id='btn'>UPDATE PROFILE</button></Link> : <HirePopUp applicantUsername={user.username} color={color} />}
                             {user.gitHub && <a target='_blank' href={user.gitHub} style={{ textDecoration: 'none', color: color }}><i class="fab fa-github-square"></i></a>}
                             {user.linkedIn && <a target='_blank' href={user.linkedIn} style={{ textDecoration: 'none', color: color }}><i class="fab fa-linkedin"></i></a>}
                             {user.twitter && <a target='_blank' href={user.twitter} style={{ textDecoration: 'none', color: color }}><i class="fab fa-twitter-square"></i></a>}

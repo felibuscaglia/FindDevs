@@ -7,11 +7,6 @@
     align-items: center;
 }
 
-#verification { 
-    height: 25px;
-    margin-right: 5px;
-}
-
 .footerDiv {
     padding: 10px;
     border: 2px solid white;
@@ -20,17 +15,40 @@
     display: flex;
     align-items: center;
     margin: 0px 100px;
-}
-
-.footerDiv:hover {
-    color: black;
-    background: white;
-    cursor: pointer;
+    transition: 0.3s;
 }
 
 .links {
     color: white;
     text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+    #footer {
+        flex-direction: column;
+        font-size: 18px;
+        text-align: center;
+        padding: 50px 0px;
+    }
+    .footerDiv {
+        padding: 5px 10px;
+        font-size: 16px;
+        margin: 0px 10px;
+        margin-top: 25px;
+        width: 90%;
+        justify-content: center;
+    }
+    #lastDiv {
+        width: 100%;
+    }
+    .links {
+        width: 100%;
+    }
+}
+.footerDiv:hover {
+    color: black;
+    background: white;
+    cursor: pointer;
 }
 
 .links:hover {

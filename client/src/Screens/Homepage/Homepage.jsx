@@ -35,11 +35,11 @@ function Homepage() {
                     </p>
                     <div id={style.txtDiv}>
                         <div className={style.smallTxt1}>
-                            <h3 className='font800'>No surprises.</h3>
+                            <h3 className={style.smallTitle} className='font800'>No surprises.</h3>
                             <span>Speak directly with the creator of the project to be able to define if their interests are aligned with yours.</span>
                         </div>
                         <div className={style.smallTxt2}>
-                            <h3 className='font800'>Get all the details.</h3>
+                            <h3 className={style.smallTitle} className='font800'>Get all the details.</h3>
                             <span>You will be able to know everything you need about the project and the job before applying.</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ function Homepage() {
                 <div id={style.secondBlockTxt}>
                     <h1 className='font200'>Gather the team <span className='font800'>you</span> need.</h1>
                     <p>
-                        Begin working today with developers who <span className='font800'>want your project to be a total success</span>. Publish your startup idea,
+                        Begin working today with developers who <span className={style.bold}>want your project to be a total success</span>. Publish your startup idea,
                     choose those who best fit in your team and start working.
                     </p>
                     <div id={style.txtDiv}>

@@ -2,6 +2,7 @@
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #headerIcon {
@@ -11,3 +12,14 @@
     margin-bottom: 7px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 480px) {
+    #header {
+      padding: 10px 5px;
+    }
+    #headerIcon {
+        font-size: 12px;
+        margin: 0px 10px;
+    }
+  }
+  

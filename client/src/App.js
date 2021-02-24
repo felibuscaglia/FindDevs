@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Homepage from './Screens/Homepage/Homepage';
 import UserProfile from './Screens/UserProfile/UserProfile';
@@ -19,6 +19,8 @@ import WorkersList from './Screens/WorkersList/WorkersList';
 import JobInfo from './Screens/JobInfo/JobInfo';
 import EditUser from './Screens/EditUser/EditUser';
 import Suggestions from './Screens/Suggestions/Suggestions';
+import NotFound from './Screens/NotFound/NotFound';
+import NavBar from './Components/NavBar/NavBar';
 
 function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotifications, getJobs }) {
 
@@ -38,19 +40,23 @@ function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotificat
         <div>
             <Route exact path='/' component={Header} />
             <Route path='/' render={({ location }) => < HeaderUser pathname={location} />} />
-            <Route exact path='/' component={Homepage} />
-            <Route exact path='/user/:username' render={({ match, location }) => < UserProfile pathname={location} username={match.params.username} />} />
-            <Route exact path='/project/post' component={PostStartup} />
-            <Route exact path='/project/profile/:projectId' render={({ match }) => < ProjectProfile projectID={match.params.projectId} />} />
-            <Route exact path='/admin/panel' component={StartupAdminPanel} />
-            <Route exact path='/project/jobPanel/:projectId' render={({ match }) => < JobPanel projectID={match.params.projectId} />} />
-            <Route exact path='/project/addJob/:projectId' render={({ match }) => < AddJob projectID={match.params.projectId} />} />
-            <Route exact path='/jobs' component={JobListings} />
-            <Route exact path='/project/settings/:projectId' render={({ match }) => <SettingsPanel projectID={match.params.projectId} />} />
-            <Route exact path='/job/info/:jobId' render={({ match }) => < JobInfo jobID={match.params.jobId} />} />
-            <Route exact path='/edit/user/:username' render={({ match }) => <EditUser username={match.params.username} />} />
-            <Route exact path='/workers' component={WorkersList} />
-            <Route exact path='/suggestions' render={({ location }) => <Suggestions pathname={location} />} />
+            <Switch>
+                <Route exact path='/' component={Homepage} />
+                <Route exact path='/user/:username' render={({ match, location }) => < UserProfile pathname={location} username={match.params.username} />} />
+                <Route exact path='/project/post' component={PostStartup} />
+                <Route exact path='/project/profile/:projectId' render={({ match }) => < ProjectProfile projectID={match.params.projectId} />} />
+                <Route exact path='/admin/panel' component={StartupAdminPanel} />
+                <Route exact path='/project/jobPanel/:projectId' render={({ match }) => < JobPanel projectID={match.params.projectId} />} />
+                <Route exact path='/project/addJob/:projectId' render={({ match }) => < AddJob projectID={match.params.projectId} />} />
+                <Route exact path='/jobs' component={JobListings} />
+                <Route exact path='/project/settings/:projectId' render={({ match }) => <SettingsPanel projectID={match.params.projectId} />} />
+                <Route exact path='/job/info/:jobId' render={({ match }) => < JobInfo jobID={match.params.jobId} />} />
+                <Route exact path='/edit/user/me' component={EditUser} />
+                <Route exact path='/workers' component={WorkersList} />
+                <Route exact path='/suggestions' render={({ location }) => <Suggestions pathname={location} />} />
+                <NotFound />
+            </Switch>
+            <Route path='/' component={NavBar} />
             <Route exact path='/' component={Footer} />
         </div>
     )

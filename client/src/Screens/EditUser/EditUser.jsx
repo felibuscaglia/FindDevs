@@ -27,22 +27,29 @@ function EditUser({ user, skills }) {
     const [errors, setErrors] = useState({});
     const [file, setFile] = useState(null);
     const [btnDisabled, setDisabled] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState (false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useLayoutEffect(() => {
-        setPreview(user.profilePic);
-        setInput({
-            email: user.email,
-            color: user.color,
-            gitHub: user.gitHub,
-            linkedIn: user.linkedIn,
-            twitter: user.twitter,
-            description: user.description,
-            country: user.country,
-            region: user.region
-        })
-        setSelectedSkills(user.skills);
+        if (user.username) {
+            setPreview(user.profilePic);
+            setInput({
+                email: user.email,
+                color: user.color,
+                gitHub: user.gitHub,
+                linkedIn: user.linkedIn,
+                twitter: user.twitter,
+                description: user.description,
+                country: user.country,
+                region: user.region
+            })
+            setSelectedSkills(user.skills);
+            setLoading(false)
+        } else {
+            setTimeout (() => {
+                window.location.replace ('/error');
+            }, 1000)
+        }
     }, [user])
 
     function check(e) {
@@ -57,7 +64,6 @@ function EditUser({ user, skills }) {
             if (found && !found2) {
                 setSelectedSkills(selectedSkills.concat(found));
                 e.target.value = '';
-                console.log(selectedSkills)
             }
         }
     }
@@ -103,7 +109,7 @@ function EditUser({ user, skills }) {
                 }
             })
             .then(res => window.location.replace(`/user/${user.username}`))
-            .catch(err => setError (true))
+            .catch(err => setError(true))
     }
 
     return (
@@ -198,11 +204,11 @@ function EditUser({ user, skills }) {
     )
 }
 
-function mapDispatchToProps(state) {
+function mapStateToProps(state) {
     return {
         user: state.userInfo,
         skills: state.allSkills
     }
 }
 
-export default connect(mapDispatchToProps, null)(EditUser);
+export default connect(mapStateToProps, null)(EditUser);

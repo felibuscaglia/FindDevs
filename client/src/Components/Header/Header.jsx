@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Header.module.css';
-import Programming from '../../Media/programming.svg';
+import Logo from '../../Media/logo.png';
 import RegisterPopUp from '../PopUps/RegisterPopUp';
 import { Link } from 'react-router-dom';
 import LoginPopUp from '../PopUps/LoginPopUp';
@@ -9,7 +9,7 @@ function Header() {
     return (
         <div id={style.header}>
             <div className='displayFlex' id='alignItemsCenter'>
-                <Link to='/' className='links'><img src={Programming} id='icon' /></Link>
+                <Link to='/' className='links'><img src={Logo} id='icon' /></Link>
                 <Link to='/jobs' className='links'><span id={style.headerIcon}>be part of a startup</span></Link>
                 <Link to='/workers' className='links'><span id={style.headerIcon}>find collaborators</span></Link>
             </div>
