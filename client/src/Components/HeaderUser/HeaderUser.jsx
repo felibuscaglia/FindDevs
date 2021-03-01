@@ -74,8 +74,9 @@ function HeaderUser(props) {
                     {props.userInfo.username ?
                         <div id={style.dropdownDiv}>
                             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                <i id='popUpIcn' class="fas fa-bell"></i>
-                                {props.notifications && props.notifications.length > 0 && <i id={style.alert} class="fas fa-circle"></i>}
+                                <i id='popUpIcn' className="fas fa-bell"></i>
+
+                                {props.notifications && props.notifications.length > 0 && <i id={style.alert} className="fas fa-circle"></i>}
                             </Button>
                             <Menu
                                 id="simple-menu"
@@ -92,10 +93,10 @@ function HeaderUser(props) {
                                             <span className='font800'>{notification.content}</span>
                                             {notification.type === 'Invitation' ?
                                                 <div>
-                                                    <button onClick={() => acceptInvitation(notification)} style={{ color: 'green' }} className={style.dropdownBtn}><i class="fas fa-check-circle"></i></button>
-                                                    <button onClick={() => rejectInvitation(notification.id, notification.userId)} style={{ color: 'red' }} className={style.dropdownBtn}><i class="fas fa-times-circle"></i></button>
+                                                    <button onClick={() => acceptInvitation(notification)} style={{ color: 'green' }} className={style.dropdownBtn}><i className="fas fa-check-circle"></i></button>
+                                                    <button onClick={() => rejectInvitation(notification.id, notification.userId)} style={{ color: 'red' }} className={style.dropdownBtn}><i className="fas fa-times-circle"></i></button>
                                                 </div> :
-                                                <button onClick={() => rejectInvitation(notification.id, notification.userId)} style={{ color: 'red' }} className={style.dropdownBtn}><i class="fas fa-times-circle"></i></button>
+                                                <button onClick={() => rejectInvitation(notification.id, notification.userId)} style={{ color: 'red' }} className={style.dropdownBtn}><i className="fas fa-times-circle"></i></button>
                                             }
                                         </div>
                                     </MenuItem>
@@ -116,19 +117,19 @@ function HeaderUser(props) {
                                     className={style.notificationDiv}
                                 >
                                     <MenuItem onClick={() => window.location.replace('/edit/user/me')}>
-                                        <div class={style.dropdown}>
+                                        <div className={style.dropdown}>
                                             <span>Edit your profile</span>
                                         </div>
                                     </MenuItem>
                                     <Link to='/admin/panel' className='links'>
                                         <MenuItem>
-                                            <div class={style.dropdown}>
+                                            <div className={style.dropdown}>
                                                 <span>Your startups</span>
                                             </div>
                                         </MenuItem>
                                     </Link>
                                     <MenuItem onClick={logOut}>
-                                        <div class={style.dropdown}>
+                                        <div className={style.dropdown}>
                                             <span>Log out</span>
                                         </div>
                                     </MenuItem>

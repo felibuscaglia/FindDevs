@@ -33,7 +33,7 @@
 
 #form2 {
     background-color: white;
-    width: 60%;
+    width: 90%;
     text-align: center;
     border-radius: 10px;
     display: flex;
@@ -123,6 +123,7 @@
     transition: 0.3s;
     cursor: pointer;
     width: 125px;
+    text-align: center;
 }
 
 #empty {

@@ -26,9 +26,12 @@ function JobPanel({ projectID, setUserInfo, user }) {
         }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
-                if (projectData.data.isDeleted) window.location.replace ('/error');
+                const userFound = projectData.data.users.find (user => user.id == user.id);
+                if (!userFound || !userFound.userXprojects.isFounder || projectData.data.isDeleted) window.location.replace ('/error');
                 setProject(projectData.data);
-                setLoading (false);
+                setTimeout(() => {
+                    setLoading (false);
+                }, 2000)
             })
             .catch(err => console.log(err))
     }, [user])

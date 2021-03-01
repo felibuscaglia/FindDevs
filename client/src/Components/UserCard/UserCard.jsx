@@ -63,7 +63,7 @@ function UserCard({ user, selectWorkers }) {
                         <span id={style.plus}>+{extraSkillsLength}</span>
                     </BlueOnGreenTooltip>}
             </div>
-            <button id={style.btn} style={{ background: user.color }}>Contact</button>
+            <Link id={style.link} to={`/user/${user.username}`}><button id={style.btn} style={{ background: user.color }}>Contact</button></Link>
         </div>
     )
 }

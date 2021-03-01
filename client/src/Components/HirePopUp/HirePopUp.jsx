@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import style from './HirePopUp.module.css';
 import axios from 'axios';
@@ -38,7 +38,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                         project.userXprojects.isFounder ?
                                             <div style={{ background: selection.project && selection.project.name === project.name ? 'rgb(231,231,231' : null }} onClick={() => getInfoAndSetProject(project)} id={style.projectDiv}>
                                                 <img id='icon' src={project.logo} />
-                                                <span className='font200'>{project.name}</span>
+                                                <span id={style.projectName} className='font200'>{project.name}</span>
                                             </div>
                                             : null
                                     )}

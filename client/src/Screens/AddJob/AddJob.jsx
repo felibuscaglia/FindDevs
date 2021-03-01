@@ -30,7 +30,8 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
         }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
-                if (projectData.data.isDeleted) window.location.replace('/error');
+                const userFound = projectData.data.users.find (user => user.id == user.id);
+                if (!userFound || !userFound.userXprojects.isFounder || projectData.data.isDeleted) window.location.replace('/error');
                 setProject(projectData.data);
                 setTimeout(() => {
                     setLoading(false);

@@ -35,7 +35,8 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
         }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
-                if (projectData.data.isDeleted) window.location.replace ('/error'); 
+                const userFound = projectData.data.users.find (member => member.id === user.id);
+                if (projectData.data.isDeleted || !userFound || !userFound.userXprojects.isFounder) window.location.replace ('/error'); 
                 setPreview(projectData.data.logo)
                 setInput(projectData.data);
                 setTimeout (() => {
@@ -71,6 +72,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
 
     function handleSubmit() {
         setLoading(true);
+        input.brightness = getBrightness (input.mainColor);
         axios.patch(`http://localhost:5001/projects/${projectID}`, input)
             .then(res => {
                 if (file) {

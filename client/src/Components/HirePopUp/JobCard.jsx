@@ -45,7 +45,7 @@ function JobCard({ job, project, applicantUsername, user, close }) {
             </div>
             <div className='displayFlex'>
                 {job.skills.map(skill =>
-                    <span style={{ border: `2px solid ${JSON.parse(skill).strongColor}`, color: JSON.parse(skill).softColor }} id={style.skillSpan}>{JSON.parse(skill).label}</span>
+                    <span style={{ border: `2px solid ${skill.strongColor}`, color: skill.softColor }} id={style.skillSpan}>{skill.label}</span>
                 )}
             </div>
             <button onClick={() => inviteToProject(job.title, job.id)} id={style.applyBtn}>Invite</button>

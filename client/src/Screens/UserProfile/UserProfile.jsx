@@ -78,7 +78,7 @@ function UserProfile({ username, pathname }) {
                             <div id={style.skillDiv}>
                                 {user.skills && user.skills.map(skill =>
                                     hasWorked ?
-                                        <BlueOnGreenTooltip title={skill.user_skills.isValidated ? 'Already validated!' : `Validate @${username}'s skill!`}>
+                                        <BlueOnGreenTooltip key={skill.user_skills.id} title={skill.user_skills.isValidated ? 'Already validated!' : `Validate @${username}'s skill!`}>
                                             <div style={{ background: skill.strongColor, color: skill.softColor }} id={style.skillBtn} onClick={() => validateSkill(skill)}>
                                                 <span>{hasWorked && !skill.user_skills.isValidated && <i class="fas fa-plus-circle"></i>} {skill.user_skills.isValidated ? <i class="fas fa-check-circle"></i> : null} {skill.label}</span>
                                             </div>
