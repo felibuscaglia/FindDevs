@@ -5,7 +5,7 @@ import { filterJob, removeJobFilter } from '../../Actions/index';
 import { Hint } from 'react-autocomplete-hint';
 import JobCard from './JobCard';
 import Loading from '../../Media/Loading.gif';
-import wavyImage from '../../Media/imagen.jpg';
+import wavyImage from '../../Media/wavyBorder1.jpg';
 
 function JobListings({ jobs, skills, skillSelection, filteredJobs, filterJob, removeJobFilter }) {
 
@@ -46,7 +46,7 @@ function JobListings({ jobs, skills, skillSelection, filteredJobs, filterJob, re
                     :
                     filteredJobs.map(job => <JobCard setLoading={setLoading} job={job} />)
             }
-            {!loading && <span id='giveMargin'>🧑‍💻 <span id={style.end}>There are no more job opportunities. Please come back later!</span></span>}
+            {!loading && <div className={style.endDiv} id='giveMargin'>🧑‍💻 <span id={style.end}>There are no more job opportunities. Please come back later!</span></div>}
         </div>
     )
 }

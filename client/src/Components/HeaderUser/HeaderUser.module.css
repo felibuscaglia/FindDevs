@@ -86,14 +86,11 @@
     font-size: 15px;
     border-radius: 5px;
     padding: 10px;
+    transition: 0.3s;
 }
 
 #postBtn:hover {
     background: whitesmoke
-}
-
-.notificationDiv {
-    margin-top: 50px;
 }
 
 #alert {

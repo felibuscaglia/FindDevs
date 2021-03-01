@@ -6,19 +6,12 @@
     margin-top: 25px;
 }
 
-#description {
-    font-size: 17px;
-    width: 60%;
-    text-align: center;
-}
-
-#datadiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 800;
-    margin: 10px 0px;
-    width: 90%;
+#cover {
+    height: 125px;
+    width: 100%;
+    position: absolute;
+    top: 96px;
+    z-index: -10;
 }
 
 #socialMediaDiv {
@@ -31,6 +24,81 @@
     position: absolute;
     right: 0px;
     top: 210px;
+}
+
+#btn {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    font-family: 'Nunito';
+    font-weight: 800;
+    padding: 10px;
+    cursor: pointer;
+  }
+  #description {
+    font-size: 17px;
+    width: 60%;
+    text-align: center;
+}
+
+#empty {
+    height: 600px;
+}
+
+#emptyDiv {
+    display: flex;
+    align-items: center;
+    padding: 0 7em;
+    border-radius: 10px;
+    width: 85%;
+    margin: 50px 0px;
+}
+
+#emptyTitle {
+    font-weight: 200;
+}
+
+@media screen and (max-width: 480px) {
+    #profilePic {
+        margin-top: 25px;
+        height: 150px;
+        width: 150px;
+    }
+    #socialMediaDiv {
+        margin-top: -25px;
+        margin-right: 10px;
+    }
+    #btn {
+        display: none;
+    }
+    #description {
+        width: 90%;
+    }
+    #cover {
+        top: 50px;
+    }
+    #empty {
+        height: 300px;
+    }
+    #emptyDiv {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    #emptyTitle {
+        font-size: 20px;
+    }
+}
+
+
+#datadiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 800;
+    margin: 10px 0px;
+    width: 90%;
 }
 
 #skillBtn {

@@ -8,6 +8,28 @@
     cursor: pointer;
 }
 
+#hireBtn {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    font-family: 'Nunito';
+    font-weight: 800;
+    padding: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+    #hireBtn {
+        position: absolute;
+        top: -125px;
+        right: -80px;
+        width: 200px;
+        font-size: 15px;
+        padding: 0px;
+    }
+}
+
 #mainDiv {
     background: rgba(0, 0, 0, 0.5);
     position: fixed;

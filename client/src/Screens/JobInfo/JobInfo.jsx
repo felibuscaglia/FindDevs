@@ -1,26 +1,40 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import style from './JobInfo.module.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from '../../Media/Loading.gif';
+import Register from '../../Components/PopUps/RegisterPopUp';
+import jwt from 'jsonwebtoken';
+import { setUserInfo } from '../../Actions/index'; 
 
-function JobInfo({ jobID, user }) {
+function JobInfo({ jobID, user, setUserInfo }) {
     const [job, setJob] = useState({});
     const [applied, setApplied] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isMember, setIsMember] = useState (false);
+    const [isMember, setIsMember] = useState(false);
+    const [notUser, setNotUser] = useState(false);
+
+    async function asyncUseEffect(username) {
+        await (setUserInfo(username));
+    }
 
     useLayoutEffect(() => {
+        if (!user.username) {
+            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
+            if (user) {
+                asyncUseEffect(user.username);
+            } else setNotUser (true)
+        }
         axios.get(`http://localhost:5001/jobs/${jobID}/jobInfo`)
             .then(jobInfo => {
                 setJob(jobInfo.data);
-                const found = jobInfo.data.Applicants.find (applicant => applicant.id === user.id);
-                const findMember = jobInfo.data.project.users.find (member => member.id === user.id );
+                const found = jobInfo.data.Applicants.find(applicant => applicant.id === user.id);
+                const findMember = jobInfo.data.project.users.find(member => member.id === user.id);
                 if (findMember) {
-                    setIsMember (true);
-                } else if (found && found.username) setApplied (true)
-                setLoading (false);
+                    setIsMember(true);
+                } else if (found && found.username) setApplied(true)
+                setLoading(false);
             })
             .catch(err => console.log(err))
     }, [user])
@@ -30,8 +44,6 @@ function JobInfo({ jobID, user }) {
             .then(res => setApplied(true))
             .catch(err => console.log(err))
     }
-
-    console.log ('JOB: ', job);
 
     return (
         <div>
@@ -50,10 +62,11 @@ function JobInfo({ jobID, user }) {
                             </Link>
                             <h1 id={style.jobTitle}>{job.title}</h1>
                             <div id={style.btnDiv}>
-                                {isMember ? <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You are already part of {job.project.name}.</span> :
-                                applied ?
-                                    <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You have applied to this job</span> :
-                                    <button onClick={applyToJob} style={{ color: job.project.mainColor }} id={style.applyBtn}>Apply to this job</button>
+                                {notUser ? <Register isJobProfile={true} /> :
+                                    isMember ? <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You are already part of {job.project.name}.</span> :
+                                        applied ?
+                                            <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You have applied to this job</span> :
+                                            <button onClick={applyToJob} style={{ color: job.project.mainColor }} id={style.applyBtn}>Apply to this job</button>
                                 }
                                 {job.Applicants.length >= 15 && !applied && <span className='font200'>🔥 This job has received many applications</span>}
                             </div>
@@ -74,4 +87,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(JobInfo);
+function mapDispatchToProps (dispatch) {
+    return {
+        setUserInfo: username => dispatch(setUserInfo(username))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobInfo);

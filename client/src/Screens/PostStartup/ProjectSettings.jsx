@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../../Media/invertedlogo.png';
 import style from './PostStartup.module.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,27 +8,61 @@ import { getBrightness } from '../../utils';
 import Loading from '../../Media/Loading.gif';
 import UserCard from './UserSettingsCard';
 import Confirmation from '../../Components/PopUps/Confirmation';
+import { setUserInfo } from '../../Actions/index';
+import jwt from 'jsonwebtoken';
 
-function ProjectSettings({ user, projectID }) {
+function ProjectSettings({ user, projectID, setUserInfo }) {
 
     const [input, setInput] = useState({});
     const [preview, setPreview] = useState(null);
     const [file, setFile] = useState(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [firstCheck, setFirstCheck] = useState (true);
+    const [inputErrors, setInputErrors] = useState ({});
+    const [btnDisabled, setDisabled] = useState (false);
+
+    async function asyncUseEffect(username) {
+        await (setUserInfo(username));
+    }
 
     useEffect(() => {
+        if (!user.username) {
+            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
+            if (user) {
+                asyncUseEffect(user.username);
+            } else window.location.replace('/error');
+        }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
-                console.log(projectData.data.users, 'USERS!')
+                if (projectData.data.isDeleted) window.location.replace ('/error'); 
                 setPreview(projectData.data.logo)
                 setInput(projectData.data);
+                setTimeout (() => {
+                    setFirstCheck (false);
+                }, 2000)
             })
             .catch(err => console.log(err))
     }, [])
 
     function handleInputChange(e) {
+        var copyOfErrors = inputErrors;
+        var noErrors = true;
+
         if (e.hex) return setInput({ ...input, mainColor: e.hex });
+
+        if (e.target.name === 'website' || e.target.name === 'workZone' || e.target.name === 'productHunt' || e.target.name === 'twitter' || e.target.name === 'linkedIn') {
+            if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(e.target.value)) copyOfErrors = { ...copyOfErrors, [e.target.name]: true };
+            else copyOfErrors = { ...copyOfErrors, [e.target.name]: false }
+        }
+
+        for (const key in copyOfErrors) if (copyOfErrors[key]) noErrors = false;
+
+        if (noErrors) setDisabled(false);
+        else setDisabled(true);
+
+        setInputErrors(copyOfErrors);
+
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -58,6 +91,12 @@ function ProjectSettings({ user, projectID }) {
     function check(e) {
         setFile(e.target.files[0]);
         setPreview(URL.createObjectURL(e.target.files[0]));
+    }
+
+    if (firstCheck) {
+        return (
+            <img src={Loading} id={style.firstCheck} />
+        )
     }
 
     return (
@@ -89,25 +128,30 @@ function ProjectSettings({ user, projectID }) {
                 </div>
                 <div style={{ marginTop: '25px' }} className='displayFlexColumn'>
                     <span className='font600'>Website</span>
-                    <input value={input.website} maxLength='255' onChange={(e) => handleInputChange(e)} name='website' className={style.input} />
+                    <input style={{ border: inputErrors.website ? '2px solid red' : '2px solid #e7e7e7' }} value={input.website} maxLength='255' onChange={(e) => handleInputChange(e)} name='website' className={style.input} />
+                    {inputErrors.website && <span className={style.errors}>Please enter a valid URL.</span>}
                 </div>
                 <div className='displayFlexColumn'>
                     <span className='font600'>Work Zone *</span>
                     <span className='advert'>Keep in mind that it will be your team's designated workspace. It can be a link to Slack,<br /> Flowdock or WebEx, for example.</span>
-                    <input value={input.workZone} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workzone} name='workZone' className={style.input} />
+                    <input style={{ border: inputErrors.workZone ? '2px solid red' : '2px solid #e7e7e7' }} value={input.workZone} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workzone} name='workZone' className={style.input} />
+                    {inputErrors.workZone && <span className={style.errors}>Please enter a valid URL.</span>}
                 </div>
                 <div id={style.socialDiv}>
                     <div className='displayFlexColumn' id='alignItemsFS'>
                         <span className='font800'><i style={{ color: '#DA552F' }} class="fab fa-product-hunt"></i> Product Hunt</span>
-                        <input value={input.productHunt} maxLength='255' name='productHunt' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        <input style={{ border: inputErrors.productHunt ? '2px solid red' : '2px solid #e7e7e7' }} value={input.productHunt} maxLength='255' name='productHunt' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        {inputErrors.productHunt && <span className={style.errors}>Please enter a valid URL.</span>}
                     </div>
                     <div className='displayFlexColumn' id='alignItemsFS'>
                         <span className='font800'><i style={{ color: ' #00acee' }} class="fab fa-twitter-square"></i> Twitter</span>
-                        <input value={input.twitter} maxLength='255' name='twitter' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        <input style={{ border: inputErrors.twitter ? '2px solid red' : '2px solid #e7e7e7' }} value={input.twitter} maxLength='255' name='twitter' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        {inputErrors.twitter && <span className={style.errors}>Please enter a valid URL.</span>}
                     </div>
                     <div className='displayFlexColumn' id='alignItemsFS'>
                         <span className='font800'><i style={{ color: '#0e76a8' }} class="fab fa-linkedin"></i> LinkedIn</span>
-                        <input value={input.linkedIn} maxLength='255' name='linkedIn' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        <input style={{ border: inputErrors.linkedIn ? '2px solid red' : '2px solid #e7e7e7' }} value={input.linkedIn} maxLength='255' name='linkedIn' onChange={(e) => handleInputChange(e)} className={style.socialMediaInput} />
+                        {inputErrors.linkedIn && <span className={style.errors}>Please enter a valid URL.</span>}
                     </div>
                 </div>
                 <div className='displayFlexColumn'>
@@ -124,9 +168,9 @@ function ProjectSettings({ user, projectID }) {
                 </div>
                 {error && <div id={style.alert} class="alert alert-danger" role="alert">Please complete all the necessary fields.</div>}
                 {loading && !error ? <img id={style.loading} src={Loading} /> :
-                    <div className='displayFlex'>
-                        <button onClick={handleSubmit} id={style.uploadBtn}>Update your project</button>
-                        <Confirmation project={input} userID={user.id} />
+                    <div id={style.btnDiv}>
+                        <button disabled={btnDisabled} onClick={handleSubmit} id={style.uploadBtn}>Update your project</button>
+                        <Confirmation project={input} />
                     </div>}
             </div>
         </div>
@@ -139,4 +183,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(ProjectSettings);
+function mapDispatchToProps (dispatch) {
+    return {
+        setUserInfo: username => dispatch(setUserInfo(username))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectSettings);

@@ -10,6 +10,13 @@
     align-items: center;
     height: 650px;
     justify-content: space-between;
+    transition: 0.3s;
+}
+
+#projectName {
+    max-width: 90%;
+    word-break: break-word;
+    text-align: center;
 }
 
 #projectCard {

@@ -5,7 +5,7 @@ import axios from 'axios';
 import randomColor from 'randomcolor';
 import { getBrightness } from '../../utils';
 
-function RegisterPopUp({ isHomepage, isLogin, isMain }) {
+function RegisterPopUp({ isHomepage, isMain, isMainHomepage, isJobProfile }) {
 
     const [input, setInput] = useState({});
     const [showPass, setShowPass] = useState(false);
@@ -18,8 +18,8 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
                 setErrors({ ...errors, email: 'Please enter a valid email.' });
                 setDisabled(true);
             } else {
-                setErrors ({ ...errors, email: false });
-                setDisabled (false);
+                setErrors({ ...errors, email: false });
+                setDisabled(false);
             }
         }
         if (e.target.name === 'username' && errors.username) {
@@ -56,8 +56,9 @@ function RegisterPopUp({ isHomepage, isLogin, isMain }) {
 
     return (
         <Popup trigger={
+            isJobProfile ? <button id={style.applyBtn}>Apply to this job</button> : 
             isMain ? <button className={style.btn}>Post your startup.</button> :
-                isLogin ? <span className='mainColor'>Sign up</span> :
+                isMainHomepage ? <button id={style.joinBtn}>Join FindDevs for free.</button> :
                     isHomepage ?
                         <span className={style.headerIcon}>join</span> :
                         <span id={style.nonHomepage}>Join FindDevs</span>

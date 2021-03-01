@@ -3,18 +3,40 @@ import Popup from 'reactjs-popup';
 import style from './GoPremium.module.css';
 import Verified from '../../Media/Verification.png';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
 
-function GoPremium() {
+const stripe = loadStripe('pk_test_51IOpiBHI1mK551upI8rUW8G0hMp0LDvjbffHLZxVHZJLtSztcJvpCrzq1zGwsfhGBfdcZOJdWQyHQoz7hzm3noA200U0ymLcVc');
+
+function GoPremium({ isHeaderUser, isHomepage }) {
+
+    function stripePayments() {
+        axios.post('http://localhost:5001/payments/create-checkout-session')
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+            });
+    }
 
     return (
-        <Popup trigger={<button id={style.goPremiumBtn}>Go premium</button>} modal>
+        <Popup trigger={isHeaderUser ?
+            <button id={style.postBtn}>Post a project</button> :
+            isHomepage ?
+                <button className={style.smallBtn}>Join the community.</button> :
+                <button id={style.goPremiumBtn}>Go premium</button>} modal>
             {close => (
                 <div id={style.mainDiv} onClick={close}>
                     <div id={style.form}>
                         <div className='displayFlex' id='alignItemsCenter'>
                             <h1 id={style.titleGP}>Get verified and become a premium member!</h1>
                         </div>
-                        <div className='displayFlex' id='alignItemsCenter'>
+                        <div id={style.pros}>
                             <div id={style.firstDiv}>
                                 <span className={style.pro}>🧑‍💻 Join the community and<span className='font800'> get the boost your career as a developer or your startup needs.</span></span>
                                 <div className={style.pro}>
@@ -33,7 +55,7 @@ function GoPremium() {
                         </div>
                         <div id={style.paymentDiv}>
                             <span id={style.advertPay}>Make sure that the email you put in the checkout is the same that you used to register in FindDevs.</span>
-                            <button id={style.btn}>Go premium</button>
+                            <button onClick={ stripePayments } id={style.btn}>Go premium</button>
                         </div>
                     </div>
                 </div>

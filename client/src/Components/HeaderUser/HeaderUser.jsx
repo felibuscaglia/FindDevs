@@ -1,15 +1,15 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React from 'react';
 import style from './HeaderUser.module.css';
 import Logo from '../../Media/logo.png';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Register from '../PopUps/RegisterPopUp';
 import SearchBar from './SearchBar';
+import GoPremium from '../GoPremiumPopUp/GoPremium';
 
 function HeaderUser(props) {
 
@@ -133,7 +133,7 @@ function HeaderUser(props) {
                                         </div>
                                     </MenuItem>
                                     <hr id='line'></hr>
-                                    <Link className='links' to='/project/post'><button id={style.postBtn}>Post a project</button></Link>
+                                    {!props.limitOfPosts ? <Link className='links' to='/project/post'><button id={style.postBtn}>Post a project</button></Link> : <GoPremium isHeaderUser={true} />}
                                 </Menu>
                             </div>
                         </div> :
@@ -151,7 +151,8 @@ function HeaderUser(props) {
 function mapStateToProps(state) {
     return {
         userInfo: state.userInfo,
-        notifications: state.notifications
+        notifications: state.notifications,
+        limitOfPosts: state.limitOfPosts
     }
 }
 

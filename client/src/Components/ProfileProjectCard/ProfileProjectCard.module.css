@@ -18,6 +18,11 @@
     cursor: pointer;
 }
 
+#projectName {
+    font-weight: 800;
+    word-break: break-word;
+}
+
 #timeSpan {
     font-size: 13px;
     font-style: italic;

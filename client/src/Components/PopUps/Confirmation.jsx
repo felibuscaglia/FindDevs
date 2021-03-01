@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import axios from 'axios';
 import Loading from '../../Media/Loading.gif';
 
-function Confirmation({ project, userID }) {
+function Confirmation({ project }) {
 
     const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,7 @@ function Confirmation({ project, userID }) {
     }
 
     return (
-        <Popup trigger={<button id={style.delete}>Delete {project.name}</button>} modal>
+        <Popup trigger={<button id={style.delete}>Delete project</button>} modal>
             {close =>
                 <div id={style.mainDiv}>
                     <div id={style.warningForm}>

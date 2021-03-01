@@ -44,6 +44,9 @@ module.exports = (sequelize) => {
       },
       isDeleted: {
         type: DataTypes.BOOLEAN
+      },
+      isPremium: {
+        type: DataTypes.BOOLEAN
       }
     },
     {

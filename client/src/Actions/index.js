@@ -45,7 +45,12 @@ export function getUsers() {
 export function getJobs() {
     return function (dispatch) {
         return axios.get('http://localhost:5001/jobs')
-            .then(jobsData => dispatch({ type: 'GET_JOBS', payload: jobsData.data }))
+            .then(jobsData => {
+                jobsData.data = jobsData.data.sort ((a, b) => {
+                    return b.project.isPremium - a.project.isPremium
+                });
+                dispatch({ type: 'GET_JOBS', payload: jobsData.data })
+            })
             .catch(err => console.log(err))
     }
 }

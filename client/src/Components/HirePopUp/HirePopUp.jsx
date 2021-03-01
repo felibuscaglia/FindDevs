@@ -25,7 +25,7 @@ function HirePopUp({ color, applicantUsername, user }) {
     }
 
     return (
-        <Popup trigger={<button style={{ backgroundColor: color, border: `2px solid ${color}` }} id='btn'>HIRE</button>} modal>
+        <Popup trigger={<button style={{ backgroundColor: color, border: `2px solid ${color}` }} id={style.hireBtn}>HIRE</button>} modal>
             {close => (
                 <div id={style.mainDiv}>
                     <div id={style.form}>

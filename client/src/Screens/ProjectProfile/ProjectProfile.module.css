@@ -11,10 +11,16 @@
     justify-content: center;
 }
 
-#logo {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
+#upvoteBtn {
+    font-family: 'Nunito';
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 17.5px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 200px;
 }
 
 #socialMediaDiv {
@@ -29,6 +35,27 @@
     top: 210px;
 }
 
+@media screen and (max-width: 480px) {
+    #projectLogo {
+        width: 100px;
+        height: 100px;
+        margin-top: 110px;
+        margin-bottom: 25px;
+    }
+    #upvoteBtn {
+        display: none;
+    }
+    #socialMediaDiv {
+        display: none;
+    }
+}
+
+#logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
 #loading {
     position: fixed;
     top: 50%;
@@ -36,18 +63,6 @@
     transform: translate(-50%, -50%);
     height: 100px;
   }
-
-#upvoteBtn {
-    font-family: 'Nunito';
-    border: none;
-    border-radius: 5px;
-    padding: 20px;
-    color: white;
-    font-size: 17.5px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 200px;
-}
 
 #oneLineDescription {
     font-size: 17px;
@@ -86,12 +101,36 @@
     margin: 25px;
 }
 
+#projectName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
 #mainUserDiv {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     max-width: 90%;
     justify-content: space-evenly;
+}
+
+#closedSpan {
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    font-size: 11px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+#presentDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 #userDiv:hover {

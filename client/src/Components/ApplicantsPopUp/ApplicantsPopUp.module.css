@@ -115,13 +115,62 @@
 }
 
 .redirectDiv {
-    margin-right: 25px;
+    margin-right: 15px;
     font-size: 16px;
     font-weight: 200;
     border-radius: 5px;
     padding: 10px;
     transition: 0.3s;
     cursor: pointer;
+    width: 125px;
+}
+
+#empty {
+    height: 400px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+#emptyDiv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    flex-direction: column;
+}
+
+.acceptedDiv {
+    display: flex;
+    align-items: center;
+}
+
+#accepted {
+    font-size: 100px;
+    color: green;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 480px) {
+    #accepted {
+        margin-right: 0px;
+        margin-bottom: 25px;
+    }
+    .acceptedDiv {
+        flex-direction: column;
+        width: 90%;
+    }
+    #form2 {
+        width: 90%;
+        padding: 25px 0px;
+    }
+    #form {
+        width: 90%;
+    }
+    #empty {
+        height: 200px;
+    }
+    .redirectDiv {
+        margin: 10px 0px;
+    }
 }
 
 #btn {
@@ -139,29 +188,10 @@
     cursor: pointer;
 }
 
-#accepted {
-    font-size: 100px;
-    color: green;
-    margin-right: 10px;
-}
-
-#empty {
-    height: 400px;
-    margin-top: 25px;
-    margin-bottom: 50px;
-}
-
 #noApps {
     font-weight: 800;
     font-size: 20px;
     margin: 25px 0px;
-}
-
-#emptyDiv {
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    flex-direction: column;
 }
 
 #memberInfo {

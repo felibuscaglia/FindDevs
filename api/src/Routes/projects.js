@@ -92,9 +92,6 @@ server.put('/:memberId/:projectId/role', (req, res, next) => {
 
 server.put('/:projectId/delete', async (req, res, next) => {
   const { projectId } = req.params;
-
-  console.log (req.body, 'REQ.BODY')
-
   try {
     await Promise.all(req.body.map(async user => {
       const userInfo = await UserXProjects.findOne({ where: { userId: user.id, projectId } });
@@ -105,7 +102,8 @@ server.put('/:projectId/delete', async (req, res, next) => {
       await userInfo.update ({ ...userInfo, endDate: finalDate });
     }))
     const project = await Project.findByPk (projectId);
-    await project.update ({ ...project, isDeleted: true })
+    await project.update ({ ...project, isDeleted: true });
+    await JobOpportunity.destroy ({ where: { projectId } });
     res.send ('Project deleted.')
   } catch (err) {
     next(err);

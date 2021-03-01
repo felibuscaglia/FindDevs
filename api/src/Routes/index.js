@@ -5,6 +5,7 @@ const userRouter = require ('./user');
 const authRouter = require ('./auth');
 const skillsRouter = require ('./skills');
 const jobsRouter = require ('./jobs');
+const paymentsRouter = require ('./payments');
 
 const router = Router();
 
@@ -13,5 +14,6 @@ router.use ("/users", userRouter);
 router.use ("/auth", authRouter);
 router.use ("/skills", skillsRouter);
 router.use ("/jobs", jobsRouter);
+router.use ("/payments", paymentsRouter);
 
 module.exports = router;

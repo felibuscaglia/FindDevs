@@ -6,6 +6,8 @@ import { Hint } from 'react-autocomplete-hint';
 import { removeFilters, selectWorkers } from '../../Actions/index';
 import GoPremium from '../../Components/GoPremiumPopUp/GoPremium';
 import Loading from '../../Media/Loading.gif';
+import wavyImage from '../../Media/wavyBorder1.jpg';
+import Verification from '../../Media/Verification.png';
 
 function WorkersList({ users, skills, skillSelection, removeFilters, filteredWorkers, selectWorkers, userInfo }) {
 
@@ -29,16 +31,13 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
 
     return (
         <div className='displayFlexColumn'>
-            <div id={style.mainImage}>
+            <div id={style.mainImage} style={{ backgroundImage: `url(${wavyImage})` }}>
                 <div id={style.searchDiv}>
                     <i class="fas fa-search"></i>
                     <Hint options={skills}>
                         <input onKeyDown={(e) => addSkill(e)} type='text' placeholder='Search and filter by skill' id={style.searchInput} />
                     </Hint>
                 </div>
-                <svg style={{ position: 'absolute', top: 230 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill="#ffffff" fill-opacity="1" d="M0,192L60,192C120,192,240,192,360,202.7C480,213,600,235,720,224C840,213,960,171,1080,160C1200,149,1320,171,1380,181.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-                </svg>
             </div>
             {!userInfo.isPremium &&
                 <div style={{ display: skillSelection.length > 0 ? 'none' : 'block' }} id={style.filteredDiv}>
@@ -47,14 +46,18 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                         <GoPremium />
                     </div>
                 </div>}
-            <div style={{ display: skillSelection.length > 0 ? 'block' : 'none' }} id={style.filteredDiv}>
+            <div style={{ display: skillSelection.length > 0 ? 'flex' : 'none' }} id={style.filteredDiv}>
                 {skillSelection.map(filtered =>
-                    <span onClick={() => removeFilters(filtered)} style={{ background: `${filtered.strongColor}`, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></span>
+                    <div onClick={() => removeFilters(filtered)} style={{ background: `${filtered.strongColor}`, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></div>
                 )}
             </div>
             {skillSelection.length === 0 &&
                 <div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
+                        <div className='displayFlex' id='alignItemsCenter'>
+                            <img src={Verification} id={style.verification} />
+                            <h3 className='font800'>Verified developers</h3>
+                        </div>
                         <div id={style.userCards}>
                             {users.map(user => user.isPremium && <UserCard user={user} />)}
                         </div>

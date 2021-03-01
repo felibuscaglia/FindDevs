@@ -1,186 +1,160 @@
-#firstBlock {
-    font-size: 30px;
-    color: white;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 50px;
-    background-image: url(https://images.unsplash.com/photo-1599153066743-08810dc8a419?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80);
-    height: 400px;
-    background-size: cover;
+#mainTitle {
+    font-size: 4em;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    width: 50%;
 }
 
-#innerTxtDiv {
-    width: 75%;
+#secondDiv {
+    display: flex;
+    background: black;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 13vh 9em;
+}
+
+#icon {
+    height: 40px;
+    margin-bottom: 25px;
+}
+
+#create {
+    font-size: 3.7em;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+#firstHalf {
+    width: 50%;
+}
+
+.txt {
+    font-size: 1.4em;
+    font-weight: 300;
+    line-height: 160%;
+}
+
+.lastTxt {
+    font-size: 1.4em;
+    font-weight: 300;
+    line-height: 160%;
+    width: 60%;
+}
+
+#secondSVG {
+    width: 500px;
+    height: 500px;
+}
+
+#lastDiv {
+    display: flex;
+    background: black;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    padding: 13vh 9em;
     text-align: center;
 }
 
-#secondBlock {
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 50px;
-    padding-top: 50px;
-    padding-bottom: 100px;
-    font-size: 25px;
-    font-weight: 200;
-}
-
-#secondBlockTxt {
-    width: 50%;
-}
-
-#txtDiv {
-    font-size: 20px;
-    display: flex;
-}
-
-.smallTxt1 {
-    width: 52%;
-    margin-right: 25px;
-}
-
-.smallTxt2 {
-    width: 50%;
-    margin-left: 25px;
-}
-
-.btn {
-    margin-top: 50px;
-    background: #8c50ff;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 25px;
-    border: none;
-    padding: 20px;
-    border-radius: 5px;
-    color: white;
+.smallBtn {
+    border: 2px solid #23F0C7;
+    color: #23F0C7;
+    border-radius: 0.3em;
+    font-size: 1.1em;
+    padding: 0.4em 1em;
+    background: transparent;
+    margin-top: 2.5em;
     transition: 0.3s;
 }
 
-.icon {
-    height: 500px;
-    width: 50%;
-}
-
-#logoTxtDiv {
+#thirdDiv {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.logo {
-    max-height: 150px;
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1);
-    cursor: pointer;
-    margin: 25px 75px;
-    max-width: 150px;
-}
-
-#logoDiv {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 13vh 9em;
 }
 
-#thirdBlock {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    margin: 50px 0px;
-    margin-bottom: 100px;
+#thirdSVG {
+    width: 550px;
+    height: 550px;
+    margin-right: 50px;
 }
 
-#fourthBlock {
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-right: 50px;
-    padding-top: 50px;
-    padding-bottom: 100px;
-    font-size: 25px;
-    font-weight: 200;
+#lastSVG {
+    width: 600px;
 }
 
-.bold {
-    font-weight: 800;
+#mainSVG {
+    width: 100%;
+    max-width: 1000px;
 }
 
 @media screen and (max-width: 480px) {
-    #innerTxtDiv {
-        font-size: 15px;
-    }
-    #firstBlock {
-        padding: 0px;
-        height: 640px;
-    }
-    #secondBlock {
-        padding: 25px 0px;
-        height: 670px;
-    }
-    #secondBlockTxt {
+    #mainTitle {
+        font-size: 2.5em;
+        margin-top: 100px;
         width: 80%;
-        font-size: 18px;
-        display: flex;
+    }
+    #secondDiv {
         flex-direction: column;
-        text-align: left;
-        align-items: center;
+        padding: 50px 10px;
+        text-align: center;
+        justify-content: center;
+        
     }
-    #txtDiv {
-        font-size: 15px;
-        flex-direction: column;
+    #icon {
+        align-self: center;
     }
-    .smallTxt1 {
+    #create {
+        font-size: 2em;
+    }
+    #firstHalf {
+        width: 90%;
+    }
+    .txt {
+        font-size: 1em;
+    }
+    #secondSVG {
+        width: 300px;
+        height: 300px;
+    }
+    .smallBtn {
+        margin-bottom: 50px;
+    }
+    #thirdDiv {
+        flex-direction: column-reverse;
+        padding: 50px 10px;
+        text-align: center;
+        justify-content: center;
+    }
+    #thirdSVG {
+        width: 350px;
+        height: 350px;
+        margin-left: 50px;
+        margin-top: -90px;
+        margin-bottom: -60px;
+    }
+    #lastDiv {
+        padding: 50px 10px;
+        text-align: center;
+        justify-content: center;
         width: 100%;
-        margin: 0px;
+        margin-bottom: -0px;
     }
-    .smallTxt2 {
+    .lastTxt {
         width: 100%;
-        margin: 0px;
-        margin-top: 25px;
+        font-size: 1em;
     }
-    .smallTitle {
-        font-size: 16px
+    #lastSVG {
+        width: 300px;
+        height: 300px;
     }
-    .btn {
-        font-size: 16px;
-        padding: 10px;
-    }
-    .icon {
-        display: none;
-    }
-    #thirdBlock {
-        display: none;
-    }
+  }
 
-    #fourthBlock {
-        background-color: white;
-        color: black;
-        padding: 25px 0px;
-    }
-    .bold {
-        font-weight: 200;
-    }
+.smallBtn:hover {
+    background: #23F0C7;
+    color: black;   
 }
-
-.logo:hover {
-    filter: grayscale(0%);
-}
-
-.btn:hover {
-    background: #a298e2;
-    cursor: pointer;
-}
-

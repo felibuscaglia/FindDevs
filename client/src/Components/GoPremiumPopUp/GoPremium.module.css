@@ -10,21 +10,20 @@
     cursor: pointer;
 }
 
-#goPremiumBtn:hover {
-    color: #f9f9f9;
-    background: black;
+.smallBtn {
+    border: 2px solid #23F0C7;
+    color: #23F0C7;
+    border-radius: 0.3em;
+    font-size: 1.1em;
+    padding: 0.4em 1em;
+    background: transparent;
+    margin-top: 2.5em;
+    transition: 0.3s;
 }
 
-#mainDiv {
-    background: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.smallBtn:hover {
+    background: #23F0C7;
+    color: black;   
 }
 
 #form {
@@ -42,9 +41,9 @@
     color: white;
 }
 
-#icon {
-    height: 20px;
-    margin-right: 5px;
+#pros {
+    display: flex;
+    align-items: center;
 }
 
 #firstDiv {
@@ -55,28 +54,14 @@
     flex-direction: column;
 }
 
-.pro {
-    margin: 10px 0px;
-}
-
 #price {
-    background-color: #8c50ff;
+    background-color: #23F0C7;
     padding: 10px 40px;
     border-radius: 5px;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
 }
-
-.advert {
-    font-size: 12px;
-    font-weight: 200;
-    margin: 10px 0px;
-    color: rgb(202, 202, 202);
-    font-size: 14px;
-    margin: 0px;
-}
-
 
 #paymentDiv {
     margin-top: 50px;
@@ -88,11 +73,83 @@
 #advertPay {
     padding: 5px 20px;
     font-size: 14px;
-    border:  2px solid #8c50ff;
-    color: #8c50ff;
+    border:  2px solid #23F0C7;
+    color: #23F0C7;
     border-radius: 5px;
     font-weight: 800;
     margin-bottom: 25px;
+}
+
+@media screen and (max-width: 480px) {
+    #paymentDiv {
+        margin-top: 0px;
+    }
+    #advertPay {
+        font-size: 10px;
+        padding: 5px;
+        margin: 25px 0px;
+    }
+    .advert {
+        font-size: 13px;
+        margin-left: 10px;
+    }
+    #price {
+        padding: 10px;
+        font-size: 13px;
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+    }
+    #firstDiv {
+        width: 100%;
+        margin-right: 0px;
+        text-align: center;
+        font-size: 12px;
+    }
+    #pros {
+        flex-direction: column;
+    }
+    #form {
+        height: 100%;
+        width: 80%;
+        margin: 0px;
+        padding: 10px;
+    }
+    .smallBtn {
+        margin-bottom: 50px;
+    }
+    #goPremiumBtn {
+        display: flex;
+        align-self: center;
+        padding: 5px;
+        margin: 10px 0px;
+    }
+  }
+
+#goPremiumBtn:hover {
+    color: #f9f9f9;
+    background: black;
+}
+
+#mainDiv {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#icon {
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pro {
+    margin: 10px 0px;
 }
 
 #titleGP {
@@ -103,18 +160,35 @@
 #btn {
     border: none;
     border-radius: 5px;
-    color: white;
+    color: black;
     font-size: 17px;
     font-family: 'Nunito';
     font-weight: 800;
     padding: 10px;
     cursor: pointer;  
-    background-color: #8c50ff;
-    border: 3px solid #8c50ff;
+    background-color: #23F0C7;
+    border: 3px solid #23F0C7;
     width: 50%;
+    transition: 0.3s;
 }
 
 #btn:hover {
     background-color: transparent;
-    color: #8c50ff;;
+    color: #23F0C7;
+}
+
+#postBtn {
+    font-family: 'Nunito';
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#postBtn:hover {
+    background: whitesmoke
 }

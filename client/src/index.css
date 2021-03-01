@@ -28,7 +28,7 @@ input {
 }
 
 .mainColor {
-  color: #8c50ff
+  color: #23F0C7
 }
 
 .white {
@@ -115,6 +115,9 @@ button {
 @media screen and (max-width: 480px) {
   #icon {
       height: 25px;
+  }
+  h1 {
+    margin-bottom: 0px;
   }
 }
 

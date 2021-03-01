@@ -5,19 +5,6 @@
     cursor: pointer;
 }
 
-.btn {
-    margin-top: 50px;
-    background: #8c50ff;
-    font-family: 'Nunito';
-    font-weight: 700;
-    font-size: 25px;
-    border: none;
-    padding: 20px;
-    border-radius: 5px;
-    color: white;
-    transition: 0.3s;
-}
-
 #form {
     background-color: white;
     width: 30%;
@@ -28,19 +15,36 @@
     align-items: center;
 }
 
+#joinBtn {
+    padding: 1em;
+    width: 12em;
+    border: none;
+    border-radius: 0.3em;
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.1em;
+    background: #23F0C7;
+    transition: 0.3s;
+    border: 3px solid #23F0C7;
+}
+
+#joinBtn:hover {
+    background: transparent;
+    color: #23F0C7;
+}
+
 @media screen and (max-width: 480px) {
     .headerIcon {
         font-size: 12px;
         margin: 0px 10px;
         margin-top: 4px;
-        color: #8c50ff;
-    }
-    .btn {
-        font-size: 16px;
-        padding: 10px;
+        color: #23F0C7;
     }
     #form {
         width: 85%;
+    }
+    #joinBtn {
+        margin-bottom: 50px;
     }
   }
   
@@ -100,6 +104,25 @@
     border: 2px solid red;
     font-family: 'Nunito';
     transition: 0.3s;
+}
+
+#applyBtn {
+    background: white;
+    padding: 10px 25px;
+    font-size: 22px;
+    font-family: 'Nunito';
+    border: none;
+    border-radius: 5px;
+    font-weight: 800;
+    margin-right: 25px;
+}
+
+@media screen and (max-width: 480px) {
+    #delete {
+        width: 45%;
+        font-size: 15px;
+        margin-left: 0px;
+    }
 }
 
 #delete:hover {
@@ -218,11 +241,12 @@
     width: 85%;
     cursor: pointer;
     margin: 25px 0px;
+    transition: 0.3s;
 
 }
 
 #createBtn:hover {
-    background: #8c50ff
+    background: #23F0C7;
 }
 
 #createBtn:disabled {

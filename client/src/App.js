@@ -20,7 +20,7 @@ import JobInfo from './Screens/JobInfo/JobInfo';
 import EditUser from './Screens/EditUser/EditUser';
 import Suggestions from './Screens/Suggestions/Suggestions';
 import NotFound from './Screens/NotFound/NotFound';
-import NavBar from './Components/NavBar/NavBar';
+import SuccessPage from './Screens/SuccessPage/SuccessPage';
 
 function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotifications, getJobs }) {
 
@@ -54,6 +54,7 @@ function App({ setGlobalSkills, setUserInfo, setProjects, getUsers, getNotificat
                 <Route exact path='/edit/user/me' component={EditUser} />
                 <Route exact path='/workers' component={WorkersList} />
                 <Route exact path='/suggestions' render={({ location }) => <Suggestions pathname={location} />} />
+                <Route exact path='/success' component={SuccessPage} />
                 <NotFound />
             </Switch>
             <Route exact path='/' component={Footer} />

@@ -5,18 +5,32 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import JobCard from '../JobListing/JobCardProfile';
 import Loading from '../../Media/Loading.gif';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from "@material-ui/core/styles";
 
 function ProjectProfile({ projectID, user }) {
 
     const [project, setProject] = useState({});
-    const [hasUpvoted, setHasUpvoted] = useState (false);
-    const [loading, setLoading] = useState (true);
+    const [hasUpvoted, setHasUpvoted] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const BlueOnGreenTooltip = withStyles({
+        tooltip: {
+            color: "white",
+            backgroundColor: "#181a19",
+            fontFamily: 'Nunito',
+            fontSize: '12px'
+        },
+        arrow: {
+            color: "#181a19"
+        }
+    })(Tooltip);
 
     useEffect(() => {
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(project => {
                 setProject(project.data);
-                setLoading (false);
+                setLoading(false);
             })
             .catch(err => console.log(err))
     }, [])
@@ -26,7 +40,7 @@ function ProjectProfile({ projectID, user }) {
         axios.patch(`http://localhost:5001/projects/${project.id}`, updatedUpvotes)
             .then(res => {
                 setProject({ ...project, upvotes: project.upvotes + 1 });
-                setHasUpvoted (true);
+                setHasUpvoted(true);
             })
             .catch(err => console.log(err))
     }
@@ -40,16 +54,16 @@ function ProjectProfile({ projectID, user }) {
     return (
         <div className='displayFlexColumn'>
             <div style={{ background: project.mainColor }} id={style.cover}></div>
-            <div className='displayFlexColumn' id='alignItemsCenter'>
-                <div id={style.socialMediaDiv} style={{ color: project.mainColor }}>
-                    {hasUpvoted ? <button style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-check-circle"></i></button> : <button onClick={modifyUpvotes} style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-rocket"></i> Upvote | {project.upvotes}</button>}
+            <div id={style.presentDiv}>
+                <div id={style.socialMediaDiv}>
+                    {hasUpvoted || project.isDeleted ? <button style={{ display: project.isDeleted ? 'none' : 'inline', background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-check-circle"></i></button> : <button onClick={modifyUpvotes} style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-rocket"></i> Upvote | {project.upvotes}</button>}
                     {project.productHunt && <a href={project.productHunt} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-product-hunt"></i></a>}
                     {project.twitter && <a href={project.twitter} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-twitter-square"></i></a>}
                     {project.linkedIn && <a href={project.linkedIn} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-linkedin"></i></a>}
                     {project.website && <a href={project.website} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fas fa-globe"></i></a>}
                 </div>
                 <div id={style.projectLogo}><img src={project.logo} id={style.logo} /></div>
-                <h1 className='font800'>{project.name}</h1>
+                <h1 id={style.projectName}>{project.name} {project.isDeleted && <BlueOnGreenTooltip title='This project has been closed by its founders.' arrow><span id={style.closedSpan}>CLOSED</span></BlueOnGreenTooltip>}</h1>
                 <span id={style.oneLineDescription}>{project.oneLineDescription}</span>
             </div>
             <div id={style.aboutDiv} style={{ background: project.mainColor }}>
@@ -73,11 +87,11 @@ function ProjectProfile({ projectID, user }) {
                     )}
                 </div>
             </div>
-            {project.jobOpportunities && project.jobOpportunities.length > 0 && 
-            <div id={style.mainJobDiv}>
-                <h2 className='font800'>Join {project.name}</h2>
-                {project.jobOpportunities.map (job => <JobCard project={project} job={job} />)}
-            </div>}
+            {project.jobOpportunities && project.jobOpportunities.length > 0 &&
+                <div id={style.mainJobDiv}>
+                    <h2 className='font800'>Join {project.name}</h2>
+                    {project.jobOpportunities.map(job => <JobCard project={project} job={job} />)}
+                </div>}
         </div>
     )
 }

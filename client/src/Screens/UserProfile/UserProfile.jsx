@@ -8,6 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
 import ProjectCard from '../../Components/ProfileProjectCard/ProfileProjectCard';
 import Loading from '../../Media/Loading.gif';
+import EmptyUser from '../../Media/EmptyUserProfile.svg';
 
 function UserProfile({ username, pathname }) {
 
@@ -17,19 +18,21 @@ function UserProfile({ username, pathname }) {
     const [hasWorked, setHasWorked] = useState(false);
     const [hasCreated, setHasCreated] = useState({});
     const [loading, setLoading] = useState(true);
+    const [noUser, setNoUser] = useState (false);
 
     useEffect(() => {
         const usuario = jwt.decode(JSON.parse(localStorage.getItem('user')));
-
+        if (!usuario) setNoUser (true);
         axios.get(`http://localhost:5001/users/${username}`)
             .then(res => {
+                if (res.data === null) window.location.replace ('/error');
                 setUser(res.data);
                 setColor(res.data.color);
                 if (res.data.projects.find(project => project.userXprojects.isFounder === true)) setHasCreated({ ...hasCreated, own: true });
                 if (res.data.projects.find(project => project.isFounder === false)) setHasCreated({ ...hasCreated, joined: true })
                 if (usuario && usuario.username === res.data.username) setIsUser(true);
                 if (pathname.search === "?verify" && usuario && usuario.username !== res.data.username) setHasWorked(true);
-                setLoading (false);
+                setLoading(false);
             })
             .catch(err => console.log(err))
     }, [])
@@ -51,17 +54,15 @@ function UserProfile({ username, pathname }) {
         }
     })(Tooltip);
 
-    console.log(user.projects, 'USER PROJECTS');
-
     return (
         <div>
             {loading ?
                 <img id={style.loading} src={Loading} /> :
                 <div>
-                    <div style={{ backgroundColor: color, height: '125px', width: '100%', position: 'absolute', top: '96px', zIndex: '-10' }}></div>
+                    <div id={style.cover} style={{ backgroundColor: color }}></div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
                         <div id={style.socialMediaDiv} style={{ color: color }}>
-                            {isUser ? <Link className='link' to='/edit/user/me'><button style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id='btn'>UPDATE PROFILE</button></Link> : <HirePopUp applicantUsername={user.username} color={color} />}
+                            {isUser ? <Link className='link' to='/edit/user/me'><button style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.btn}>UPDATE PROFILE</button></Link> : noUser ? null : <HirePopUp applicantUsername={user.username} color={color} />}
                             {user.gitHub && <a target='_blank' href={user.gitHub} style={{ textDecoration: 'none', color: color }}><i class="fab fa-github-square"></i></a>}
                             {user.linkedIn && <a target='_blank' href={user.linkedIn} style={{ textDecoration: 'none', color: color }}><i class="fab fa-linkedin"></i></a>}
                             {user.twitter && <a target='_blank' href={user.twitter} style={{ textDecoration: 'none', color: color }}><i class="fab fa-twitter-square"></i></a>}
@@ -98,6 +99,11 @@ function UserProfile({ username, pathname }) {
                             <h3 className='font800'>🤝 Project joined</h3>
                             {user.projects && user.projects.map(project => !project.userXprojects.isFounder ? <ProjectCard project={project} /> : null)}
                         </div>}
+                        {user.projects.length === 0 &&
+                            <div style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.emptyDiv}>
+                                <img id={style.empty} src={EmptyUser} />
+                                <h1 id={style.emptyTitle}>{isUser ? "You haven't joined or created any project." : "This developer hasn't joined or created any project."}</h1>
+                            </div>}
                     </div>
                 </div>}
         </div>

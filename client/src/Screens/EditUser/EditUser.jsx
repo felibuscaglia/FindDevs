@@ -32,15 +32,15 @@ function EditUser({ user, skills, setUserInfo }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    async function asyncUseEffect (username) {
-        await (setUserInfo (username));
+    async function asyncUseEffect(username) {
+        await (setUserInfo(username));
     }
 
     useLayoutEffect(() => {
         if (!user.username) {
-            const user = jwt.decode (JSON.parse(localStorage.getItem ('user')))
+            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
             if (user) {
-                asyncUseEffect (user.username);
+                asyncUseEffect(user.username);
             } else window.location.replace('/error');
         }
         setPreview(user.profilePic);
@@ -78,20 +78,27 @@ function EditUser({ user, skills, setUserInfo }) {
         setSelectedSkills(selectedSkills.filter(skill => skill.label !== e.target.name))
     }
 
-    function handleInputChange(e) {
-        if (e.hex) return setInput({ ...input, color: e.hex });
-
+    function handleInputChange (e) {
+        var copyOfErrors = errors;
+        var noErrors = true;
+        if (e.hex) return setInput ({ ...input, color: e.hex });
         if (e.target.name === 'email') {
-            if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(e.target.value))) {
-                setErrors({ ...errors, email: true });
-                setDisabled(true);
-            } else {
-                setErrors({ ...errors, email: false })
-                setDisabled(false);
-            }
+            if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(e.target.value)) copyOfErrors = { ...copyOfErrors, email: true };
+            else copyOfErrors = { ...copyOfErrors, email: false };
+        }
+        if (e.target.name === 'gitHub' || e.target.name === 'linkedIn' || e.target.name === 'twitter') {
+            if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(e.target.value)) copyOfErrors = { ...copyOfErrors, [e.target.name]: true };
+            else copyOfErrors = { ...errors, [e.target.name]: false };
         }
 
-        setInput({ ...input, [e.target.name]: e.target.value })
+        for (const key in copyOfErrors) if (copyOfErrors [key]) noErrors = false;
+
+        if (noErrors) setDisabled (false);
+        else setDisabled (true);
+
+        setErrors (copyOfErrors);
+
+        setInput ({ ...input, [e.target.name]: e.target.value })
     }
 
     function handleSubmit() {
@@ -122,7 +129,7 @@ function EditUser({ user, skills, setUserInfo }) {
         <div className='displayFlexColumn' id='alignItemsCenter'>
             <div style={{ background: user.color }} id={style.mainImage}>
                 <h1 style={{ color: user.brightness === 'bright' ? '#fff' : '#000' }} className='font800'>Edit your profile</h1>
-                <svg style={{ position: 'absolute', top: 160 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <svg id={style.cover} style={{ position: 'absolute', top: 160 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <path fill="#f9f9f9" fill-opacity="1" d="M0,192L60,192C120,192,240,192,360,202.7C480,213,600,235,720,224C840,213,960,171,1080,160C1200,149,1320,171,1380,181.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
                 </svg>
             </div>
@@ -132,19 +139,19 @@ function EditUser({ user, skills, setUserInfo }) {
                         <h2 className='font800'>@{user.username}</h2>
                         {user.isPremium && <img id={style.verification} src={Verified} />}
                     </div>
-                    <div style={{ display: user.isPremium ? 'none' : 'block' }} id={style.GPdiv}>
+                    <div style={{ display: user.isPremium ? 'none' : 'flex' }} id={style.GPdiv}>
                         <span className='font800'>Verify your FindDevs account and access all the benefits!</span>
                         <GoPremium />
                     </div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
-                        <div className='displayFlex'>
+                        <div id={style.firstDiv} className='displayFlex'>
                             <div id={style.imageDiv}>
                                 <div style={{ backgroundImage: `url(${preview})` }} id={style.profilePic}></div>
                                 <label for={style.fileDrop} id={style.logoLabel}><i class="fas fa-portrait"></i> Upload Image</label>
                                 <input onChange={(e) => check(e)} id={style.fileDrop} type='file' />
                                 <BlockPicker onChange={(e) => handleInputChange(e)} color={input.color} />
                             </div>
-                            <div>
+                            <div id={style.innerFirstDiv}>
                                 <div className={style.inputDiv}>
                                     <span className='font800'>Your email</span>
                                     <span id={style.lowEnphasis}>Keep in mind that it will be the one through which startups will contact you.</span>
@@ -168,15 +175,18 @@ function EditUser({ user, skills, setUserInfo }) {
                         <div id={style.socialDiv}>
                             <div className='displayFlexColumn' id='alignItemsCenter'>
                                 <span className='font800'><i class="fab fa-github-square"></i> GitHub</span>
-                                <input value={user.gitHub} name='gitHub' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                <input style={{ border: errors.gitHub ? '2px solid red' : '2px solid #e7e7e7' }} value={input.gitHub} name='gitHub' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                {errors.gitHub && <span className={style.errors}>Please enter a valid URL.</span>}
                             </div>
                             <div className='displayFlexColumn' id='alignItemsCenter'>
                                 <span className='font800'><i style={{ color: '#0e76a8' }} class="fab fa-linkedin"></i> LinkedIn</span>
-                                <input value={input.linkedIn} name='linkedIn' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                <input style={{ border: errors.linkedIn ? '2px solid red' : '2px solid #e7e7e7' }} value={input.linkedIn} name='linkedIn' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                {errors.linkedIn && <span className={style.errors}>Please enter a valid URL.</span>}
                             </div>
                             <div className='displayFlexColumn' id='alignItemsCenter'>
                                 <span className='font800'><i style={{ color: ' #00acee' }} class="fab fa-twitter-square"></i> Twitter</span>
-                                <input value={input.twitter} name='twitter' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                <input style={{ border: errors.twitter ? '2px solid red' : '2px solid #e7e7e7' }} value={input.twitter} name='twitter' onChange={(e) => handleInputChange(e)} className={style.input} />
+                                {errors.twitter && <span className={style.errors}>Please enter a valid URL.</span>}
                             </div>
                         </div>
                         <h3 className='font800' id='giveLessMargin'>Your skills</h3>
@@ -193,7 +203,7 @@ function EditUser({ user, skills, setUserInfo }) {
                             </Hint>
                         </div>
                     </div>
-                    <div>
+                    <div id={style.btnDiv}>
                         <button onClick={() => window.location.replace(`/user/${user.username}`)} style={{ background: 'black', color: 'white' }} id={style.btn}>Discard changes</button>
                         <button onClick={handleSubmit} disabled={btnDisabled} style={{ background: btnDisabled ? 'gray' : user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.btn}>Save changes</button>
                     </div>
@@ -217,9 +227,9 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
-        setUserInfo: username => setUserInfo (username)
+        setUserInfo: username => setUserInfo(username)
     }
 }
 

@@ -5,7 +5,7 @@ import Loading from '../../Media/Loading.gif';
 
 function UserSettingsCard({ user, projectID }) {
 
-    const [btnTxt, setBtnTxt] = useState('Founder')
+    const [btnTxt, setBtnTxt] = useState('Make founder')
 
     function makeFounder(userId) {
         setBtnTxt (null);

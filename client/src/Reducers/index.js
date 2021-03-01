@@ -10,7 +10,8 @@ const initialState = {
     jobSkillSelection: [],
     filteredWorkers: [],
     filteredJobs: [],
-    notifications: []
+    notifications: [],
+    limitOfPosts: false
 }
 
 function rootReducer(state = initialState, action) {
@@ -21,9 +22,11 @@ function rootReducer(state = initialState, action) {
                 allSkills: action.payload
             }
         case 'SET_USER_DATA':
+            const find = action.payload.projects.find (project => project.userXprojects.isFounder === true);
             return {
                 ...state,
-                userInfo: action.payload
+                userInfo: action.payload,
+                limitOfPosts: find && !action.payload.isPremium ? true : false
             }
         case 'SET_PROJECTS':
             return {

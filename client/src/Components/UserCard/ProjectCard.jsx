@@ -16,7 +16,7 @@ function ProjectCard({ project }) {
         <div id={style.projectCard}>
             <div id='alignItemsCenter' className='displayFlexColumn'>
                 <img id={style.profilePic} src={project.logo} />
-                <span className='font800'>{project.name}</span>
+                <span id={style.projectName} className='font800'>{project.name}</span>
                 <p id={style.bio}>{project.oneLineDescription}</p>
             </div>
             <Link style={{ width: '100%' }} to={`/project/profile/${project.id}`}><button id={style.btn} style={{ background: project.mainColor }}>Go to profile</button></Link>

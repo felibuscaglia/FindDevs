@@ -1,19 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import style from './JobPanel.module.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import JobCard from '../../JobListing/JobCardProfile';
 import Empty from '../../../Media/emptyJob.svg';
+import Loading from '../../../Media/Loading.gif';
+import jwt from 'jsonwebtoken';
+import { setUserInfo } from '../../../Actions/index';
+import { connect } from 'react-redux';
 
-function JobPanel({ projectID }) {
-
+function JobPanel({ projectID, setUserInfo, user }) {
     const [project, setProject] = useState({});
+    const [loading, setLoading] = useState (true);
 
-    useEffect(() => {
+    async function asyncUseEffect(username) {
+        await (setUserInfo(username));
+    }
+
+    useLayoutEffect(() => {
+        if (!user.username) {
+            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
+            if (user) {
+                asyncUseEffect(user.username);
+            } else window.location.replace('/error');
+        }
         axios.get(`http://localhost:5001/projects/${projectID}`)
-            .then(projectData => setProject(projectData.data))
+            .then(projectData => {
+                if (projectData.data.isDeleted) window.location.replace ('/error');
+                setProject(projectData.data);
+                setLoading (false);
+            })
             .catch(err => console.log(err))
-    }, [])
+    }, [user])
+
+    if (loading) {
+        return (
+            <img src={Loading} id={style.loading} />
+        )
+    }
 
     return (
         <div className='displayFlex'>
@@ -32,7 +56,7 @@ function JobPanel({ projectID }) {
                 </div> :
                 <div id={style.emptyDiv}>
                     <img src={Empty} id={style.empty} />
-                    <div>
+                    <div id={style.innerEmptyDiv}>
                         <h1 style={{ marginBottom: '25px' }} className='font800'>No jobs posted.</h1>
                         <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn2}>Post a job</span></Link>
                     </div>
@@ -41,6 +65,16 @@ function JobPanel({ projectID }) {
     )
 }
 
-//jobOpportunities
+function mapStateToProps (state) {
+    return {
+        user: state.userInfo
+    }
+} 
 
-export default JobPanel;
+function mapDispatchToProps (dispatch) {
+    return {
+        setUserInfo: username => dispatch(setUserInfo(username))
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(JobPanel);

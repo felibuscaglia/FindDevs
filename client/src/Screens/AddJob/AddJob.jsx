@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import style from './AddJob.module.css';
 import axios from 'axios';
 import { Hint } from 'react-autocomplete-hint';
 import { connect } from 'react-redux';
 import { Editor } from '@tinymce/tinymce-react';
 import Loading from '../../Media/Loading.gif';
+import jwt from 'jsonwebtoken';
+import { setUserInfo } from '../../Actions/index';
 
-function AddJob({ projectID, skills }) {
+function AddJob({ projectID, skills, setUserInfo, user }) {
 
     const [project, setProject] = useState({});
     const [selectedSkills, setSelectedSkills] = useState([]);
@@ -14,14 +16,28 @@ function AddJob({ projectID, skills }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
+    async function asyncUseEffect(username) {
+        await (setUserInfo(username));
+    }
+
+
+    useLayoutEffect(() => {
+        if (!user.username) {
+            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
+            if (user) {
+                asyncUseEffect(user.username);
+            } else window.location.replace('/error');
+        }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
+                if (projectData.data.isDeleted) window.location.replace('/error');
                 setProject(projectData.data);
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [user])
 
     function removeSkill(e) {
         setSelectedSkills(selectedSkills.filter(skill => skill.label !== e.target.name))
@@ -53,7 +69,7 @@ function AddJob({ projectID, skills }) {
     }
 
     function handleSubmit() {
-        setLoading (true);
+        setLoading(true);
         const justIDs = selectedSkills.map(skill => skill.id);
 
         if (!input.title || !input.description) return setError('Please complete all the necessary fields.')
@@ -72,20 +88,21 @@ function AddJob({ projectID, skills }) {
             </div>
             <div id={style.secondDiv}>
                 {!loading ?
-                    <div>
-                        <h1 className='font800'>Post a job</h1>
+                    <div id={style.innerDiv}>
+                        <h1 id={style.mainSpan} className='font800'>Post a job</h1>
                         <div className='displayFlexColumn'>
                             <span className='font600'>Title *</span>
                             <input maxLength='255' name='title' onChange={(e) => handleInputChange(e)} className={style.input} />
                         </div>
                         <div className='displayFlexColumn'>
                             <span className={style.title}>Description *</span>
-                            <Editor
+                            {window.innerWidth > 385 && <Editor
                                 onChange={(e) => handleDescriptionChange(e)}
                                 apiKey='5ltasngibqdlae7csndk86vmlye4eqd8jhk6fsiza0lpz5db'
                                 init={{
                                     selector: 'textarea',
-                                    content_style: "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap'); body { font-family: 'Nunito';}",
+                                    content_style: 
+                                    "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap'); body { font-family: 'Nunito';}",
                                     branding: false,
                                     height: 300,
                                     width: 723,
@@ -101,11 +118,12 @@ function AddJob({ projectID, skills }) {
                             alignleft aligncenter alignright | \
                             bullist numlist outdent indent'
                                 }}
-                            />
+                            />}
+                            <textarea id={style.textarea} placeholder='Describe your project'></textarea>
                         </div>
                         <div id={style.skillDiv}>
                             <span className='font600'>Skills</span>
-                            <div className='displayFlex' style={{ maxWidth: '800px', flexWrap: 'wrap' }}>
+                            <div id={style.selectedSkills}>
                                 {selectedSkills.map(skill =>
                                     <div>
                                         <button style={{ background: skill.strongColor, color: skill.softColor }} name={skill.label} onClick={(e) => removeSkill(e)} id={style.skillBtn}>{skill.label}</button>
@@ -126,7 +144,7 @@ function AddJob({ projectID, skills }) {
                             }
                         </div>
                     </div> :
-                    <img className='loading' src={Loading} />}
+                    <img className={style.loading} src={Loading} />}
             </div>
         </div>
     )
@@ -134,8 +152,15 @@ function AddJob({ projectID, skills }) {
 
 function mapStateToProps(state) {
     return {
-        skills: state.allSkills
+        skills: state.allSkills,
+        user: state.userInfo
     }
 }
 
-export default connect(mapStateToProps, null)(AddJob);
+function mapDispatchToProps (dispatch) {
+    return {
+        setUserInfo: username => dispatch(setUserInfo(username))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddJob);
