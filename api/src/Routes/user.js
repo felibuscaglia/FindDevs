@@ -22,6 +22,12 @@ cloudinary.config({
     api_secret: CLOUDINARY_SECRET
 });
 
+server.post ('/:userId/premium', (req, res, next) => {
+    const { userId } = req.params;
+    console.log ('REQ BODY', req.body);
+    res.send ('You are now premium!');
+})
+
 server.post('/:userId/profilePic', upload.single ('image') , async (req, res, next) => {
     const { userId } = req.params;
 
