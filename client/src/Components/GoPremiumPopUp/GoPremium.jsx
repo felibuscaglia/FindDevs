@@ -3,12 +3,16 @@ import Popup from 'reactjs-popup';
 import style from './GoPremium.module.css';
 import Verified from '../../Media/Verification.png';
 import axios from 'axios';
-import PayPal from './PayPal';
 import { PayPalButton } from 'react-paypal-button-v2';
+import { connect } from 'react-redux';
 
-function GoPremium({ isHeaderUser, isHomepage }) {
+function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
 
-    const [checkout, setCheckout] = useState(true);
+    const [checkout, setCheckout] = useState(false);
+
+    const paymentHandler = (details, data) => {
+        axios.put (`http://localhost:5001/users/${userInfo.id}`)
+    }
 
     return (
         <Popup trigger={isHeaderUser ?
@@ -20,7 +24,11 @@ function GoPremium({ isHeaderUser, isHomepage }) {
                 <div id={style.mainDiv} onClick={close}>
                     <div id={style.form}>
                         {checkout ?
-                            <PayPalButton /> :
+                            <PayPalButton
+                                amount={11.99}
+                                currency={'USD'}
+                                onSuccess={paymentHandler}
+                            /> :
                             <div>
                                 <div className='displayFlex' id='alignItemsCenter'>
                                     <h1 id={style.titleGP}>Get verified and become a premium member!</h1>
@@ -44,7 +52,7 @@ function GoPremium({ isHeaderUser, isHomepage }) {
                                 </div>
                                 <div id={style.paymentDiv}>
                                     <span id={style.advertPay}>Make sure that the email you put in the checkout is the same that you used to register in FindDevs.</span>
-                                    <button onClick={() => setCheckout (true)} id={style.btn}>Go premium</button>
+                                    <button onClick={() => setCheckout(true)} id={style.btn}>Go premium</button>
                                 </div>
                             </div>}
                     </div>
@@ -53,4 +61,11 @@ function GoPremium({ isHeaderUser, isHomepage }) {
         </Popup>
     )
 }
-export default GoPremium;
+
+function mapStateToProps (state) {
+    return {
+        userInfo: state.userInfo
+    }
+}
+
+export default connect (mapStateToProps, null)(GoPremium);
