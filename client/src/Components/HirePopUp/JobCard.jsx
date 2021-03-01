@@ -37,7 +37,7 @@ function JobCard({ job, project, applicantUsername, user, close }) {
     } else return (
         <div id={style.mainJobDiv} style={{ background: project.project.mainColor }}>
             <div className='displayFlex' id='alignItemsCenter'>
-                <div id={style.imgDiv}><img src={project.project.logo} id={style.icon} /></div>
+                <div id={style.imgDiv}><img alt="Loading GIF" src={project.project.logo} id={style.icon} /></div>
                 <div id={style.jobInfoDiv}>
                     <span id={style.projectName}>{project.project.name}</span>
                     <span>{job.title}</span>

@@ -65,6 +65,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
         setLoading(true);
         if (!file) input.logo = 'https://i.ibb.co/m82SNJT/profile-pic-startup-sin-marco.png';
         input.isPremium = user.isPremium;
+        input.ownerId = user.id;
         input.brightness = getBrightness(input.mainColor);
         axios.post(`http://localhost:5001/projects/${user.username}`, input)
             .then(res => {

@@ -37,7 +37,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                     {user.projects && user.projects.map(project =>
                                         project.userXprojects.isFounder ?
                                             <div style={{ background: selection.project && selection.project.name === project.name ? 'rgb(231,231,231' : null }} onClick={() => getInfoAndSetProject(project)} id={style.projectDiv}>
-                                                <img id='icon' src={project.logo} />
+                                                <img alt="Project logo" id='icon' src={project.logo} />
                                                 <span id={style.projectName} className='font200'>{project.name}</span>
                                             </div>
                                             : null
@@ -52,7 +52,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                         jobs.map(job => <JobCard close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />)
                                         :
                                         <div>
-                                            <img id={style.emptyIcon} src={Empty} />
+                                            <img alt="No jobs are posted for this project." id={style.emptyIcon} src={Empty} />
                                             <Link to={`/project/addJob/${selection.project.id}`}><button id={style.postBtn} style={{ background: selection.project.mainColor }}>Post a job</button></Link>
                                         </div>}
                                 </div>

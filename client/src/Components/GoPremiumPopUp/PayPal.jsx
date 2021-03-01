@@ -1,9 +1,10 @@
 import React from 'react';
 import { PayPalButton } from "react-paypal-button-v2";
 
-function PayPalBtn({ amount, onSuccess, currency }) {
+function PayPalBtn({ amount, onSuccess, currency, shippingPreference }) {
     return (
         <PayPalButton
+            shippingPreference={shippingPreference}
             amount={amount}
             currency={currency}
             onSuccess={(details, data) => onSuccess(details, data)}

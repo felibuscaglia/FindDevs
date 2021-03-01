@@ -68,12 +68,12 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
                 </div>
                 {applicants.length === 0 && 
                 <div id={style.emptyDiv}>
-                    <img id={style.empty} src={Empty} />
+                    <img alt='No developers have applied to this job.' id={style.empty} src={Empty} />
                     <Link to='/workers'><button id='btn' style={{ background: 'black' }}>Search for developers</button></Link>
                 </div>}
             </div> :
             <div id={style.form}>
-                <img id='icon' src={Loading} />
+                <img alt='Loading GIF' id='icon' src={Loading} />
             </div>
     )
 }

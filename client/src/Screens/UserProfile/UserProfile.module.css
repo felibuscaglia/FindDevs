@@ -88,6 +88,8 @@
     }
     #emptyTitle {
         font-size: 20px;
+        width: 200%;
+        margin-bottom: 10px;
     }
 }
 

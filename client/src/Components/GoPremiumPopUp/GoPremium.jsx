@@ -9,9 +9,23 @@ import { connect } from 'react-redux';
 function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
 
     const [checkout, setCheckout] = useState(false);
+    const [loading, setLoading] = useState (false);
 
     const paymentHandler = (details, data) => {
-        axios.put (`http://localhost:5001/users/${userInfo.id}`)
+        setLoading (true);
+        var infoToUpdate = {
+            isPremium: true,
+            orderID: data.orderID,
+            payerID: data.payerID
+        }
+        axios.post(`http://localhost:5001/users/${userInfo.id}/premium`, infoToUpdate)
+            .then (res => window.location.replace ('/success'))
+            .catch (err => console.log (err))
+    }
+
+    function closePopUp(close) {
+        setCheckout(false);
+        close();
     }
 
     return (
@@ -21,15 +35,22 @@ function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
                 <button className={style.smallBtn}>Join the community.</button> :
                 <button id={style.goPremiumBtn}>Go premium</button>} modal>
             {close => (
-                <div id={style.mainDiv} onClick={close}>
+                <div id={style.mainDiv}>
                     <div id={style.form}>
-                        {checkout ?
-                            <PayPalButton
-                                amount={11.99}
-                                currency={'USD'}
-                                onSuccess={paymentHandler}
-                            /> :
-                            <div>
+                        {loading ?
+                        <img alt="Loading GIF" src='https://flevix.com/wp-content/uploads/2019/07/Bar-Preloader-1.gif' /> :
+                        checkout ?
+                            <div id={style.payPalDiv}>
+                                <button id={style.paypal} onClick={() => closePopUp(close)}><i class="fas fa-times"></i></button>
+                                <PayPalButton
+                                    amount={11.99}
+                                    currency={'USD'}
+                                    onSuccess={paymentHandler}
+                                    shippingPreference={"NO_SHIPPING"}
+                                />
+                            </div> :
+                            <div className='displayFlexColumn'>
+                                <button id={style.closeBtn} onClick={() => closePopUp(close)}><i class="fas fa-times"></i></button>
                                 <div className='displayFlex' id='alignItemsCenter'>
                                     <h1 id={style.titleGP}>Get verified and become a premium member!</h1>
                                 </div>
@@ -37,7 +58,7 @@ function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
                                     <div id={style.firstDiv}>
                                         <span className={style.pro}>🧑‍💻 Join the community and<span className='font800'> get the boost your career as a developer or your startup needs.</span></span>
                                         <div className={style.pro}>
-                                            <img src={Verified} id={style.icon} />
+                                            <img alt="Verification badge" src={Verified} id={style.icon} />
                                             <span>Verify yourself and be the first person project founders see when they are looking for developers, by <span className='font800'>appearing on the frontpage of the workers directory.</span></span>
                                         </div>
                                         <span className={style.pro}>🚀 <span className='font800'>Eliminate the limit of projects that you can publish</span>, so you will have the opportunity to promote any idea you have.</span>
@@ -46,13 +67,12 @@ function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
                                     <div>
                                         <div id={style.price}>
                                             <span className='font800'>$11.99</span>
-                                            <span className={style.advert}>7-day money-back guarantee. One time payment.</span>
+                                            <span className={style.advert}>One time payment.</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div id={style.paymentDiv}>
-                                    <span id={style.advertPay}>Make sure that the email you put in the checkout is the same that you used to register in FindDevs.</span>
-                                    <button onClick={() => setCheckout(true)} id={style.btn}>Go premium</button>
+                                    {isHomepage && !userInfo.username ? null : userInfo.isPremium ? <span id={style.alreadyMember}><i class="fas fa-check-circle"></i> You are already a premium member of FindDevs!</span> : <button onClick={() => setCheckout(true)} id={style.btn}>Go premium</button>}
                                 </div>
                             </div>}
                     </div>
@@ -62,10 +82,10 @@ function GoPremium({ isHeaderUser, isHomepage, userInfo }) {
     )
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         userInfo: state.userInfo
     }
 }
 
-export default connect (mapStateToProps, null)(GoPremium);
+export default connect(mapStateToProps, null)(GoPremium);

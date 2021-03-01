@@ -80,7 +80,23 @@
     margin-bottom: 25px;
 }
 
+#alreadyMember {
+    color: #23F0C7;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 10px;
+    background-color: transparent;
+    border: 3px solid #23F0C7;
+    width: 75%;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 480px) {
+    #alreadyMember {
+        font-size: 12px;
+        margin-top: 10px;
+    }
     #paymentDiv {
         margin-top: 0px;
     }
@@ -157,6 +173,11 @@
     margin-bottom: 20px;
 }
 
+#alreadyMember:hover {
+    background-color: #23F0C7;
+    color: black;
+}
+
 #btn {
     border: none;
     border-radius: 5px;
@@ -176,6 +197,33 @@
     background-color: transparent;
     color: #23F0C7;
 }
+
+#payPalDiv {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#closeBtn {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+#paypal {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 200px;
+}
+
 
 #postBtn {
     font-family: 'Nunito';

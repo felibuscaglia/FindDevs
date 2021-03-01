@@ -68,7 +68,7 @@ function HeaderUser(props) {
     if (props.pathname.pathname.indexOf('/project/settings') === -1 && props.pathname.pathname.indexOf('/project/members') === -1 && props.pathname.pathname !== '/' && props.pathname.pathname !== '/project/post' && props.pathname.pathname !== '/admin/panel' && props.pathname.pathname.indexOf('project/jobPanel') !== 1 && props.pathname.pathname.indexOf('project/addJob') !== 1) {
         return (
             <div id={style.header}>
-                <img onClick={changeScreen} style={{ cursor: 'pointer' }} src={Logo} id='icon' />
+                <img alt="Logo" onClick={changeScreen} style={{ cursor: 'pointer' }} src={Logo} id='icon' />
                 <div className='displayFlex' id='alignItemsCenter'>
                     {props.pathname.pathname !== '/suggestions' && <SearchBar />}
                     {props.userInfo.username ?
@@ -89,7 +89,7 @@ function HeaderUser(props) {
                                 {props.notifications && props.notifications.map(notification =>
                                     <MenuItem style={{ display: deleted.includes(notification.id) ? 'none' : 'block' }} id='alignItemsFS' className='displayFlexColumn'>
                                         <div className='displayFlex' id='alignItemsCenter'>
-                                            <img onClick={() => window.location.replace(`/project/profile/${notification.projectId}`)} src={notification.projectLogo} id={style.icon} />
+                                            <img alt="Startup logo" onClick={() => window.location.replace(`/project/profile/${notification.projectId}`)} src={notification.projectLogo} id={style.icon} />
                                             <span className='font800'>{notification.content}</span>
                                             {notification.type === 'Invitation' ?
                                                 <div>
@@ -114,11 +114,11 @@ function HeaderUser(props) {
                                     keepMounted
                                     open={Boolean(anchorEl2)}
                                     onClose={handleClose2}
-                                    className={style.notificationDiv}
+                                    className={style.userMenu}
                                 >
-                                    <MenuItem onClick={() => window.location.replace('/edit/user/me')}>
+                                    <MenuItem onClick={() => window.location.replace(`/user/${props.userInfo.username}`)}>
                                         <div className={style.dropdown}>
-                                            <span>Edit your profile</span>
+                                            <span>Your profile</span>
                                         </div>
                                     </MenuItem>
                                     <Link to='/admin/panel' className='links'>
@@ -128,6 +128,22 @@ function HeaderUser(props) {
                                             </div>
                                         </MenuItem>
                                     </Link>
+                                    <hr id='line'></hr>
+                                    <Link to='/jobs' className='links'>
+                                        <MenuItem>
+                                            <div className={style.dropdown}>
+                                                <span>Startup jobs</span>
+                                            </div>
+                                        </MenuItem>
+                                    </Link>
+                                    <Link className='links' to='/workers'>
+                                        <MenuItem>
+                                            <div className={style.dropdown}>
+                                                <span>Workers</span>
+                                            </div>
+                                        </MenuItem>
+                                    </Link>
+                                    <hr id='line'></hr>
                                     <MenuItem onClick={logOut}>
                                         <div className={style.dropdown}>
                                             <span>Log out</span>
