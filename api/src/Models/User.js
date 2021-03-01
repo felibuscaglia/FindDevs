@@ -63,6 +63,12 @@ module.exports = (sequelize) => {
       },
       brightness: {
         type: DataTypes.STRING
+      },
+      orderID: {
+        type: DataTypes.STRING
+      },
+      payerID: {
+        type: DataTypes.STRING
       }
     },
     {

@@ -22,13 +22,25 @@ cloudinary.config({
     api_secret: CLOUDINARY_SECRET
 });
 
-server.post ('/:userId/premium', (req, res, next) => {
+server.post('/:userId/premium', async (req, res, next) => {
     const { userId } = req.params;
-    console.log ('REQ BODY', req.body);
-    res.send ('You are now premium!');
+
+    try {
+        const user = await User.findByPk(userId);
+        await user.update(req.body);
+        const userProjects = await Project.findAll({ where: { ownerId: userId } });
+        await Promise.all(
+            userProjects.map(async project => {
+                await project.update({ ...project, isPremium: true })
+            })
+        )
+        res.send ('User is now premium.')
+    } catch (err) {
+        next (err);
+    }
 })
 
-server.post('/:userId/profilePic', upload.single ('image') , async (req, res, next) => {
+server.post('/:userId/profilePic', upload.single('image'), async (req, res, next) => {
     const { userId } = req.params;
 
     try {
@@ -37,7 +49,7 @@ server.post('/:userId/profilePic', upload.single ('image') , async (req, res, ne
             user.update({ ...user, profilePic: result.url });
         });
         fs.unlinkSync(req.file.path);
-        return res.send ('User updated.')
+        return res.send('User updated.')
     } catch (err) {
         next(err)
     }
@@ -85,15 +97,15 @@ server.get('/:username/projects', (req, res, next) => {
 
 })
 
-server.post ('/:userId/:projectId/founders', async (req, res, next) => {
+server.post('/:userId/:projectId/founders', async (req, res, next) => {
     const { userId, projectId } = req.params;
 
     try {
-        const userData = await UserXProjects.findOne ( { where: { userId, projectId } });
-        await userData.update ({ ...userData, isFounder: true });
-        res.send ('User is now founder.')
+        const userData = await UserXProjects.findOne({ where: { userId, projectId } });
+        await userData.update({ ...userData, isFounder: true });
+        res.send('User is now founder.')
     } catch (err) {
-        next (err);
+        next(err);
     }
 })
 
@@ -112,13 +124,13 @@ server.post('/:username/notifications', (req, res, next) => {
         .catch(next)
 })
 
-server.delete ('/:userId/notifications/:notificationId', (req, res, next) => {
+server.delete('/:userId/notifications/:notificationId', (req, res, next) => {
     const { notificationId, userId } = req.params;
-    Notifications.findByPk (notificationId)
-        .then (notification => notification.destroy ())
-        .then (response => User.findByPk (userId, { include: { model: Notifications } }))
-        .then (user => res.json (user.notifications))
-        .catch (err => console.log (err))
+    Notifications.findByPk(notificationId)
+        .then(notification => notification.destroy())
+        .then(response => User.findByPk(userId, { include: { model: Notifications } }))
+        .then(user => res.json(user.notifications))
+        .catch(err => console.log(err))
 })
 
 server.post('/:username/project/:projectId', (req, res, next) => {

@@ -47,6 +47,9 @@ module.exports = (sequelize) => {
       },
       isPremium: {
         type: DataTypes.BOOLEAN
+      },
+      ownerId: {
+        type: DataTypes.INTEGER
       }
     },
     {
