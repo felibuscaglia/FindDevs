@@ -34,7 +34,7 @@ function JobCardProfile({ job, project, isJobPanel, warning, setWarning }) {
                 <span id={style.pinned}>📌{getDate(moment(job.createdAt).format('MM/DD/YYYY'))}</span>
             </div> :
                 <div id={style.applicantsDiv}>
-                    <ApplicantsPopUp job={job} projectName={project.name} brightness={project.brightness} />
+                    <ApplicantsPopUp job={job} projectLogo={project.logo} projectName={project.name} brightness={project.brightness} />
                     <span onClick={deleteJob} style={{ color: project.brightness === 'bright' ? '#000' : '#fff', background: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.editBtn}>Delete</span>
                 </div>
             }

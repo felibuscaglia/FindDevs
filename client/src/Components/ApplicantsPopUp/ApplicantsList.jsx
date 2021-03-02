@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../../Media/Loading.gif';
 import Empty from '../../Media/JobApplicants.svg';
 
-function ApplicantsList({ job, projectName, applicants, close, setDecided, setApplicants }) {
+function ApplicantsList({ job, projectName, applicants, close, setDecided, setApplicants, projectLogo }) {
 
     const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
 
         axios.post(`http://localhost:5001/users/${applicantName}/project/${job.projectId}`, { jobTitle: job.title })
             .then(res => {
-                return axios.post(`http://localhost:5001/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId, jobTitle: job.title, projectLogo: job.project.logo })
+                return axios.post(`http://localhost:5001/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId, projectLogo: projectLogo })
             })
             .then(res => axios.delete(`http://localhost:5001/jobs/${job.id}`))
             .then(res => {
