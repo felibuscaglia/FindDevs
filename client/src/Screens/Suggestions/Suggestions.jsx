@@ -58,7 +58,7 @@ function Suggestions({ pathname, users, projects }) {
                         </div>
                     </div>}
                     {suggestions.projects.length === 0 && suggestions.users.length === 0 &&
-                        <div className='displayFlex' id='alignItemsCenter'>
+                        <div className='justifyCenter' id='alignItemsCenter'>
                             <img alt="No suggestions found" src={Empty} id={style.empty} />
                             <div>
                                 <h1 style={{ marginBottom: '25px' }} className='font800'>Oops... nothing was found.</h1>

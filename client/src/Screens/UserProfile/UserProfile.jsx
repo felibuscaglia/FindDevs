@@ -29,7 +29,7 @@ function UserProfile({ username, pathname }) {
                 setUser(res.data);
                 setColor(res.data.color);
                 if (res.data.projects.find(project => project.userXprojects.isFounder === true)) setHasCreated({ ...hasCreated, own: true });
-                if (res.data.projects.find(project => project.isFounder === false)) setHasCreated({ ...hasCreated, joined: true })
+                if (res.data.projects.find(project => project.userXprojects.isFounder === false)) setHasCreated({ ...hasCreated, joined: true })
                 if (usuario && usuario.username === res.data.username) setIsUser(true);
                 if (pathname.search === "?verify" && usuario && usuario.username !== res.data.username) setHasWorked(true);
                 setLoading(false);
