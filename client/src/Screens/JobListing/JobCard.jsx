@@ -48,7 +48,7 @@ function JobCard({ job, filterJobs, setLoading }) {
             </div>
             <div id={style.skillDiv}>
                 {job.skills.map(skill =>
-                    <BlueOnGreenTooltip classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
+                    <BlueOnGreenTooltip key={skill.id} classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
                         <span onClick={() => {
                             setLoading(true);
                             filterJobs(skill);

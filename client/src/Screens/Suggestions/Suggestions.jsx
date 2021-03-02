@@ -46,7 +46,7 @@ function Suggestions({ pathname, users, projects }) {
                             <h1 className='font800'>Projects ({suggestions.projects.length})</h1>
                         </div>
                         <div id={style.userCards}>
-                            {suggestions.projects.map(project => <ProjectCard project={project} />)}
+                            {suggestions.projects.map(project => <ProjectCard key={project.id} project={project} />)}
                         </div>
                     </div>}
                     {suggestions.users.length > 0 && <div className='displayFlexColumn' id='alignItemsCenter'>
@@ -54,7 +54,7 @@ function Suggestions({ pathname, users, projects }) {
                             <h1 className='font800'>Developers ({suggestions.users.length})</h1>
                         </div>
                         <div id={style.userCards}>
-                            {suggestions.users.map(user => <UserCardSearch user={user} />)}
+                            {suggestions.users.map(user => <UserCardSearch key={user.id} user={user} />)}
                         </div>
                     </div>}
                     {suggestions.projects.length === 0 && suggestions.users.length === 0 &&

@@ -193,7 +193,7 @@ function EditUser({ user, skills, setUserInfo }) {
                         <div className='displayFlexColumn' id='alignItemsCenter'>
                             <div id={style.skillDiv} className='displayFlex'>
                                 {selectedSkills && selectedSkills.map(skill =>
-                                    <div>
+                                    <div key={skill.id}>
                                         <button style={{ background: skill.strongColor, color: skill.softColor }} name={skill.label} onClick={(e) => removeSkill(e)} id={style.skillBtn}><i class="fas fa-times-circle"></i> {skill.label}</button>
                                     </div>
                                 )}

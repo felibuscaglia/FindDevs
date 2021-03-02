@@ -129,7 +129,21 @@
     display: flex;
 }
 
+#userDiv {
+    width: 50%;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 @media screen and (max-width: 480px) {
+    #userDiv {
+        width: 100%;
+        padding: 5px;
+    }
     #logoDivS {
         margin-top: 0px;
         margin-bottom: 15px;
@@ -194,16 +208,6 @@
     height: 50px;
     margin-right: 15px;
     margin-bottom: 10px;
-}
-
-#userDiv {
-    width: 50%;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 25px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 #miniLoading {

@@ -54,7 +54,7 @@ function JobPanel({ projectID, setUserInfo, user }) {
                 <div id={style.secondDiv}>
                     <h1 className='font800'>Job Panel</h1>
                     <div id={style.jobDiv}>
-                        {project.jobOpportunities && project.jobOpportunities.map(job => <JobCard isJobPanel={true} project={project} job={job} />)}
+                        {project.jobOpportunities && project.jobOpportunities.map(job => <JobCard key={job.id} isJobPanel={true} project={project} job={job} />)}
                     </div>
                     <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn}>Post a job</span></Link>
                 </div> :

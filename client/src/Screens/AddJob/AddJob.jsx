@@ -128,7 +128,7 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
                             <span className='font600'>Skills</span>
                             <div id={style.selectedSkills}>
                                 {selectedSkills.map(skill =>
-                                    <div>
+                                    <div key={skill.id}>
                                         <button style={{ background: skill.strongColor, color: skill.softColor }} name={skill.label} onClick={(e) => removeSkill(e)} id={style.skillBtn}>{skill.label}</button>
                                     </div>
                                 )}

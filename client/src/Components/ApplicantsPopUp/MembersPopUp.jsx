@@ -48,7 +48,7 @@ function MembersPopUp({ projectID, userInfo, brightness, isFounder }) {
                             <div id={style.topApplicantDiv}>
                                 {project.users && project.users.map(user =>
                                     user.userXprojects.endDate === null && 
-                                    <div id={style.applicantDiv}>
+                                    <div key={user.id} id={style.applicantDiv}>
                                         <div className='displayFlex' id='alignItemsCenter'>
                                             <div id={style.profilePic}></div>
                                             <div id={style.memberInfo}>

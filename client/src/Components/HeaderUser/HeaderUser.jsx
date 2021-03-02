@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Register from '../PopUps/RegisterPopUp';
 import SearchBar from './SearchBar';
-import GoPremium from '../GoPremiumPopUp/GoPremium';
 
 function HeaderUser(props) {
 
@@ -87,7 +86,7 @@ function HeaderUser(props) {
                                 className={style.notificationDiv}
                             >
                                 {props.notifications && props.notifications.map(notification =>
-                                    <MenuItem style={{ display: deleted.includes(notification.id) ? 'none' : 'block' }} id='alignItemsFS' className='displayFlexColumn'>
+                                    <MenuItem key={notification.id} style={{ display: deleted.includes(notification.id) ? 'none' : 'block' }} id='alignItemsFS' className='displayFlexColumn'>
                                         <div className='displayFlex' id='alignItemsCenter'>
                                             <img alt="Startup logo" onClick={() => window.location.replace(`/project/profile/${notification.projectId}`)} src={notification.projectLogo} id={style.icon} />
                                             <span className='font800'>{notification.content}</span>
@@ -130,14 +129,14 @@ function HeaderUser(props) {
                                     </Link>
                                     <hr id='line'></hr>
                                     <Link to='/jobs' className='links'>
-                                        <MenuItem>
+                                        <MenuItem onClick={handleClose2}>
                                             <div className={style.dropdown}>
                                                 <span>Startup jobs</span>
                                             </div>
                                         </MenuItem>
                                     </Link>
                                     <Link className='links' to='/workers'>
-                                        <MenuItem>
+                                        <MenuItem onClick={handleClose2}>
                                             <div className={style.dropdown}>
                                                 <span>Workers</span>
                                             </div>
@@ -150,7 +149,7 @@ function HeaderUser(props) {
                                         </div>
                                     </MenuItem>
                                     <hr id='line'></hr>
-                                    {!props.limitOfPosts ? <Link className='links' to='/project/post'><button id={style.postBtn}>Post a project</button></Link> : <GoPremium isHeaderUser={true} />}
+                                    {!props.limitOfPosts ? <Link className='links' to='/project/post'><button id={style.postBtn}>Post a project</button></Link> : null}
                                 </Menu>
                             </div>
                         </div> :

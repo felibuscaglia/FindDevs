@@ -15,7 +15,7 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
 
         axios.post(`http://localhost:5001/users/${applicantName}/project/${job.projectId}`, { jobTitle: job.title })
             .then(res => {
-                return axios.post(`http://localhost:5001/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId })
+                return axios.post(`http://localhost:5001/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId, jobTitle: job.title, projectLogo: job.project.logo })
             })
             .then(res => axios.delete(`http://localhost:5001/jobs/${job.id}`))
             .then(res => {
@@ -45,12 +45,12 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
                 <h1 className='font200'>{job.title}</h1>
                 <div className='displayFlex'>
                     {job.skills.map(skill =>
-                        <span style={{ background: skill.strongColor, color: skill.softColor }} className={style.requirement}>{skill.label}</span>
+                        <span key={skill.id} style={{ background: skill.strongColor, color: skill.softColor }} className={style.requirement}>{skill.label}</span>
                     )}
                 </div>
                 <div id={style.topApplicantDiv}>
                     {applicants.map(applicant =>
-                        <div id={style.applicantDiv}>
+                        <div key={applicant.id} id={style.applicantDiv}>
                             <div className='displayFlex' id='alignItemsCenter'>
                                 <div id={style.profilePic}></div>
                                 <span id={style.username}>{`@ ${applicant.username}`}</span>

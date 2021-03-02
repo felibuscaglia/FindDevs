@@ -74,7 +74,7 @@ function ProjectProfile({ projectID, user }) {
                 <h2 className='font800'>Members ({project.users && project.users.length})</h2>
                 <div id={style.mainUserDiv}>
                     {project.users && project.users.map(user =>
-                        <div style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
+                        <div key={user.id} style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
                             <img alt="Profile picture" src={user.profilePic} id={style.profilePic} />
                             <div className='displayFlexColumn' id='alignItemsCenter'>
                                 <h5 className='font800'>@ {user.username}</h5>
@@ -90,7 +90,7 @@ function ProjectProfile({ projectID, user }) {
             {project.jobOpportunities && project.jobOpportunities.length > 0 &&
                 <div id={style.mainJobDiv}>
                     <h2 className='font800'>Join {project.name}</h2>
-                    {project.jobOpportunities.map(job => <JobCard project={project} job={job} />)}
+                    {project.jobOpportunities.map(job => <JobCard key={job.id} project={project} job={job} />)}
                 </div>}
         </div>
     )

@@ -47,7 +47,7 @@ function UserCard({ user, selectWorkers }) {
             </div>
             <div id='alignItemsCenter' className='justifyCenter' style={{ flexWrap: 'wrap' }}>
                 {user.skills && user.skills.slice(0, 8).map(skill =>
-                    <div id={style.skillDiv}>
+                    <div key={skill.id} id={style.skillDiv}>
                         <BlueOnGreenTooltip classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
                             <span
                                 onClick={() => { selectWorkers(skill) }}

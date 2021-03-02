@@ -46,7 +46,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                 </div>}
             <div style={{ display: skillSelection.length > 0 ? 'flex' : 'none' }} id={style.filteredDiv}>
                 {skillSelection.map(filtered =>
-                    <div onClick={() => removeFilters(filtered)} style={{ background: filtered.strongColor, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></div>
+                    <div key={filtered.id} onClick={() => removeFilters(filtered)} style={{ background: filtered.strongColor, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></div>
                 )}
             </div>
             {skillSelection.length === 0 &&
@@ -57,19 +57,19 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                             <h3 className='font800'>Verified developers</h3>
                         </div>
                         <div id={style.userCards}>
-                            {users.map(user => user.isPremium && <UserCard user={user} />)}
+                            {users.map(user => user.isPremium && <UserCard key={user.id} user={user} />)}
                         </div>
                     </div>
                     <div>
                         {skills.map(skill =>
                             skill.users.length > 0 && skill.users.find(user => user.isPremium === true) ?
-                                <div className='displayFlexColumn' id='alignItemsCenter'>
+                                <div key={skill.id} className='displayFlexColumn' id='alignItemsCenter'>
                                     <div className='displayFlex' id='alignItemsCenter'>
                                         <img alt="Skill logo" src={skill.logo} id={style.verification} />
                                         <h3 className='font800'>{skill.label} developers ({skill.users.length})</h3>
                                     </div>
                                     <div id={style.userCards}>
-                                        {skill.users.map(user => user.isPremium && <UserCard user={user} />)}
+                                        {skill.users.map(user => user.isPremium && <UserCard key={user.id} user={user} />)}
                                     </div>
                                 </div> : null
                         )}
@@ -78,7 +78,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
             }
             {skillSelection.length > 0 && filteredWorkers.length !== 0 &&
                 <div className='justifyCenter' id='flexWrap'>
-                    {filteredWorkers.map(worker => <UserCard user={worker} />)}
+                    {filteredWorkers.map(worker => <UserCard key={worker.id} user={worker} />)}
                 </div>
             }
         </div>

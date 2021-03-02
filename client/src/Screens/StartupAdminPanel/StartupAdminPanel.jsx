@@ -8,7 +8,8 @@ import ProjectCard from '../../Components/ProjectCard/ProjectCard';
 import Empty from '../../Media/emptyJob.svg';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index';
-import Loading from '../../Media/Loading.gif'
+import Loading from '../../Media/Loading.gif';
+import GoPremium from '../../Components/GoPremiumPopUp/GoPremium';
 
 function StartupAdminPanel({ user, limitOfPosts, setUserInfo }) {
     const [projects, setProjects] = useState([]);
@@ -51,7 +52,7 @@ function StartupAdminPanel({ user, limitOfPosts, setUserInfo }) {
             <div id={style.secondDiv}>
                 <div id={style.projectDiv}>
                     {projects.length > 0 && <h1 className='font800'>Your projects</h1>}
-                    {projects.length > 0 ? projects.map(project => project.userXprojects.endDate !== null ? null : project.userXprojects.isFounder ? <ProjectCard project={project} isFounder={true} /> : <ProjectCard project={project} isFounder={false} />) :
+                    {projects.length > 0 ? projects.map(project => project.userXprojects.endDate !== null ? null : project.userXprojects.isFounder ? <ProjectCard key={project.id} project={project} isFounder={true} /> : <ProjectCard key={project.id} project={project} isFounder={false} />) :
                         <div id={style.emptyDiv}>
                             <img alt="No jobs posted" src={Empty} id={style.empty} />
                             <div>
@@ -60,7 +61,7 @@ function StartupAdminPanel({ user, limitOfPosts, setUserInfo }) {
                             </div>
                         </div>}
                 </div>
-                {projects.length > 0 && !limitOfPosts && <Link to='/project/post'><span id={style.postBtn}>Post a project</span></Link>}
+                {projects.length > 0 && !limitOfPosts ? <Link to='/project/post'><span id={style.postBtn}>Post a project</span></Link> : <GoPremium isAdminPanel={true} />}
             </div>
         </div>
     )

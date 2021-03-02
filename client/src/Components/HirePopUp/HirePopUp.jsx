@@ -36,7 +36,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                 <div className='justifyCenter' id='flexWrap'>
                                     {user.projects && user.projects.map(project =>
                                         project.userXprojects.isFounder ?
-                                            <div style={{ background: selection.project && selection.project.name === project.name ? 'rgb(231,231,231' : null }} onClick={() => getInfoAndSetProject(project)} id={style.projectDiv}>
+                                            <div key={project.id} style={{ background: selection.project && selection.project.name === project.name ? 'rgb(231,231,231' : null }} onClick={() => getInfoAndSetProject(project)} id={style.projectDiv}>
                                                 <img alt="Project logo" id='icon' src={project.logo} />
                                                 <span id={style.projectName} className='font200'>{project.name}</span>
                                             </div>
@@ -49,7 +49,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                 <h1 className='font800'>Jobs at {selection.project.name}</h1>
                                 <div className='justifyCenter' id='alignItemsCenter'>
                                     {jobs.length > 0 ?
-                                        jobs.map(job => <JobCard close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />)
+                                        jobs.map(job => <JobCard key={job.id} close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />)
                                         :
                                         <div>
                                             <img alt="No jobs are posted for this project." id={style.emptyIcon} src={Empty} />

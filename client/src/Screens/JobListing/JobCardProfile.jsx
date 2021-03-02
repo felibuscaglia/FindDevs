@@ -25,7 +25,7 @@ function JobCardProfile({ job, project, isJobPanel, warning, setWarning }) {
             </div>
             <div id={style.skillDiv}>
                 {job.skills.map(skill =>
-                    <span id={style.skillSpan}>{skill.label}</span>
+                    <span key={skill.id} id={style.skillSpan}>{skill.label}</span>
                 )}
             </div>
             {!isJobPanel ? 

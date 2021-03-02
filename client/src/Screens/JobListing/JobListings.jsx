@@ -36,15 +36,15 @@ function JobListings({ jobs, skills, skillSelection, filteredJobs, filterJob, re
             </div>
             <div style={{ display: skillSelection.length > 0 ? 'block' : 'none' }} id={style.filteredDiv}>
                 {skillSelection.map(filtered =>
-                    <span onClick={() => removeJobFilter(filtered)} style={{ background: filtered.strongColor, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></span>
+                    <span key={filtered.id} onClick={() => removeJobFilter(filtered)} style={{ background: filtered.strongColor, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></span>
                 )}
             </div>
             {loading ?
                 <img alt="Loading GIF" id={style.loading} src={Loading} /> :
                 skillSelection.length === 0 ?
-                    jobs.map(job => <JobCard setLoading={setLoading} job={job} />)
+                    jobs.map(job => <JobCard key={job.id} setLoading={setLoading} job={job} />)
                     :
-                    filteredJobs.map(job => <JobCard setLoading={setLoading} job={job} />)
+                    filteredJobs.map(job => <JobCard key={job.id} setLoading={setLoading} job={job} />)
             }
             {!loading && <div className={style.endDiv} id='giveMargin'>🧑‍💻 <span id={style.end}>There are no more job opportunities. Please come back later!</span></div>}
         </div>

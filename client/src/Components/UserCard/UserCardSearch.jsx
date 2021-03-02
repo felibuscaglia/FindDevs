@@ -44,7 +44,7 @@ function UserCardSearch({ user }) {
             <p id={style.bio}>{user.description}</p>
             <div className='justifyCenter' style={{ flexWrap: 'wrap' }}>
                 {user.skills && user.skills.slice(0, 8).map(skill =>
-                    <div id={style.skillDiv}>
+                    <div key={skill.id} id={style.skillDiv}>
                         <span
                             style={{ background: `${skill.strongColor}`, color: skill.softColor }}
                             id={style.skillSpan}>

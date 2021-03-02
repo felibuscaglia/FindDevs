@@ -10,6 +10,25 @@
     cursor: pointer;
 }
 
+#postBtn {
+    font-weight: 700;
+    background-color: black;
+    padding: 20px 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    margin-top: 25px;
+    transition: 0.3s;
+    border: 2px solid black;
+    transition: 0.3s;
+}
+
+#postBtn:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
 .smallBtn {
     border: 2px solid #23F0C7;
     color: #23F0C7;
@@ -26,6 +45,11 @@
     color: black;
 }
 
+#infoDiv {
+    display: flex;
+    flex-direction: column;
+}
+
 #form {
     background-color: #181818;
     width: 60%;
@@ -40,7 +64,6 @@
     padding: 25px;
     color: white;
     overflow: auto;
-    z-index: 1000;
 }
 
 #form::-webkit-scrollbar {
@@ -162,6 +185,9 @@
         padding: 5px;
         margin: 10px 0px;
     }
+    #btn {
+        margin-top: 20px;
+    }
 }
 
 #goPremiumBtn:hover {
@@ -179,7 +205,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 #icon {
@@ -235,7 +260,6 @@
     font-size: 30px;
     cursor: pointer;
     color: white;
-    margin-top: 70px;
 }
 
 #paypal {
@@ -246,20 +270,4 @@
     cursor: pointer;
     color: white;
     margin-bottom: 200px;
-}
-
-#postBtn {
-    font-family: 'Nunito';
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-#postBtn:hover {
-    background: whitesmoke
 }

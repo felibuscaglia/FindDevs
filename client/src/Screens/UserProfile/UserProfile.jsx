@@ -92,12 +92,12 @@ function UserProfile({ username, pathname }) {
                         {hasCreated.own && <div className={style.projectDiv}>
                             <h3 className='font800'>🧑‍💻 Projects created</h3>
                             <div id={style.mainProjectDiv}>
-                                {user.projects && user.projects.map(project => project.userXprojects.isFounder ? <ProjectCard isFounder={true} project={project} /> : null)}
+                                {user.projects && user.projects.map(project => project.userXprojects.isFounder ? <ProjectCard key={project.id} isFounder={true} project={project} /> : null)}
                             </div>
                         </div>}
                         {hasCreated.joined && <div className={style.projectDiv}>
                             <h3 className='font800'>🤝 Project joined</h3>
-                            {user.projects && user.projects.map(project => !project.userXprojects.isFounder ? <ProjectCard project={project} /> : null)}
+                            {user.projects && user.projects.map(project => !project.userXprojects.isFounder ? <ProjectCard key={project.id} project={project} /> : null)}
                         </div>}
                         {user.projects.length === 0 &&
                             <div style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.emptyDiv}>

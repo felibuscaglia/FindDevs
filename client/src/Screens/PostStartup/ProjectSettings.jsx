@@ -168,7 +168,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                     <textarea value={input.description} onChange={(e) => handleInputChange(e)} name='description' maxLength="2000" className={style.textarea} />
                 </div>
                 <div>
-                    {input.users && input.users.map(user => !user.userXprojects.isFounder ? <UserCard user={user} projectID={input.id} /> : null)}
+                    {input.users && input.users.map(user => !user.userXprojects.isFounder ? <UserCard key={user.id} user={user} projectID={input.id} /> : null)}
                 </div>
                 {error && <div id={style.alert} class="alert alert-danger" role="alert">Please complete all the necessary fields.</div>}
                 {loading && !error ? <img alt="Loading GIF" id={style.loading} src={Loading} /> :
