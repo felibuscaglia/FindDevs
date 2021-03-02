@@ -97,12 +97,11 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
 
     return (
         <div className='displayFlex'>
-            <div id={style.fixedDiv} >
-                <Link id={style.link} to={`/user/${user.username}`}>
-                    <div id={style.logoDivS}>
-                        <img alt="FindDevs logo" src={Logo} id={style.invertedLogo} />
-                    </div>
-                </Link>
+            <div id={style.fixedDiv}>
+                <div id={style.logoDiv}>
+                    <Link to={`/user/${user.username}`}><img alt="Project logo" src={Logo} id={style.invertedLogo} /></Link>
+                </div>
+                <Link id={style.link} to={`/admin/panel`}><span className='font200'><i class="fas fa-door-open"></i> Back to Admin Panel</span></Link>
             </div>
             <div id={style.secondDiv}>
                 <h1 className='font800'>Let's start.</h1>
@@ -180,9 +179,9 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
-        setUserInfo: username => dispatch (setUserInfo(username))
+        setUserInfo: username => dispatch(setUserInfo(username))
     }
 }
 

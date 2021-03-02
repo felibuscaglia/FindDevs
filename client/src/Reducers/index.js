@@ -22,7 +22,7 @@ function rootReducer(state = initialState, action) {
                 allSkills: action.payload
             }
         case 'SET_USER_DATA':
-            const find = action.payload.projects.find (project => project.userXprojects.isFounder === true);
+            const find = action.payload.projects.find (project => project.userXprojects.isFounder === true && !project.isDeleted && project.ownerId ===action.payload.id);
             return {
                 ...state,
                 userInfo: action.payload,
