@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     arrow: { color: "#181a19" }
 }));
 
-function UserCard({ user, selectWorkers }) {
+function UserCard({ user, setLoading, selectWorkers, skillSelection }) {
 
     const [extraSkills, setExtraSkills] = useState(null);
     const [extraSkillsLength, setExtraLength] = useState(0);
@@ -35,6 +35,13 @@ function UserCard({ user, selectWorkers }) {
         }
     })(Tooltip);
 
+    function addSkill (skill) {
+        setLoading (true);
+        const dontRepeat = skillSelection.find (filtered => filtered.id === skill.id);
+        if (!dontRepeat) selectWorkers(skill);
+        setLoading (false);
+    }
+
     return (
         <div id={style.userCard}>
             <div className='displayFlexColumn' id='alignItemsCenter'>
@@ -50,7 +57,7 @@ function UserCard({ user, selectWorkers }) {
                     <div key={skill.id} id={style.skillDiv}>
                         <BlueOnGreenTooltip classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
                             <span
-                                onClick={() => { selectWorkers(skill) }}
+                                onClick={() => { addSkill (skill) }}
                                 style={{ background: `${skill.strongColor}`, color: skill.softColor }}
                                 id={style.skillSpan}>
                                 {skill.user_skills.isValidated && <i style={{ marginRight: '5px' }} class="fas fa-check-circle"></i>}{skill.label}
@@ -68,10 +75,16 @@ function UserCard({ user, selectWorkers }) {
     )
 }
 
+function mapStateToProps (state) {
+    return {
+        skillSelection: state.skillSelection
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         selectWorkers: skill => dispatch(selectWorkers(skill))
     }
 }
 
-export default connect(null, mapDispatchToProps)(UserCard);
+export default connect(mapStateToProps, mapDispatchToProps)(UserCard);

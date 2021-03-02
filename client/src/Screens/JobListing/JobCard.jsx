@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     arrow: { color: "#181a19" }
 }));
 
-function JobCard({ job, filterJobs, setLoading }) {
+function JobCard({ job, filterJobs, setLoading, skillSelection }) {
 
     const classes = useStyles();
 
@@ -26,6 +26,15 @@ function JobCard({ job, filterJobs, setLoading }) {
             fontSize: '12px'
         }
     })(Tooltip);
+
+    function addSkill (skill) {
+        setLoading (true);
+        const dontRepeat = skillSelection.find (filtered => filtered.id === skill.id);
+        console.log (dontRepeat, 'dont repeat');
+        console.log (skillSelection, 'SKILL SELECTION')
+        if (!dontRepeat) filterJobs(skill);
+        setLoading (false);
+    }
 
     return (
         <div id={style.mainDiv} style={{ background: job.project.mainColor }}>
@@ -49,11 +58,7 @@ function JobCard({ job, filterJobs, setLoading }) {
             <div id={style.skillDiv}>
                 {job.skills.map(skill =>
                     <BlueOnGreenTooltip key={skill.id} classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
-                        <span onClick={() => {
-                            setLoading(true);
-                            filterJobs(skill);
-                            setLoading(false);
-                        }} id={style.skillSpan}>{skill.label}</span>
+                        <span onClick={() => addSkill (skill) } id={style.skillSpan}>{skill.label}</span>
                     </BlueOnGreenTooltip>
                 )}
             </div>
@@ -65,10 +70,16 @@ function JobCard({ job, filterJobs, setLoading }) {
     )
 }
 
+function mapStateToProps (state) {
+    return {
+        skillSelection: state.jobSkillSelection
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         filterJobs: skill => dispatch(filterJob(skill))
     }
 }
 
-export default connect(null, mapDispatchToProps)(JobCard);
+export default connect(mapStateToProps, mapDispatchToProps)(JobCard);

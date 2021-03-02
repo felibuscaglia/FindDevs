@@ -8,6 +8,7 @@ import GoPremium from '../../Components/GoPremiumPopUp/GoPremium';
 import Loading from '../../Media/Loading.gif';
 import wavyImage from '../../Media/wavyBorder1.jpg';
 import Verification from '../../Media/Verification.png';
+import { StepLabel } from '@material-ui/core';
 
 function WorkersList({ users, skills, skillSelection, removeFilters, filteredWorkers, selectWorkers, userInfo }) {
 
@@ -15,8 +16,9 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
 
     function addSkill(e) {
         if (e.keyCode === 13) {
-            var found = skills.find(skill => skill.label.toLowerCase() === e.target.value.toLowerCase());
-            if (found) {
+            const dontRepeat = skillSelection.find (skill => skill.label.toLowerCase() === e.target.value.toLowerCase());
+            const found = skills.find(skill => skill.label.toLowerCase() === e.target.value.toLowerCase());
+            if (found && !dontRepeat) {
                 setLoading(true);
                 selectWorkers(found);
                 setLoading(false);
@@ -69,7 +71,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                                         <h3 className='font800'>{skill.label} developers ({skill.users.length})</h3>
                                     </div>
                                     <div id={style.userCards}>
-                                        {skill.users.map(user => user.isPremium && <UserCard key={user.id} user={user} />)}
+                                        {skill.users.map(user => user.isPremium && <UserCard setLoading={setLoading} key={user.id} user={user} />)}
                                     </div>
                                 </div> : null
                         )}
@@ -78,7 +80,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
             }
             {skillSelection.length > 0 && filteredWorkers.length !== 0 &&
                 <div className='justifyCenter' id='flexWrap'>
-                    {filteredWorkers.map(worker => <UserCard key={worker.id} user={worker} />)}
+                    {filteredWorkers.map(worker => <UserCard setLoading={setLoading} key={worker.id} user={worker} />)}
                 </div>
             }
         </div>
