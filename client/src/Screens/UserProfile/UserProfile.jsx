@@ -18,18 +18,20 @@ function UserProfile({ username, pathname }) {
     const [hasWorked, setHasWorked] = useState(false);
     const [hasCreated, setHasCreated] = useState({});
     const [loading, setLoading] = useState(true);
-    const [noUser, setNoUser] = useState (false);
+    const [noUser, setNoUser] = useState(false);
 
     useEffect(() => {
         const usuario = jwt.decode(JSON.parse(localStorage.getItem('user')));
-        if (!usuario) setNoUser (true);
+        if (!usuario) setNoUser(true);
         axios.get(`http://localhost:5001/users/${username}`)
             .then(res => {
-                if (res.data === null) window.location.replace ('/error');
+                if (res.data === null) window.location.replace('/error');
                 setUser(res.data);
                 setColor(res.data.color);
-                if (res.data.projects.find(project => project.userXprojects.isFounder === true)) setHasCreated({ ...hasCreated, own: true });
-                if (res.data.projects.find(project => project.userXprojects.isFounder === false)) setHasCreated({ ...hasCreated, joined: true })
+                var userProjects = {};
+                if (res.data.projects.find(project => project.userXprojects.isFounder === true)) userProjects.own = true;
+                if (res.data.projects.find(project => project.userXprojects.isFounder === false)) userProjects.joined = true;
+                setHasCreated (userProjects);
                 if (usuario && usuario.username === res.data.username) setIsUser(true);
                 if (pathname.search === "?verify" && usuario && usuario.username !== res.data.username) setHasWorked(true);
                 setLoading(false);
@@ -97,7 +99,9 @@ function UserProfile({ username, pathname }) {
                         </div>}
                         {hasCreated.joined && <div className={style.projectDiv}>
                             <h3 className='font800'>🤝 Project joined</h3>
-                            {user.projects && user.projects.map(project => !project.userXprojects.isFounder ? <ProjectCard key={project.id} project={project} /> : null)}
+                            <div id={style.mainProjectDiv}>
+                                {user.projects && user.projects.map(project => !project.userXprojects.isFounder ? <ProjectCard key={project.id} project={project} /> : null)}
+                            </div>
                         </div>}
                         {user.projects.length === 0 &&
                             <div style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.emptyDiv}>
