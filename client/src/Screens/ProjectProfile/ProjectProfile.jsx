@@ -71,19 +71,21 @@ function ProjectProfile({ projectID, user }) {
                 <p className='font200' style={{ color: project.brightness === 'bright' ? '#fff' : '#000', fontSize: '17px' }}>{project.description}</p>
             </div>
             <div className='displayFlexColumn' id='alignItemsCenter'>
-                <h2 className='font800'>Members ({project.users && project.users.length})</h2>
+                <h2 className='font800'>Members</h2>
                 <div id={style.mainUserDiv}>
                     {project.users && project.users.map(user =>
-                        <div key={user.id} style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
-                            <img alt="Profile picture" src={user.profilePic} id={style.profilePic} />
-                            <div className='displayFlexColumn' id='alignItemsCenter'>
-                                <h5 className='font800'>@ {user.username}</h5>
-                                <span id={style.lowEnphasis}>{user.userXprojects.role}</span>
-                            </div>
-                            <Link to={`/user/${user.username}`}>
-                                <button style={{ color: user.brightness === 'bright' ? '#fff' : '#000', border: user.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} id={style.contactBtn}>Contact</button>
-                            </Link>
-                        </div>
+                        user.userXprojects.endDate === null ?
+                            <div key={user.id} style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
+                                <img alt="Profile picture" src={user.profilePic} id={style.profilePic} />
+                                <div className='displayFlexColumn' id='alignItemsCenter'>
+                                    <h5 className='font800'>@ {user.username}</h5>
+                                    <span id={style.lowEnphasis}>{user.userXprojects.role}</span>
+                                </div>
+                                <Link to={`/user/${user.username}`}>
+                                    <button style={{ color: user.brightness === 'bright' ? '#fff' : '#000', border: user.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} id={style.contactBtn}>Contact</button>
+                                </Link>
+                            </div> :
+                            null
                     )}
                 </div>
             </div>
