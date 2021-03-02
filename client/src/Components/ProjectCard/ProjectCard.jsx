@@ -7,7 +7,7 @@ function ProjectCard({ project, isFounder }) {
     return (
         <div id={style.mainDiv} style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }}>
             <div id={style.firstDiv} >
-                <div id={style.imgDiv}><img src={project.logo} id={style.icon} /></div>
+                <div id={style.imgDiv}><img alt="Project logo" src={project.logo} id={style.icon} /></div>
                 <h5 id={style.name} className='font800'>{project.name}</h5>
             </div>
             <div id={style.btnDiv}>

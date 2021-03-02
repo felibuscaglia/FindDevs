@@ -55,7 +55,7 @@ function JobInfo({ jobID, user, setUserInfo }) {
                             <Link className='links' to={`/project/profile/${job.project.id}`}>
                                 <div className='displayFlex' id='alignItemsCenter'>
                                     <div id={style.projectLogoDiv}>
-                                        <img src={job.project.logo} id={style.logo} />
+                                        <img alt="Project logo" src={job.project.logo} id={style.logo} />
                                     </div>
                                     <h5 style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000' }} className='font800'>{job.project.name}</h5>
                                 </div>
@@ -75,7 +75,7 @@ function JobInfo({ jobID, user, setUserInfo }) {
                         <div dangerouslySetInnerHTML={{ __html: job.description }} id={style.jobDescrip}></div>
                     </div>
                 </div> :
-                <img id={style.loading} src={Loading} />
+                <img alt="Loading GIF" id={style.loading} src={Loading} />
             }
         </div>
     )

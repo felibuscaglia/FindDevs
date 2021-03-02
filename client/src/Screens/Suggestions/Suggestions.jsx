@@ -39,7 +39,7 @@ function Suggestions({ pathname, users, projects }) {
                     <input onKeyDown={(e) => search(e)} placeholder='Search for projects or users' id={style.searchInput} />
                 </div>
             </div>
-            {loading ? <img id={style.suggestionsLoading} src={Loading} /> :
+            {loading ? <img alt="Loading GIF" id={style.suggestionsLoading} src={Loading} /> :
                 <div>
                     {suggestions.projects.length > 0 && <div className='displayFlexColumn' id='alignItemsCenter'>
                         <div className='displayFlex' id='alignItemsCenter'>
@@ -59,7 +59,7 @@ function Suggestions({ pathname, users, projects }) {
                     </div>}
                     {suggestions.projects.length === 0 && suggestions.users.length === 0 &&
                         <div className='displayFlex' id='alignItemsCenter'>
-                            <img src={Empty} id={style.empty} />
+                            <img alt="No suggestions found" src={Empty} id={style.empty} />
                             <div>
                                 <h1 style={{ marginBottom: '25px' }} className='font800'>Oops... nothing was found.</h1>
                             </div>

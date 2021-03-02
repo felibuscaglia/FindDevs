@@ -91,7 +91,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
 
     if (firstCheck) {
         return (
-            <img id={style.firstCheck} src={Loading} />
+            <img alt="Loading GIF" id={style.firstCheck} src={Loading} />
         )
     }
 
@@ -100,7 +100,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
             <div id={style.fixedDiv} >
                 <Link id={style.link} to={`/user/${user.username}`}>
                     <div id={style.logoDivS}>
-                        <img src={Logo} id={style.invertedLogo} />
+                        <img alt="FindDevs logo" src={Logo} id={style.invertedLogo} />
                     </div>
                 </Link>
             </div>
@@ -118,7 +118,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
                 <div className='displayFlexColumn'>
                     <span className='font600'>Logo *</span>
                     <div id={style.profilePicDiv}>
-                        <div id={style.profilePic}><img src={preview} ID={style.logo} /></div>
+                        <div id={style.profilePic}><img alt="Selected project logo" src={preview} ID={style.logo} /></div>
                         <label for={style.fileDrop} id={style.logoLabel}>
                             <i class="fas fa-cloud-upload-alt"></i> Upload Logo
                         </label>
@@ -137,7 +137,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
                 <div className='displayFlexColumn'>
                     <span className='font600'>Work Zone *</span>
                     <span className='advert'>Keep in mind that it will be your team's designated workspace. It can be a link to Slack,<br /> Flowdock or WebEx, for example.</span>
-                    <input style={{ border: inputErrors.workZone ? '2px solid red' : '2px solid #e7e7e7' }} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workzone} name='workZone' className={style.input} />
+                    <input style={{ border: inputErrors.workZone ? '2px solid red' : '2px solid #e7e7e7' }} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workZone} name='workZone' className={style.input} />
                     {inputErrors.workZone && <span className={style.errors}>Please enter a valid URL.</span>}
                 </div>
                 <div id={style.socialDiv}>
@@ -167,7 +167,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
                     <textarea onChange={(e) => handleInputChange(e)} name='description' maxLength="2000" className={style.textarea} />
                 </div>
                 {error && <div id={style.alert} class="alert alert-danger" role="alert">Please complete all the necessary fields.</div>}
-                {loading && !error ? <img id={style.loading} src={Loading} /> : <button disabled={btnDisabled} onClick={handleSubmit} id={style.uploadBtn}>Post your project!</button>}
+                {loading && !error ? <img alt="Loading GIF" id={style.loading} src={Loading} /> : <button disabled={btnDisabled} onClick={handleSubmit} id={style.uploadBtn}>Post your project!</button>}
             </div>
         </div>
     )

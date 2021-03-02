@@ -38,10 +38,10 @@ function UserCard({ user, selectWorkers }) {
     return (
         <div id={style.userCard}>
             <div className='displayFlexColumn' id='alignItemsCenter'>
-                <img id={style.profilePic} src={user.profilePic} />
+                <img alt="Profile picture" id={style.profilePic} src={user.profilePic} />
                 <div id='alignItemsCenter' className='displayFlex'>
                     <span className='font800' style={{ alignSelf: 'flex-start' }}><span style={{ color: user.color }}>@ </span>{user.username}</span>
-                    {user.isPremium && <img id={style.verification} src={Verification} />}
+                    {user.isPremium && <img alt="Verification badge" id={style.verification} src={Verification} />}
                 </div>
                 <p id={style.bio}>{user.description}</p>
             </div>

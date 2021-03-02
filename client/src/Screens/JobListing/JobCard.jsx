@@ -30,12 +30,12 @@ function JobCard({ job, filterJobs, setLoading }) {
     return (
         <div id={style.mainDiv} style={{ background: job.project.mainColor }}>
             <div className='displayFlex' id='alignItemsCenter'>
-                <div id={style.imgDiv}><img src={job.project.logo} id={style.icon} /></div>
+                <div id={style.imgDiv}><img alt="Project logo" src={job.project.logo} id={style.icon} /></div>
                 <div id={style.jobInfoDiv}>
                     <div className='displayFlex' id={style.nameAndLogo}>
                         <span id={style.projectName}>{job.project.name}</span>
                         {job.project.isPremium && <BlueOnGreenTooltip classes={{ arrow: classes.arrow }} id={style.tooltip} title='Verified project' arrow>
-                            <img id={style.verification} src={job.project.brightness === 'bright' ? InvertedVerification : Verification} />
+                            <img alt="FindDevs verification" id={style.verification} src={job.project.brightness === 'bright' ? InvertedVerification : Verification} />
                         </BlueOnGreenTooltip>}
                     </div>
                     <span>{job.title}</span>

@@ -38,16 +38,17 @@ function JobPanel({ projectID, setUserInfo, user }) {
 
     if (loading) {
         return (
-            <img src={Loading} id={style.loading} />
+            <img alt="Loading GIF" src={Loading} id={style.loading} />
         )
     }
 
     return (
         <div className='displayFlex'>
-            <div id={style.fixedDiv} >
+            <div id={style.fixedDiv}>
                 <div id={style.logoDiv}>
-                    <Link to={`/project/profile/${projectID}`}><img src={project.logo} id={style.invertedLogo} /></Link>
+                    <Link to={`/project/profile/${projectID}`}><img alt="Project logo" src={project.logo} id={style.invertedLogo} /></Link>
                 </div>
+                <Link id={style.link} to={`/admin/panel`}><span className='font200'><i class="fas fa-door-open"></i> Back to Admin Panel</span></Link>
             </div>
             {project.jobOpportunities && project.jobOpportunities.length > 0 ?
                 <div id={style.secondDiv}>
@@ -58,7 +59,7 @@ function JobPanel({ projectID, setUserInfo, user }) {
                     <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn}>Post a job</span></Link>
                 </div> :
                 <div id={style.emptyDiv}>
-                    <img src={Empty} id={style.empty} />
+                    <img alt="No jobs posted" src={Empty} id={style.empty} />
                     <div id={style.innerEmptyDiv}>
                         <h1 style={{ marginBottom: '25px' }} className='font800'>No jobs posted.</h1>
                         <Link className='links' to={`/project/addJob/${projectID}`}><span id={style.addBtn2}>Post a job</span></Link>

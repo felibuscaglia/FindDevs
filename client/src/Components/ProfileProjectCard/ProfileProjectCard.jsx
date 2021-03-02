@@ -7,7 +7,7 @@ function ProfileProjectCard({ project, isFounder }) {
         <div>
             <div style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.projectDiv}>
                 <div className='displayFlexColumn' id='alignItemsCenter'>
-                    <div id={style.logoDiv}><img src={project.logo} id={style.icon} /></div>
+                    <div id={style.logoDiv}><img alt="Project logo" src={project.logo} id={style.icon} /></div>
                     <h5 id={style.projectName}>{project.name}</h5>
                     {!isFounder && <span id={style.lowEnphasis}>{project.userXprojects.role}</span>}
                     <span id={style.timeSpan}>{project.userXprojects.startDate} — {project.userXprojects.endDate ? project.userXprojects.endDate : 'present'}</span>

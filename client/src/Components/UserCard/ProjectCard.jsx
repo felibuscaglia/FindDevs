@@ -15,7 +15,7 @@ function ProjectCard({ project }) {
     return (
         <div id={style.projectCard}>
             <div id='alignItemsCenter' className='displayFlexColumn'>
-                <img id={style.profilePic} src={project.logo} />
+                <img alt="Profile picture" id={style.profilePic} src={project.logo} />
                 <span id={style.projectName} className='font800'>{project.name}</span>
                 <p id={style.bio}>{project.oneLineDescription}</p>
             </div>

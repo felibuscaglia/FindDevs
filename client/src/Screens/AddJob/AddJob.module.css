@@ -4,6 +4,17 @@
     height: 100%;
     width: 240px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+#link {
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 #logo {
@@ -84,6 +95,13 @@
 }
 
 @media screen and (max-width: 480px) {
+    #link {
+        margin-bottom: 0px;
+    }
+    #logoDiv {
+        margin-top: 0px;
+        margin-bottom: 4px;
+    }
     #uploadBtn {
         width: 50%;
         margin-top: 0px;
@@ -129,10 +147,8 @@
     #fixedDiv {
         height: 100px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
+        flex-direction: column-reverse;
+        padding-bottom: 0px;
     }
     #logo {
         max-width: 75px;

@@ -17,7 +17,7 @@ function JobCardProfile({ job, project, isJobPanel, warning, setWarning }) {
     return (
         <div id={!isJobPanel ? style.mainDivProfile : style.mainDivJP} style={{ background: project.mainColor }}>
             <div className='displayFlex' id='alignItemsCenter'>
-                <div id={style.imgDiv}><img src={project.logo} id={style.icon} /></div>
+                <div id={style.imgDiv}><img alt="Project logo" src={project.logo} id={style.icon} /></div>
                 <div id={style.jobInfoDiv}>
                     <span id={style.projectName}>{project.name}</span>
                     <span>{job.title}</span>

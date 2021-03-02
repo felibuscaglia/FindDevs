@@ -21,7 +21,7 @@ function Confirmation({ project }) {
                 <div id={style.mainDiv}>
                     <div id={style.warningForm}>
                         {loading ? 
-                        <img src={Loading} /> :
+                        <img alt="Loading GIF" src={Loading} /> :
                         <div>
                             <i id={style.warning} class="fas fa-exclamation-circle"></i>
                             <h2 className='font800'>Are you sure you want to delete {project.name}?</h2>

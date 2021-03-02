@@ -57,7 +57,7 @@ function UserProfile({ username, pathname }) {
     return (
         <div>
             {loading ?
-                <img id={style.loading} src={Loading} /> :
+                <img alt="Suggestions GIF" id={style.loading} src={Loading} /> :
                 <div>
                     <div id={style.cover} style={{ backgroundColor: color }}></div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
@@ -101,7 +101,7 @@ function UserProfile({ username, pathname }) {
                         </div>}
                         {user.projects.length === 0 &&
                             <div style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.emptyDiv}>
-                                <img id={style.empty} src={EmptyUser} />
+                                <img alt="No project to display" id={style.empty} src={EmptyUser} />
                                 <h1 id={style.emptyTitle}>{isUser ? "You haven't joined or created any project." : "This developer hasn't joined or created any project."}</h1>
                             </div>}
                     </div>

@@ -47,7 +47,7 @@ function ProjectProfile({ projectID, user }) {
 
     if (loading) {
         return (
-            <img id={style.loading} src={Loading} />
+            <img alt="Loading GIF" id={style.loading} src={Loading} />
         )
     }
 
@@ -62,7 +62,7 @@ function ProjectProfile({ projectID, user }) {
                     {project.linkedIn && <a href={project.linkedIn} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-linkedin"></i></a>}
                     {project.website && <a href={project.website} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fas fa-globe"></i></a>}
                 </div>
-                <div id={style.projectLogo}><img src={project.logo} id={style.logo} /></div>
+                <div id={style.projectLogo}><img alt="Project logo" src={project.logo} id={style.logo} /></div>
                 <h1 id={style.projectName}>{project.name} {project.isDeleted && <BlueOnGreenTooltip title='This project has been closed by its founders.' arrow><span id={style.closedSpan}>CLOSED</span></BlueOnGreenTooltip>}</h1>
                 <span id={style.oneLineDescription}>{project.oneLineDescription}</span>
             </div>
@@ -75,7 +75,7 @@ function ProjectProfile({ projectID, user }) {
                 <div id={style.mainUserDiv}>
                     {project.users && project.users.map(user =>
                         <div style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
-                            <img src={user.profilePic} id={style.profilePic} />
+                            <img alt="Profile picture" src={user.profilePic} id={style.profilePic} />
                             <div className='displayFlexColumn' id='alignItemsCenter'>
                                 <h5 className='font800'>@ {user.username}</h5>
                                 <span id={style.lowEnphasis}>{user.userXprojects.role}</span>

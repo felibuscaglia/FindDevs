@@ -7,6 +7,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import Loading from '../../Media/Loading.gif';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index';
+import { Link } from 'react-router-dom';
 
 function AddJob({ projectID, skills, setUserInfo, user }) {
 
@@ -30,7 +31,7 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
         }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
-                const userFound = projectData.data.users.find (user => user.id == user.id);
+                const userFound = projectData.data.users.find(user => user.id == user.id);
                 if (!userFound || !userFound.userXprojects.isFounder || projectData.data.isDeleted) window.location.replace('/error');
                 setProject(projectData.data);
                 setTimeout(() => {
@@ -84,8 +85,9 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
         <div>
             <div id={style.fixedDiv}>
                 <div id={style.logoDiv}>
-                    <img src={project.logo} id={style.logo} />
+                    <Link to={`/project/profile/${projectID}`}><img alt="Project logo" src={project.logo} id={style.logo} /></Link>
                 </div>
+                <Link id={style.link} to={`/project/jobPanel/${projectID}`}><span className='font200'><i class="fas fa-door-open"></i> Go back</span></Link>
             </div>
             <div id={style.secondDiv}>
                 {!loading ?
@@ -102,8 +104,8 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
                                 apiKey='5ltasngibqdlae7csndk86vmlye4eqd8jhk6fsiza0lpz5db'
                                 init={{
                                     selector: 'textarea',
-                                    content_style: 
-                                    "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap'); body { font-family: 'Nunito';}",
+                                    content_style:
+                                        "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap'); body { font-family: 'Nunito';}",
                                     branding: false,
                                     height: 300,
                                     width: 723,
@@ -137,7 +139,7 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
                             <span className='advert'>If you don't find your skill, please contact us.</span>
                         </div>
                         <div>
-                            <button onClick={handleSubmit} id={style.uploadBtn}>Post job!</button>
+                            <button onClick={handleSubmit} id={style.uploadBtn}>Post job</button>
                             {error &&
                                 <div id={style.alert} class="alert alert-danger" role="alert">
                                     {error}
@@ -145,7 +147,7 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
                             }
                         </div>
                     </div> :
-                    <img className={style.loading} src={Loading} />}
+                    <img alt="Loading GIF" className={style.loading} src={Loading} />}
             </div>
         </div>
     )
@@ -158,7 +160,7 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         setUserInfo: username => dispatch(setUserInfo(username))
     }

@@ -8,7 +8,7 @@ function SuccessPage({ userInfo }) {
     return (
         <div>
             <div className='displayFlex' id='alignItemsCenter'>
-                <img id={style.successSVG} src={Success} />
+                <img alt="Successful purchase" id={style.successSVG} src={Success} />
                 <div>
                     <h1 className='font800'>Thank you!</h1>
                     <p id={style.thankYou}>

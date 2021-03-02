@@ -29,7 +29,7 @@ function JobCard({ job, project, applicantUsername, user, close }) {
     if (loading) {
         return (
             <div>
-                <img id={style.loading} src={Loading} />
+                <img alt="Loading GIF" id={style.loading} src={Loading} />
             </div>
         )
     } else if (invited) {

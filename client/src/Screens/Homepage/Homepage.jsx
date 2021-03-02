@@ -16,12 +16,12 @@ function Homepage() {
             <div className='displayFlexColumn' id='alignItemsCenter'>
                 <h1 id={style.mainTitle}>Get the boost your startup needs.</h1>
                 <RegisterPopUp isMainHomepage={true} />
-                <img src={mainSVG} id={style.mainSVG} />
+                <img alt="Startup SVG" src={mainSVG} id={style.mainSVG} />
             </div>
             <div id={style.secondDiv}>
                 <div id={style.firstHalf}>
                     <div className='displayFlexColumn' id='alignItemsFS'>
-                        <img src='https://pics.freeicons.io/uploads/icons/png/1643084561599979347-512.png' id={style.icon} />
+                        <img alt="Decoration image" src='https://pics.freeicons.io/uploads/icons/png/1643084561599979347-512.png' id={style.icon} />
                         <h1 id={style.create}>Create the next big thing.</h1>
                     </div>
                     <p className={style.txt}>
@@ -33,14 +33,14 @@ function Homepage() {
                     <Link to='/workers'><button className={style.smallBtn}>Search for developers.</button></Link>
                 </div>
                 <div>
-                    <img id={style.secondSVG} src={FindCandidates} />
+                    <img alt="Startup SVG" id={style.secondSVG} src={FindCandidates} />
                 </div>
             </div>
             <div id={style.thirdDiv}>
-                <img id={style.thirdSVG} src={PairProgramming} />
+                <img alt="Startup SVG" id={style.thirdSVG} src={PairProgramming} />
                 <div id={style.firstHalf}>
                     <div className='displayFlexColumn' id='alignItemsFS'>
-                        <img src='https://pics.freeicons.io/uploads/icons/png/11068572181595341011-512.png' id={style.icon} />
+                        <img alt="Decoration icon" src='https://pics.freeicons.io/uploads/icons/png/11068572181595341011-512.png' id={style.icon} />
                         <h1 id={style.create}>Be part of the future.</h1>
                     </div>
                     <p className={style.txt}>
@@ -53,13 +53,13 @@ function Homepage() {
                 </div>
             </div>
             <div id={style.lastDiv}>
-                <img src={Verification} id={style.icon} />
+                <img alt="Verification badge" src={Verification} id={style.icon} />
                 <h1 id={style.create}>Become a premium member.</h1>
                 <p style={{ width: '60%' }} className={style.lastTxt}>
                     Say goodbye to the limit of projects you can post, appear on the frontpage of the workers directory. Plus, all the jobs you post will have the verification mark (4x more visits and applicants) and will appear first in the searches.
                 </p>
                 <GoPremium isHomepage={true} />
-                <img src={Launching} id={style.lastSVG} />
+                <img alt="Startup SVG" src={Launching} id={style.lastSVG} />
             </div>
         </div>
     )

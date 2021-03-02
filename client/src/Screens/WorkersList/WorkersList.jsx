@@ -26,7 +26,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
     }
 
     if (loading) {
-        return <img id={style.loading} src={Loading} />
+        return <img alt="Loading GIF" id={style.loading} src={Loading} />
     }
 
     return (
@@ -40,22 +40,20 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                 </div>
             </div>
             {!userInfo.isPremium &&
-                <div style={{ display: skillSelection.length > 0 ? 'none' : 'block' }} id={style.filteredDiv}>
-                    <div id={style.GPdiv}>
-                        <span>Do you want to appear on the frontpage? <span className='font800'>Verify your FindDevs account!</span></span>
-                        <GoPremium />
-                    </div>
+                <div id={style.GPdiv}>
+                    <span>Do you want to appear on the frontpage? <span className='font800'>Verify your FindDevs account!</span></span>
+                    <GoPremium />
                 </div>}
             <div style={{ display: skillSelection.length > 0 ? 'flex' : 'none' }} id={style.filteredDiv}>
                 {skillSelection.map(filtered =>
-                    <div onClick={() => removeFilters(filtered)} style={{ background: `${filtered.strongColor}`, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></div>
+                    <div onClick={() => removeFilters(filtered)} style={{ background: filtered.strongColor, color: filtered.softColor }} id={style.skillSpan}>{filtered.label} <i class="fas fa-times-circle"></i></div>
                 )}
             </div>
             {skillSelection.length === 0 &&
                 <div>
                     <div className='displayFlexColumn' id='alignItemsCenter'>
                         <div className='displayFlex' id='alignItemsCenter'>
-                            <img src={Verification} id={style.verification} />
+                            <img alt="Verification badge" src={Verification} id={style.verification} />
                             <h3 className='font800'>Verified developers</h3>
                         </div>
                         <div id={style.userCards}>
@@ -67,7 +65,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                             skill.users.length > 0 && skill.users.find(user => user.isPremium === true) ?
                                 <div className='displayFlexColumn' id='alignItemsCenter'>
                                     <div className='displayFlex' id='alignItemsCenter'>
-                                        <img src={skill.logo} id={style.verification} />
+                                        <img alt="Skill logo" src={skill.logo} id={style.verification} />
                                         <h3 className='font800'>{skill.label} developers ({skill.users.length})</h3>
                                     </div>
                                     <div id={style.userCards}>

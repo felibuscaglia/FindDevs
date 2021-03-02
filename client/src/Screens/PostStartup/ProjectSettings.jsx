@@ -35,6 +35,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
         }
         axios.get(`http://localhost:5001/projects/${projectID}`)
             .then(projectData => {
+                console.log (projectData);
                 const userFound = projectData.data.users.find (member => member.id === user.id);
                 if (projectData.data.isDeleted || !userFound || !userFound.userXprojects.isFounder) window.location.replace ('/error'); 
                 setPreview(projectData.data.logo)
@@ -97,7 +98,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
 
     if (firstCheck) {
         return (
-            <img src={Loading} id={style.firstCheck} />
+            <img alt="Loading GIF" src={Loading} id={style.firstCheck} />
         )
     }
 
@@ -105,8 +106,9 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
         <div className='displayFlex'>
             <div id={style.fixedDiv} >
                 <div id={style.logoDivS}>
-                    <Link to={`/project/profile/${projectID}`}><img src={input.logo} id={style.invertedLogoSettings} /></Link>
+                    <Link to={`/project/profile/${projectID}`}><img alt="Project logo redirect" src={input.logo} id={style.invertedLogoSettings} /></Link>
                 </div>
+                <Link id={style.link} to={`/admin/panel`}><span className='font200'><i class="fas fa-door-open"></i> Back to Admin Panel</span></Link>
             </div>
             <div id={style.secondDiv}>
                 <h1 className='font800'>Project Settings</h1>
@@ -117,7 +119,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                 <div className='displayFlexColumn'>
                     <span className='font600'>Logo *</span>
                     <div id={style.profilePicDiv}>
-                        <div id={style.profilePic}><img src={preview} ID={style.logo} /></div>
+                        <div id={style.profilePic}><img alt="Project logo" src={preview} ID={style.logo} /></div>
                         <label for={style.fileDrop} id={style.logoLabel}>
                             <i class="fas fa-cloud-upload-alt"></i> Upload Logo
                         </label>
@@ -136,7 +138,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                 <div className='displayFlexColumn'>
                     <span className='font600'>Work Zone *</span>
                     <span className='advert'>Keep in mind that it will be your team's designated workspace. It can be a link to Slack,<br /> Flowdock or WebEx, for example.</span>
-                    <input style={{ border: inputErrors.workZone ? '2px solid red' : '2px solid #e7e7e7' }} value={input.workZone} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workzone} name='workZone' className={style.input} />
+                    <input style={{ border: inputErrors.workZone ? '2px solid red' : '2px solid #e7e7e7' }} maxLength='255' onChange={(e) => handleInputChange(e)} value={input.workZone} name='workZone' className={style.input} />
                     {inputErrors.workZone && <span className={style.errors}>Please enter a valid URL.</span>}
                 </div>
                 <div id={style.socialDiv}>
@@ -169,7 +171,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                     {input.users && input.users.map(user => !user.userXprojects.isFounder ? <UserCard user={user} projectID={input.id} /> : null)}
                 </div>
                 {error && <div id={style.alert} class="alert alert-danger" role="alert">Please complete all the necessary fields.</div>}
-                {loading && !error ? <img id={style.loading} src={Loading} /> :
+                {loading && !error ? <img alt="Loading GIF" id={style.loading} src={Loading} /> :
                     <div id={style.btnDiv}>
                         <button disabled={btnDisabled} onClick={handleSubmit} id={style.uploadBtn}>Update your project</button>
                         <Confirmation project={input} />

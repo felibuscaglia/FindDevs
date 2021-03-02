@@ -4,7 +4,18 @@
     height: 100%;
     width: 240px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+#link {
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
 #secondDiv {
     margin-left: 250px;
     color: black;
@@ -46,6 +57,7 @@
     text-align: center;
     margin: 15px 0px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 #socialDiv {
@@ -118,13 +130,19 @@
 }
 
 @media screen and (max-width: 480px) {
+    #logoDivS {
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
+    #link {
+        margin-bottom: 0px;
+    }
     #fixedDiv {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: 100px;
         width: 100%;
-        height: 75px;
-        z-index: 1000;
+        flex-direction: column-reverse;
+        padding-bottom: 0px;
+        z-index: 100;
     }
     #secondDiv {
         margin-top: 100px;

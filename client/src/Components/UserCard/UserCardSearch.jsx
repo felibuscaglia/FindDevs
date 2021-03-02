@@ -35,10 +35,10 @@ function UserCardSearch({ user }) {
     return (
         <div id={style.userCard}>
             <div id='alignItemsCenter' className='displayFlexColumn'>
-                <img id={style.profilePic} src={user.profilePic} />
+                <img alt="Profile picture" id={style.profilePic} src={user.profilePic} />
                 <div className='displayFlex' id='alignItemsCenter'>
                     <span className='font800'><span style={{ color: user.color }}>@ </span>{user.username}</span>
-                    {user.isPremium && <img id={style.verification} src={Verification} />}
+                    {user.isPremium && <img alt="Verification badge" id={style.verification} src={Verification} />}
                 </div>
             </div>
             <p id={style.bio}>{user.description}</p>

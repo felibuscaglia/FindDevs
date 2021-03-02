@@ -137,7 +137,7 @@ function EditUser({ user, skills, setUserInfo }) {
                 {!loading && <div id={style.form}>
                     <div className='displayFlex' id='alignItemsCenter'>
                         <h2 className='font800'>@{user.username}</h2>
-                        {user.isPremium && <img id={style.verification} src={Verified} />}
+                        {user.isPremium && <img alt="Verification badge" id={style.verification} src={Verified} />}
                     </div>
                     <div style={{ display: user.isPremium ? 'none' : 'flex' }} id={style.GPdiv}>
                         <span className='font800'>Verify your FindDevs account and access all the benefits!</span>
@@ -213,7 +213,7 @@ function EditUser({ user, skills, setUserInfo }) {
                 </div>}
                 {loading &&
                     <div id={style.form}>
-                        <img src={Loading} />
+                        <img alt="Loading GIF" src={Loading} />
                     </div>}
             </div>
         </div>

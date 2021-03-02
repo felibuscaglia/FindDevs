@@ -40,7 +40,7 @@ function JobListings({ jobs, skills, skillSelection, filteredJobs, filterJob, re
                 )}
             </div>
             {loading ?
-                <img id={style.loading} src={Loading} /> :
+                <img alt="Loading GIF" id={style.loading} src={Loading} /> :
                 skillSelection.length === 0 ?
                     jobs.map(job => <JobCard setLoading={setLoading} job={job} />)
                     :
