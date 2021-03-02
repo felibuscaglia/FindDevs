@@ -13,28 +13,27 @@ function JobPanel({ projectID, setUserInfo, user }) {
     const [project, setProject] = useState({});
     const [loading, setLoading] = useState (true);
 
-    async function asyncUseEffect(username) {
+    async function asyncUseEffect(username, userId) {
         await (setUserInfo(username));
+        try {
+            const projectData = await axios.get(`http://localhost:5001/projects/${projectID}`);
+            const userFound = await projectData.data.users.find(member => member.id === userId);
+            if (!userFound || userFound.userXprojects.isFounder === false || projectData.data.isDeleted) window.location.replace('/error');
+            setProject(projectData.data);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     useLayoutEffect(() => {
-        if (!user.username) {
-            const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
-            if (user) {
-                asyncUseEffect(user.username);
-            } else window.location.replace('/error');
-        }
-        axios.get(`http://localhost:5001/projects/${projectID}`)
-            .then(projectData => {
-                const userFound = projectData.data.users.find (user => user.id == user.id);
-                if (!userFound || !userFound.userXprojects.isFounder || projectData.data.isDeleted) window.location.replace ('/error');
-                setProject(projectData.data);
-                setTimeout(() => {
-                    setLoading (false);
-                }, 2000)
-            })
-            .catch(err => console.log(err))
-    }, [user])
+        const user = jwt.decode(JSON.parse(localStorage.getItem('user')))
+        if (user) {
+            asyncUseEffect(user.username, user.id);
+        } else window.location.replace ('/error');
+    }, [])
 
     if (loading) {
         return (

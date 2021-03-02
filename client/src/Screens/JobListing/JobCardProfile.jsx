@@ -25,7 +25,7 @@ function JobCardProfile({ job, project, isJobPanel, warning, setWarning }) {
             </div>
             <div id={style.skillDiv}>
                 {job.skills.map(skill =>
-                    <span key={skill.id} id={style.skillSpan}>{skill.label}</span>
+                    <div style={{ border: project.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} key={skill.id} id={style.skillSpan}>{skill.label}</div>
                 )}
             </div>
             {!isJobPanel ? 

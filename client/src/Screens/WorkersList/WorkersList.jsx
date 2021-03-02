@@ -8,7 +8,6 @@ import GoPremium from '../../Components/GoPremiumPopUp/GoPremium';
 import Loading from '../../Media/Loading.gif';
 import wavyImage from '../../Media/wavyBorder1.jpg';
 import Verification from '../../Media/Verification.png';
-import { StepLabel } from '@material-ui/core';
 
 function WorkersList({ users, skills, skillSelection, removeFilters, filteredWorkers, selectWorkers, userInfo }) {
 
@@ -59,7 +58,7 @@ function WorkersList({ users, skills, skillSelection, removeFilters, filteredWor
                             <h3 className='font800'>Verified developers</h3>
                         </div>
                         <div id={style.userCards}>
-                            {users.map(user => user.isPremium && <UserCard key={user.id} user={user} />)}
+                            {users.map(user => user.isPremium && <UserCard setLoading={setLoading} key={user.id} user={user} />)}
                         </div>
                     </div>
                     <div>

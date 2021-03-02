@@ -24,8 +24,6 @@ function HirePopUp({ color, applicantUsername, user, applicantsNotifications }) 
             .catch(err => console.log(err))
     }
 
-    console.log (user);
-
     return (
         <Popup trigger={<button style={{ backgroundColor: color, border: `2px solid ${color}` }} id={style.hireBtn}>HIRE</button>} modal>
             {close => (

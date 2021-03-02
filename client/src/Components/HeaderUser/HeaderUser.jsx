@@ -34,10 +34,9 @@ function HeaderUser(props) {
 
     async function acceptInvitation(notification) {
         var message = `🤝 ${props.userInfo.username} is now part of ${notification.projectName} 🤝`;
-
         try {
             await axios.post(`http://localhost:5001/users/${props.userInfo.username}/project/${notification.projectId}`, { jobTitle: notification.jobTitle });
-            await axios.post(`http://localhost:5001/users/${notification.ownerUsername}/notifications`, { content: message, type: 'Joined' });
+            await axios.post(`http://localhost:5001/users/${notification.ownerUsername}/notifications`, { content: message, type: 'Joined', projectLogo: notification.projectLogo });
             await axios.delete(`http://localhost:5001/jobs/${notification.jobId}`);
             await axios.delete(`http://localhost:5001/users/${props.userInfo.id}/notifications/${notification.id}`)
             window.location.replace('/admin/panel');

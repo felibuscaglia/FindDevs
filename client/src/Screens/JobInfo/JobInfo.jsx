@@ -50,8 +50,8 @@ function JobInfo({ jobID, user, setUserInfo }) {
             {!loading ?
                 <div>
                     {job.project &&
-                        <div style={{ background: job.project && job.project.mainColor }} id={style.mainDiv}>
-                            <Link className='links' to='/jobs'><span style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000' }} id={style.goBack}><i style={{ marginRight: '10px' }} class="fas fa-arrow-left"></i>More jobs</span></Link>
+                        <div style={{ background: job.project && job.project.mainColor, color: job.project.brightness === 'bright' ? '#fff' : '#000' }} id={style.mainDiv}>
+                            <Link className='links' to='/jobs'><span id={style.goBack}><i style={{ marginRight: '10px' }} class="fas fa-arrow-left"></i>More jobs</span></Link>
                             <Link className='links' to={`/project/profile/${job.project.id}`}>
                                 <div className='displayFlex' id='alignItemsCenter'>
                                     <div id={style.projectLogoDiv}>
@@ -63,10 +63,10 @@ function JobInfo({ jobID, user, setUserInfo }) {
                             <h1 id={style.jobTitle}>{job.title}</h1>
                             <div id={style.btnDiv}>
                                 {notUser ? <Register isJobProfile={true} /> :
-                                    isMember ? <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You are already part of {job.project.name}.</span> :
+                                    isMember ? <span style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000', background: job.project.brightness === 'bright' ? '#000' : '#fff' }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You are already part of {job.project.name}.</span> :
                                         applied ?
-                                            <span style={{ color: job.project.mainColor }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You have applied to this job</span> :
-                                            <button onClick={applyToJob} style={{ color: job.project.mainColor }} id={style.applyBtn}>Apply to this job</button>
+                                            <span style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000', background: job.project.brightness === 'bright' ? '#000' : '#fff' }} id={style.applied}><i id={style.appliedIcon} class="fas fa-check-circle"></i> You have applied to this job</span> :
+                                            <button onClick={applyToJob} style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000', background: job.project.brightness === 'bright' ? '#000' : '#fff' }} id={style.applyBtn}>Apply to this job</button>
                                 }
                                 {job.Applicants.length >= 15 && !applied && <span className='font200'>🔥 This job has received many applications</span>}
                             </div>

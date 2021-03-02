@@ -37,7 +37,7 @@ function JobCard({ job, filterJobs, setLoading, skillSelection }) {
     }
 
     return (
-        <div id={style.mainDiv} style={{ background: job.project.mainColor }}>
+        <div id={style.mainDiv} style={{ background: job.project.mainColor, color: job.project.brightness === 'bright' ? '#fff' : '#000' }}>
             <div className='displayFlex' id='alignItemsCenter'>
                 <div id={style.imgDiv}><img alt="Project logo" src={job.project.logo} id={style.icon} /></div>
                 <div id={style.jobInfoDiv}>
@@ -58,12 +58,12 @@ function JobCard({ job, filterJobs, setLoading, skillSelection }) {
             <div id={style.skillDiv}>
                 {job.skills.map(skill =>
                     <BlueOnGreenTooltip key={skill.id} classes={{ arrow: classes.arrow }} id={style.tooltip} title='Add tag to filters' arrow>
-                        <span onClick={() => addSkill (skill) } id={style.skillSpan}>{skill.label}</span>
+                        <div style={{ border: job.project.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} onClick={() => addSkill (skill) } id={style.skillSpan}>{skill.label}</div>
                     </BlueOnGreenTooltip>
                 )}
             </div>
             <div id={style.applyAndMoment}>
-                <Link to={`/job/info/${job.id}`}><button id={style.btn}>Apply</button></Link>
+                <Link to={`/job/info/${job.id}`}><button style={{ color: job.project.brightness === 'bright' ? '#fff' : '#000', border: job.project.brightness === 'bright' ? '4px solid #fff' : '4px solid #000' }} id={style.btn}>Apply</button></Link>
                 <span id={style.time}>📌{getDate(moment(job.createdAt).format('MM/DD/YYYY'))}</span>
             </div>
         </div>
