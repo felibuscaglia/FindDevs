@@ -81,7 +81,7 @@
 #applicantDiv {
     border-bottom: 2px solid rgb(231, 231, 231);
     font-size: 17px;
-    width: 90%;
+    width: 100%;
     padding: 25px;
     display: flex;
     justify-content: space-between;
@@ -99,12 +99,12 @@
 
 #socialMediaDiv2 {
     font-size: 25px;
-    width: 55%;
+    width: 65%;
     align-items: center;
 }
 
 #topApplicantDiv {
-    width: 80%;
+    width: 90%;
 }
 
 .dropdownBtn {

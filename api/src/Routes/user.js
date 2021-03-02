@@ -28,7 +28,7 @@ server.post('/:userId/premium', async (req, res, next) => {
     try {
         const user = await User.findByPk(userId);
         await user.update(req.body);
-        const userProjects = await Project.findAll({ where: { ownerId: userId } });
+        const userProjects = await Project.findAll({ where: { ownerId: userId, isDeleted: false } });
         await Promise.all(
             userProjects.map(async project => {
                 await project.update({ ...project, isPremium: true })
