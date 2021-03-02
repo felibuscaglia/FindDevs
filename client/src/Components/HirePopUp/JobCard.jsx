@@ -11,13 +11,13 @@ function JobCard({ job, project, applicantUsername, user, close }) {
     const [loading, setLoading] = useState(false);
 
     function inviteToProject(jobTitle, jobId) {
-        setLoading (true);
+        setLoading(true);
         var message = `${jobTitle} at ${project.project.name}`;
 
         axios.post(`http://localhost:5001/users/${applicantUsername}/notifications`, { content: message, type: 'Invitation', projectId: project.project.id, jobTitle: jobTitle, projectLogo: project.project.logo, projectName: project.project.name, ownerUsername: user.username, jobId })
             .then(res => {
-                setInvited (true);
-                setLoading (false);
+                setInvited(true);
+                setLoading(false);
                 setTimeout(() => {
                     close()
                     window.location.reload()
@@ -33,19 +33,15 @@ function JobCard({ job, project, applicantUsername, user, close }) {
             </div>
         )
     } else if (invited) {
-        return <Invited type={'Invitation'} decided={applicantUsername} projectName={project.project.name}/>
+        return <Invited type={'Invitation'} decided={applicantUsername} projectName={project.project.name} />
     } else return (
         <div id={style.mainJobDiv} style={{ background: project.project.mainColor, color: project.project.brightness === 'bright' ? '#fff' : '#000' }}>
             <div className='displayFlex' id='alignItemsCenter'>
-                <div id={style.imgDiv}><img alt="Loading GIF" src={project.project.logo} id={style.icon} /></div>
-                <div id={style.jobInfoDiv}>
-                    <span id={style.projectName}>{project.project.name}</span>
-                    <span>{job.title}</span>
-                </div>
+                <span className='font800'>{job.title}</span>
             </div>
-            <div className='displayFlex'>
+            <div id={style.skillDiv}>
                 {job.skills.map(skill =>
-                    <span key={skill.id} style={{ border: project.project.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} id={style.skillSpan}>{skill.label}</span>
+                    <div key={skill.id} style={{ border: project.project.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} id={style.skillSpan}>{skill.label}</div>
                 )}
             </div>
             <button onClick={() => inviteToProject(job.title, job.id)} style={{ color: project.project.brightness === 'bright' ? '#fff' : '#000', border: project.project.brightness === 'bright' ? '3px solid white' : '3px solid black' }} id={style.applyBtn}>Invite</button>
