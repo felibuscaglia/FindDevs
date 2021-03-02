@@ -256,9 +256,10 @@
 }
 
 #logo {
-    object-fit: contain;
-    height: 75px;
-    width: 75px;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
 }
 
 #alert {
