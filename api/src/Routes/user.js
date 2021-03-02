@@ -7,7 +7,7 @@ const { CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_SECRET } = process.env;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/Users/felipebuscaglia/Henry/startit/api/src/Uploads')
+        cb(null, `${__dirname}/Uploads`)
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)

@@ -23,7 +23,7 @@ server.post('/:projectId', async (req, res, next) => {
     try {
         const project = await Project.findByPk (projectId);
         const jobOpportunity = await JobOpportunity.create (jobInfo);
-        await jobOpportunity.setSkills (skills)
+        await jobOpportunity.setSkills (skills);
         await project.addJobOpportunity (jobOpportunity);
         res.status (200).send ('Job placed successfully.');
     } catch (err) { 

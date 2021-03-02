@@ -57,6 +57,11 @@ const UserXProjects = sequelize.define (
   { timestamps: false }
 );
 
+const JobXSkills = sequelize.define (
+  'jobXskills', 
+  {}
+)
+
 const Notifications = sequelize.define (
   'notification',
   {
@@ -84,7 +89,8 @@ Project.hasMany (JobOpportunity);
 JobOpportunity.belongsTo (Project);
 
 JobOpportunity.hasMany (User, { as: 'Applicants' });
-JobOpportunity.hasMany (Skills);
+JobOpportunity.belongsToMany (Skills, { through: JobXSkills });
+Skills.belongsToMany (JobOpportunity, { through: JobXSkills})
 
 User.hasMany (Notifications);
 
