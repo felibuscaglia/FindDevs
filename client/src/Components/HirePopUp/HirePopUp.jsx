@@ -7,13 +7,12 @@ import JobCard from './JobCard';
 import Empty from '../../Media/hiring.svg';
 import { Link } from 'react-router-dom';
 
-function HirePopUp({ color, applicantUsername, user }) {
+function HirePopUp({ color, applicantUsername, user, applicantsNotifications }) {
 
     const [screen, setScreen] = useState(true);
     const [selection, setSelection] = useState({});
     const [jobs, setJobs] = useState([]);
     const [selectionUsers, setSelectionUsers] = useState([]);
-    const [invited, setInvited] = useState (true);
 
     function getInfoAndSetProject(project) {
         axios.get(`http://localhost:5001/projects/${project.id}`)
@@ -25,7 +24,7 @@ function HirePopUp({ color, applicantUsername, user }) {
             .catch(err => console.log(err))
     }
 
-    console.log (selection, 'SELECTION')
+    console.log (user);
 
     return (
         <Popup trigger={<button style={{ backgroundColor: color, border: `2px solid ${color}` }} id={style.hireBtn}>HIRE</button>} modal>
@@ -52,7 +51,11 @@ function HirePopUp({ color, applicantUsername, user }) {
                                 <h1 className='font800'>Jobs at {selection.project.name}</h1>
                                 <div id={style.jobContainer}>
                                     {jobs.length > 0 ?
-                                        jobs.map(job => <JobCard key={job.id} close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />)
+                                        jobs.map(job => 
+                                            applicantsNotifications.find (notification => notification.jobId === job.id) ?
+                                            <JobCard alreadyInvited={true} key={job.id} close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />
+                                            : <JobCard key={job.id} close={close} user={user} applicantUsername={applicantUsername} project={selection} job={job} />
+                                        )
                                         :
                                         <div>
                                             <img alt="No jobs are posted for this project." id={style.emptyIcon} src={Empty} />
