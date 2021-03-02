@@ -101,14 +101,12 @@
 #applyBtn {
     border: none;
   border-radius: 5px;
-  color: white;
   font-size: 17px;
   font-family: 'Nunito';
   font-weight: 800;
   padding: 10px 60px;
   cursor: pointer;
   background-color: transparent;
-  border: 3px solid white;
 }
 
 @media screen and (max-width: 480px) {
@@ -180,15 +178,14 @@
 
 #postBtn {
     background: transparent;
-    border: 2px solid white;
     border-radius: 5px;
-    color: white;
     font-size: 20px;
     font-family: 'Nunito';
     font-weight: 800;
     padding: 10px 50px;
     cursor: pointer;
     margin: 0px 25px;
+    border: none;
 }
 
 #accepted {

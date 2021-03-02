@@ -35,7 +35,7 @@ function JobCard({ job, project, applicantUsername, user, close }) {
     } else if (invited) {
         return <Invited type={'Invitation'} decided={applicantUsername} projectName={project.project.name}/>
     } else return (
-        <div id={style.mainJobDiv} style={{ background: project.project.mainColor }}>
+        <div id={style.mainJobDiv} style={{ background: project.project.mainColor, color: project.project.brightness === 'bright' ? '#fff' : '#000' }}>
             <div className='displayFlex' id='alignItemsCenter'>
                 <div id={style.imgDiv}><img alt="Loading GIF" src={project.project.logo} id={style.icon} /></div>
                 <div id={style.jobInfoDiv}>
@@ -45,10 +45,10 @@ function JobCard({ job, project, applicantUsername, user, close }) {
             </div>
             <div className='displayFlex'>
                 {job.skills.map(skill =>
-                    <span key={skill.id} style={{ border: `2px solid ${skill.strongColor}`, color: skill.softColor }} id={style.skillSpan}>{skill.label}</span>
+                    <span key={skill.id} style={{ border: project.project.brightness === 'bright' ? '2px solid #fff' : '2px solid #000' }} id={style.skillSpan}>{skill.label}</span>
                 )}
             </div>
-            <button onClick={() => inviteToProject(job.title, job.id)} id={style.applyBtn}>Invite</button>
+            <button onClick={() => inviteToProject(job.title, job.id)} style={{ color: project.project.brightness === 'bright' ? '#fff' : '#000', border: project.project.brightness === 'bright' ? '3px solid white' : '3px solid black' }} id={style.applyBtn}>Invite</button>
         </div>
     )
 }

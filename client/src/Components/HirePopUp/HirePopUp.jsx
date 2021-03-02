@@ -53,7 +53,7 @@ function HirePopUp({ color, applicantUsername, user }) {
                                         :
                                         <div>
                                             <img alt="No jobs are posted for this project." id={style.emptyIcon} src={Empty} />
-                                            <Link to={`/project/addJob/${selection.project.id}`}><button id={style.postBtn} style={{ background: selection.project.mainColor }}>Post a job</button></Link>
+                                            <Link to={`/project/addJob/${selection.project.id}`}><button id={style.postBtn} style={{ background: selection.project.mainColor, color: selection.project.brightness === 'bright' ? '#fff' : '#000' }}>Post a job</button></Link>
                                         </div>}
                                 </div>
                             </div>
