@@ -1,20 +1,11 @@
 const server = require("express").Router();
-const { User, Skills, Project, Notifications, UserXProjects, JobOpportunity } = require("../db.js");
+const { User, Skills, Project, Notifications, UserXProjects } = require("../db.js");
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
-const fs = require('fs');
+const streamifier = require('streamifier');
 const { CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_SECRET } = process.env;
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, `${__dirname}/Uploads`)
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    }
-});
-
-const upload = multer({ storage: storage });
+const upload = multer();
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
@@ -34,25 +25,45 @@ server.post('/:userId/premium', async (req, res, next) => {
                 await project.update({ ...project, isPremium: true })
             })
         )
-        res.send ('User is now premium.')
+        res.send('User is now premium.')
     } catch (err) {
-        next (err);
+        next(err);
     }
 })
 
 server.post('/:userId/profilePic', upload.single('image'), async (req, res, next) => {
     const { userId } = req.params;
-
+    var user;
     try {
-        const user = await User.findByPk(userId);
-        await cloudinary.uploader.upload(req.file.path, { quality: 75 }, (error, result) => {
-            user.update({ ...user, profilePic: result.url });
-        });
-        fs.unlinkSync(req.file.path);
-        return res.send('User updated.')
+        user = await User.findByPk(userId);
     } catch (err) {
         next(err)
     }
+
+    let streamUpload = (req) => {
+        return new Promise((resolve, reject) => {
+          let stream = cloudinary.uploader.upload_stream(
+            (error, result) => {
+              if (result) {
+                resolve(result);
+              } else {
+                throw new Error('Failed to upload file.')
+              }
+            }
+          );
+    
+          streamifier.createReadStream(req.file.buffer).pipe(stream);
+        });
+      };
+    
+      async function upload(req) {
+        let result = await streamUpload(req);
+        user.update({ ...user, profilePic: result.url });
+      }
+    
+      upload(req);
+    
+      res.send ('File uploaded.')
 })
 
 server.put('/:userId', async (req, res, next) => {

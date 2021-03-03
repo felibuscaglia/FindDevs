@@ -3,6 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const BearerStrategy = require("passport-http-bearer").Strategy;
 const { User } = require("./db.js");
 const jwt = require("jsonwebtoken");
+const { PASSPORT_SECRET } = process.env;
 
 passport.use(
   new LocalStrategy (
@@ -25,7 +26,7 @@ passport.use(
 
 passport.use(
   new BearerStrategy ((token, done) => {
-    jwt.verify(token, "Crazygol1!", function (err, user) {
+    jwt.verify(token, PASSPORT_SECRET, function (err, user) {
       if (err) return done(err);
       return done(null, user ? user : false);
     });

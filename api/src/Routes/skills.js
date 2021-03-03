@@ -35,8 +35,6 @@ server.post ('/:username/validate', (req, res, next) => {
     const { username } = req.params;
     const { skill } = req.body;
 
-    console.log (skill, 'SKILL')
-
     var userId;
     var skillId;
 

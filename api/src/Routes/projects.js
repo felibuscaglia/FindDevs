@@ -1,20 +1,11 @@
 const server = require("express").Router();
 const { Project, User, UserXProjects, JobOpportunity, Skills } = require("../db.js");
 const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
 const multer = require('multer');
-const fs = require('fs');
 const { CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_SECRET } = process.env;
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/Users/felipebuscaglia/Henry/startit/api/src/Uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-});
-
-const upload = multer({ storage: storage });
+const upload = multer();
 
 cloudinary.config({
   cloud_name: CLOUD_NAME,
@@ -57,16 +48,37 @@ server.post('/:username', async (req, res, next) => {
 server.post('/:projectId/logo', upload.single('image'), async (req, res, next) => {
   const { projectId } = req.params;
 
+  var project;
+
   try {
-    const project = await Project.findByPk(projectId);
-    await cloudinary.uploader.upload(req.file.path, { quality: 75 }, (error, result) => {
-      project.update({ ...project, logo: result.url });
-    });
-    fs.unlinkSync(req.file.path);
-    return res.send('Project updated.')
+    project = await Project.findByPk(projectId);
   } catch (err) {
-    next(err)
+    res.status(500).send('Something failed.')
   }
+  let streamUpload = (req) => {
+    return new Promise((resolve, reject) => {
+      let stream = cloudinary.uploader.upload_stream(
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            throw new Error('Failed to upload file.')
+          }
+        }
+      );
+
+      streamifier.createReadStream(req.file.buffer).pipe(stream);
+    });
+  };
+
+  async function upload(req) {
+    let result = await streamUpload(req);
+    project.update({ ...project, logo: result.url });
+  }
+
+  upload(req);
+
+  res.send ('File uploaded.')
 })
 
 server.patch('/:projectId', (req, res, next) => {
@@ -99,12 +111,12 @@ server.put('/:projectId/delete', async (req, res, next) => {
       thisDate = thisDate.toString();
       thisDate = thisDate.split(' ')
       var finalDate = `${thisDate[1].toLowerCase()} ${thisDate[3]}`;
-      await userInfo.update ({ ...userInfo, endDate: finalDate });
+      await userInfo.update({ ...userInfo, endDate: finalDate });
     }))
-    const project = await Project.findByPk (projectId);
-    await project.update ({ ...project, isDeleted: true });
-    await JobOpportunity.destroy ({ where: { projectId } });
-    res.send ('Project deleted.')
+    const project = await Project.findByPk(projectId);
+    await project.update({ ...project, isDeleted: true });
+    await JobOpportunity.destroy({ where: { projectId } });
+    res.send('Project deleted.')
   } catch (err) {
     next(err);
   }

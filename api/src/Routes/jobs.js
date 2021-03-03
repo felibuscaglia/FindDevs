@@ -1,6 +1,5 @@
 const server = require("express").Router();
 const { JobOpportunity, Project, User, Skills } = require("../db");
-const cloudinary = require('cloudinary').v2;
 
 server.get('/', (req, res, next) => {
     JobOpportunity.findAll({ include: [{ model: User, as: 'Applicants' }, { model: Project, include: { model: User } }, { model: Skills }] })
@@ -50,8 +49,6 @@ server.post('/:jobId/applicants', (req, res, next) => {
 server.delete('/:jobId/applicants', (req, res, next) => {
     const { jobId } = req.params;
     const { username } = req.body;
-
-    console.log(req.body, 'REQBODY!!!')
 
     JobOpportunity.findByPk(jobId, { include: { model: User, as: 'Applicants' } })
         .then(job => {
