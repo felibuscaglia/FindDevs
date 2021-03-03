@@ -119,6 +119,11 @@ function HeaderUser(props) {
                                             <span>Your profile</span>
                                         </div>
                                     </MenuItem>
+                                    <MenuItem onClick={() => window.location.replace('/edit/user/me')}>
+                                        <div className={style.dropdown}>
+                                            <span>Edit your profile</span>
+                                        </div>
+                                    </MenuItem>
                                     <Link to='/admin/panel' className='links'>
                                         <MenuItem>
                                             <div className={style.dropdown}>

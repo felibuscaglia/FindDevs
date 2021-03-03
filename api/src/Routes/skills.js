@@ -31,6 +31,15 @@ server.post ('/:username', (req, res, next) => {
         .catch (next)
 })
 
+server.delete ('/:skillId', (req, res, next) => {
+    const { skillId } = req.params;
+
+    Skills.findByPk (skillId)
+        .then (skill => skill.destroy())
+        .then (response => res.send ('Skill deleted.'))
+        .catch (next)
+})
+
 server.post ('/:username/validate', (req, res, next) => {
     const { username } = req.params;
     const { skill } = req.body;
