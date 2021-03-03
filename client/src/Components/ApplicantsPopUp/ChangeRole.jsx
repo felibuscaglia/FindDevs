@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './ApplicantsPopUp.module.css';
 import axios from 'axios';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function ChangeRole({ userData, setChangeRole, projectName }) {
 
@@ -8,7 +9,7 @@ function ChangeRole({ userData, setChangeRole, projectName }) {
 
     function changeRole () {
         const data = userData.userXprojects;
-        axios.put (`http://localhost:5001/projects/${userData.userXprojects.userId}/${userData.userXprojects.projectId}/role`, { role,  userXprojects: data })
+        axios.put (`${REACT_APP_DATABASE_URL}/projects/${userData.userXprojects.userId}/${userData.userXprojects.projectId}/role`, { role,  userXprojects: data })
             .then (res => window.location.reload ())
             .catch (err => console.log (err))
     }

@@ -30,8 +30,6 @@ function JobCard({ job, filterJobs, setLoading, skillSelection }) {
     function addSkill (skill) {
         setLoading (true);
         const dontRepeat = skillSelection.find (filtered => filtered.id === skill.id);
-        console.log (dontRepeat, 'dont repeat');
-        console.log (skillSelection, 'SKILL SELECTION')
         if (!dontRepeat) filterJobs(skill);
         setLoading (false);
     }

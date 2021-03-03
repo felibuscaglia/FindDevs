@@ -7,6 +7,7 @@ import Loading from '../../Media/Loading.gif';
 import Register from '../../Components/PopUps/RegisterPopUp';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index'; 
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function JobInfo({ jobID, user, setUserInfo }) {
     const [job, setJob] = useState({});
@@ -26,7 +27,7 @@ function JobInfo({ jobID, user, setUserInfo }) {
                 asyncUseEffect(user.username);
             } else setNotUser (true)
         }
-        axios.get(`http://localhost:5001/jobs/${jobID}/jobInfo`)
+        axios.get(`${REACT_APP_DATABASE_URL}/jobs/${jobID}/jobInfo`)
             .then(jobInfo => {
                 setJob(jobInfo.data);
                 const found = jobInfo.data.Applicants.find(applicant => applicant.id === user.id);
@@ -40,7 +41,7 @@ function JobInfo({ jobID, user, setUserInfo }) {
     }, [user])
 
     function applyToJob() {
-        axios.post(`http://localhost:5001/jobs/${jobID}/applicants`, { username: user.username })
+        axios.post(`${REACT_APP_DATABASE_URL}/jobs/${jobID}/applicants`, { username: user.username })
             .then(res => setApplied(true))
             .catch(err => console.log(err))
     }

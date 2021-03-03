@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import style from './PopUpStyle.module.css';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import RegisterPopUp from './RegisterPopUp';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function LoginPopUp({ isRegister }) {
 
@@ -20,11 +20,11 @@ function LoginPopUp({ isRegister }) {
     }
 
     function handleSubmit() {
-        axios.post('http://localhost:5001/auth/login', input)
+        axios.post(`${REACT_APP_DATABASE_URL}/auth/login`, input)
             .then(res => {
                 const user = jwt.decode(res.data);
                 localStorage.setItem('user', JSON.stringify(res.data));
-                window.location.replace(`http://localhost:3000/user/${user.username}`)
+                window.location.replace(`/user/${user.username}`)
             })
             .catch(err => setError(true))
     }

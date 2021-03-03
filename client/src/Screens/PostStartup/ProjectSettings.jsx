@@ -10,6 +10,7 @@ import UserCard from './UserSettingsCard';
 import Confirmation from '../../Components/PopUps/Confirmation';
 import { setUserInfo } from '../../Actions/index';
 import jwt from 'jsonwebtoken';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function ProjectSettings({ user, projectID, setUserInfo }) {
 
@@ -33,9 +34,8 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                 asyncUseEffect(user.username);
             } else window.location.replace('/error');
         }
-        axios.get(`http://localhost:5001/projects/${projectID}`)
+        axios.get(`${REACT_APP_DATABASE_URL}/projects/${projectID}`)
             .then(projectData => {
-                console.log (projectData);
                 const userFound = projectData.data.users.find (member => member.id === user.id);
                 if (projectData.data.isDeleted || !userFound || !userFound.userXprojects.isFounder) window.location.replace ('/error'); 
                 setPreview(projectData.data.logo)
@@ -74,7 +74,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
     function handleSubmit() {
         setLoading(true);
         input.brightness = getBrightness (input.mainColor);
-        axios.patch(`http://localhost:5001/projects/${projectID}`, input)
+        axios.patch(`${REACT_APP_DATABASE_URL}/projects/${projectID}`, input)
             .then(res => {
                 if (file) {
                     const newForm = new FormData();
@@ -84,7 +84,7 @@ function ProjectSettings({ user, projectID, setUserInfo }) {
                             'content-type': 'multipart/form-data'
                         }
                     };
-                    return axios.post(`http://localhost:5001/projects/${projectID}/logo`, newForm, config);
+                    return axios.post(`${REACT_APP_DATABASE_URL}/projects/${projectID}/logo`, newForm, config);
                 } else return window.location.replace ('/admin/panel')
             })
             .then(res => window.location.replace('/admin/panel'))

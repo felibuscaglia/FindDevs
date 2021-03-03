@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import style from './ApplicantsPopUp.module.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import ApplicantsList from './ApplicantsList';
 import Accepted from './Accepted';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function ApplicantsPopUp({ job, projectName, brightness, projectLogo }) {
 
@@ -12,7 +12,7 @@ function ApplicantsPopUp({ job, projectName, brightness, projectLogo }) {
     const [decided, setDecided] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/jobs/${job.id}/applicants`)
+        axios.get(`${REACT_APP_DATABASE_URL}/jobs/${job.id}/applicants`)
             .then(applicantes => setApplicants(applicantes.data))
             .catch(err => console.log(err))
     }, [])

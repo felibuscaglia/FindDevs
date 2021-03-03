@@ -9,6 +9,7 @@ import { getBrightness } from '../../utils';
 import Loading from '../../Media/Loading.gif';
 import { setUserInfo } from '../../Actions/index';
 import jwt from 'jsonwebtoken';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function PostStartup({ user, limitOfPosts, setUserInfo }) {
     const [input, setInput] = useState({ mainColor: '#000' });
@@ -67,7 +68,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
         input.isPremium = user.isPremium;
         input.ownerId = user.id;
         input.brightness = getBrightness(input.mainColor);
-        axios.post(`http://localhost:5001/projects/${user.username}`, input)
+        axios.post(`${REACT_APP_DATABASE_URL}/projects/${user.username}`, input)
             .then(res => {
                 if (file) {
                     const newForm = new FormData();
@@ -77,7 +78,7 @@ function PostStartup({ user, limitOfPosts, setUserInfo }) {
                             'content-type': 'multipart/form-data'
                         }
                     };
-                    return axios.post(`http://localhost:5001/projects/${res.data.id}/logo`, newForm, config);
+                    return axios.post(`${REACT_APP_DATABASE_URL}/projects/${res.data.id}/logo`, newForm, config);
                 } else window.location.replace('/admin/panel')
             })
             .then(res => window.location.replace('/admin/panel'))

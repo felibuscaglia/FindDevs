@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Register from '../PopUps/RegisterPopUp';
 import SearchBar from './SearchBar';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function HeaderUser(props) {
 
@@ -35,10 +36,10 @@ function HeaderUser(props) {
     async function acceptInvitation(notification) {
         var message = `🤝 ${props.userInfo.username} is now part of ${notification.projectName} 🤝`;
         try {
-            await axios.post(`http://localhost:5001/users/${props.userInfo.username}/project/${notification.projectId}`, { jobTitle: notification.jobTitle });
-            await axios.post(`http://localhost:5001/users/${notification.ownerUsername}/notifications`, { content: message, type: 'Joined', projectLogo: notification.projectLogo });
-            await axios.delete(`http://localhost:5001/jobs/${notification.jobId}`);
-            await axios.delete(`http://localhost:5001/users/${props.userInfo.id}/notifications/${notification.id}`)
+            await axios.post(`${REACT_APP_DATABASE_URL}/users/${props.userInfo.username}/project/${notification.projectId}`, { jobTitle: notification.jobTitle });
+            await axios.post(`${REACT_APP_DATABASE_URL}/users/${notification.ownerUsername}/notifications`, { content: message, type: 'Joined', projectLogo: notification.projectLogo });
+            await axios.delete(`${REACT_APP_DATABASE_URL}/jobs/${notification.jobId}`);
+            await axios.delete(`${REACT_APP_DATABASE_URL}/users/${props.userInfo.id}/notifications/${notification.id}`)
             window.location.replace('/admin/panel');
         } catch (err) {
             console.log(err);
@@ -47,7 +48,7 @@ function HeaderUser(props) {
 
     async function rejectInvitation(notificationid, userId) {
         try {
-            await axios.delete(`http://localhost:5001/users/${userId}/notifications/${notificationid}`);
+            await axios.delete(`${REACT_APP_DATABASE_URL}/users/${userId}/notifications/${notificationid}`);
             setDeleted(deleted.concat(notificationid))
         } catch (err) {
             console.log(err);

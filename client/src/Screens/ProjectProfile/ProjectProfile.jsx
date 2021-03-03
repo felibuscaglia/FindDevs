@@ -7,6 +7,7 @@ import JobCard from '../JobListing/JobCardProfile';
 import Loading from '../../Media/Loading.gif';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function ProjectProfile({ projectID, user }) {
 
@@ -27,7 +28,7 @@ function ProjectProfile({ projectID, user }) {
     })(Tooltip);
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/projects/${projectID}`)
+        axios.get(`${REACT_APP_DATABASE_URL}/projects/${projectID}`)
             .then(project => {
                 setProject(project.data);
                 setLoading(false);
@@ -37,7 +38,7 @@ function ProjectProfile({ projectID, user }) {
 
     function modifyUpvotes() {
         const updatedUpvotes = { upvotes: project.upvotes + 1 };
-        axios.patch(`http://localhost:5001/projects/${project.id}`, updatedUpvotes)
+        axios.patch(`${REACT_APP_DATABASE_URL}/projects/${project.id}`, updatedUpvotes)
             .then(res => {
                 setProject({ ...project, upvotes: project.upvotes + 1 });
                 setHasUpvoted(true);

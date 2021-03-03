@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ChangeRole from './ChangeRole';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function MembersPopUp({ projectID, userInfo, brightness, isFounder }) {
 
@@ -15,7 +16,7 @@ function MembersPopUp({ projectID, userInfo, brightness, isFounder }) {
     const [fire, setFire] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/projects/${projectID}`)
+        axios.get(`${REACT_APP_DATABASE_URL}/projects/${projectID}`)
             .then(projectData => setProject(projectData.data))
             .catch(err => console.log(err))
     }, [])
@@ -28,7 +29,7 @@ function MembersPopUp({ projectID, userInfo, brightness, isFounder }) {
     }
 
     function fireUser(userID) {
-        axios.delete(`http://localhost:5001/projects/${projectID}/${userID}/fire`)
+        axios.delete(`${REACT_APP_DATABASE_URL}/projects/${projectID}/${userID}/fire`)
             .then(res => window.location.reload ())
             .catch(err => console.log(err))
     }

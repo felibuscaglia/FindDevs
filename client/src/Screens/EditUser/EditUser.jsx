@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import style from './EditUser.module.css';
 import { connect } from 'react-redux';
 import Verified from '../../Media/Verification.png';
@@ -11,6 +11,7 @@ import axios from 'axios';
 import { getBrightness } from '../../utils';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index';
+const { REACT_APP_DATABASE_URL } = process.env;
 
 function EditUser({ user, skills, setUserInfo }) {
 
@@ -106,7 +107,7 @@ function EditUser({ user, skills, setUserInfo }) {
         input.brightness = getBrightness(input.color);
         const filteredSkills = selectedSkills.map(skill => skill.id);
         input.skills = filteredSkills;
-        axios.put(`http://localhost:5001/users/${user.id}`, input)
+        axios.put(`${REACT_APP_DATABASE_URL}/users/${user.id}`, input)
             .then(res => {
                 if (file) {
                     const newForm = new FormData();
@@ -116,7 +117,7 @@ function EditUser({ user, skills, setUserInfo }) {
                             'content-type': 'multipart/form-data'
                         }
                     };
-                    return axios.post(`http://localhost:5001/users/${user.id}/profilePic`, newForm, config);
+                    return axios.post(`${REACT_APP_DATABASE_URL}/users/${user.id}/profilePic`, newForm, config);
                 } else {
                     window.location.replace(`/user/${user.username}`)
                 }
