@@ -8,8 +8,6 @@ import Loading from '../../Media/Loading.gif';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index';
 import { Link } from 'react-router-dom';
-const { REACT_APP_DATABASE_URL } = process.env;
-const { REACT_APP_PUBLIC_URL } = process.env;
 
 function AddJob({ projectID, skills, setUserInfo, user }) {
 
@@ -22,7 +20,7 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
     async function asyncUseEffect(username, userId) {
         await (setUserInfo(username));
         try {
-            const projectData = await axios.get(`${REACT_APP_DATABASE_URL}/projects/${projectID}`);
+            const projectData = await axios.get(`/projects/${projectID}`);
             const userFound = await projectData.data.users.find(member => member.id === userId);
             if (!userFound || userFound.userXprojects.isFounder === false || projectData.data.isDeleted) window.location.replace('/error');
             setProject(projectData.data);
@@ -76,8 +74,8 @@ function AddJob({ projectID, skills, setUserInfo, user }) {
 
         if (!input.title || !input.description) return setError('Please complete all the necessary fields.')
 
-        axios.post(`${REACT_APP_DATABASE_URL}/jobs/${project.id}`, { jobInfo: input, skills: justIDs })
-            .then(res => window.location.replace(`${REACT_APP_PUBLIC_URL}/project/jobPanel/${project.id}`))
+        axios.post(`/jobs/${project.id}`, { jobInfo: input, skills: justIDs })
+            .then(res => window.location.replace(`/project/jobPanel/${project.id}`))
             .catch(err => setError('Something failed—we are sorry!'))
     }
 

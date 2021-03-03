@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Loading from '../../Media/Loading.gif';
 import Empty from '../../Media/JobApplicants.svg';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function ApplicantsList({ job, projectName, applicants, close, setDecided, setApplicants, projectLogo }) {
 
@@ -14,11 +13,11 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
         var message = `🎉 You are now part of ${projectName}! 🎉`;
         setLoading(true);
 
-        axios.post(`${REACT_APP_DATABASE_URL}/users/${applicantName}/project/${job.projectId}`, { jobTitle: job.title })
+        axios.post(`/users/${applicantName}/project/${job.projectId}`, { jobTitle: job.title })
             .then(res => {
-                return axios.post(`${REACT_APP_DATABASE_URL}/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId, projectLogo: projectLogo })
+                return axios.post(`/users/${applicantName}/notifications`, { content: message, type: 'Acceptance', projectId: job.projectId, projectLogo: projectLogo })
             })
-            .then(res => axios.delete(`${REACT_APP_DATABASE_URL}/jobs/${job.id}`))
+            .then(res => axios.delete(`/jobs/${job.id}`))
             .then(res => {
                 setLoading(false);
                 setDecided(applicantName);
@@ -31,7 +30,7 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
     }
 
     function rejectApplicant(applicantName) {
-        axios.delete(`${REACT_APP_DATABASE_URL}/jobs/${job.id}/applicants`, { data: { username: applicantName }})
+        axios.delete(`/jobs/${job.id}/applicants`, { data: { username: applicantName }})
             .then(res => {
                 const filteredApplicants = applicants.filter(applicant => applicant.username !== applicantName);
                 setApplicants(filteredApplicants);

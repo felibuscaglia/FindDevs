@@ -5,12 +5,11 @@ import moment from 'moment';
 import { getDate } from '../../utils';
 import ApplicantsPopUp from '../../Components/ApplicantsPopUp/ApplicantsPopUp';
 import axios from 'axios';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function JobCardProfile({ job, project, isJobPanel }) {
 
     function deleteJob() {
-        axios.delete(`${REACT_APP_DATABASE_URL}/jobs/${job.id}`)
+        axios.delete(`/jobs/${job.id}`)
             .then(window.location.reload())
             .catch(err => console.log(err))
     }

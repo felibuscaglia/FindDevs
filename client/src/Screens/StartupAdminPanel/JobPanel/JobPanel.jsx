@@ -8,7 +8,6 @@ import Loading from '../../../Media/Loading.gif';
 import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../../Actions/index';
 import { connect } from 'react-redux';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function JobPanel({ projectID, setUserInfo, user }) {
     const [project, setProject] = useState({});
@@ -17,7 +16,7 @@ function JobPanel({ projectID, setUserInfo, user }) {
     async function asyncUseEffect(username, userId) {
         await (setUserInfo(username));
         try {
-            const projectData = await axios.get(`${REACT_APP_DATABASE_URL}/projects/${projectID}`);
+            const projectData = await axios.get(`/projects/${projectID}`);
             const userFound = await projectData.data.users.find(member => member.id === userId);
             if (!userFound || userFound.userXprojects.isFounder === false || projectData.data.isDeleted) window.location.replace('/error');
             setProject(projectData.data);

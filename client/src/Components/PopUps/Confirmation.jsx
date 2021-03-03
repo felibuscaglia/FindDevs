@@ -3,7 +3,6 @@ import style from './PopUpStyle.module.css';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
 import Loading from '../../Media/Loading.gif';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function Confirmation({ project }) {
 
@@ -11,7 +10,7 @@ function Confirmation({ project }) {
 
     function deleteProject() {
         setLoading (true);
-        axios.put(`${REACT_APP_DATABASE_URL}/projects/${project.id}/delete`, project.users)
+        axios.put(`/projects/${project.id}/delete`, project.users)
             .then (res => window.location.replace ('/admin/panel'))
             .catch(err => setLoading (false))
     }

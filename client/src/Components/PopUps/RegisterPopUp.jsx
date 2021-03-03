@@ -4,7 +4,6 @@ import Popup from 'reactjs-popup';
 import axios from 'axios';
 import randomColor from 'randomcolor';
 import { getBrightness } from '../../utils';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function RegisterPopUp({ isHomepage, isMain, isMainHomepage, isJobProfile }) {
 
@@ -37,7 +36,7 @@ function RegisterPopUp({ isHomepage, isMain, isMainHomepage, isJobProfile }) {
         input.color = randomColor();
         input.brightness = getBrightness(input.color);
         input.profilePic = 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png';
-        axios.post(`${REACT_APP_DATABASE_URL}/auth/register`, input)
+        axios.post('/auth/register', input)
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res.data));
                 window.location.replace('/edit/user/me');

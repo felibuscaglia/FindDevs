@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import JobCard from './JobCard';
 import Empty from '../../Media/hiring.svg';
 import { Link } from 'react-router-dom';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function HirePopUp({ color, applicantUsername, user, applicantsNotifications }) {
 
@@ -16,7 +15,7 @@ function HirePopUp({ color, applicantUsername, user, applicantsNotifications }) 
     const [selectionUsers, setSelectionUsers] = useState([]);
 
     function getInfoAndSetProject(project) {
-        axios.get(`${REACT_APP_DATABASE_URL}/projects/${project.id}`)
+        axios.get(`/projects/${project.id}`)
             .then(jobsData => {
                 setJobs(jobsData.data.jobOpportunities);
                 setSelectionUsers(jobsData.data.users);

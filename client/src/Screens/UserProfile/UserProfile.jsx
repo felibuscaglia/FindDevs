@@ -9,7 +9,6 @@ import { withStyles } from "@material-ui/core/styles";
 import ProjectCard from '../../Components/ProfileProjectCard/ProfileProjectCard';
 import Loading from '../../Media/Loading.gif';
 import EmptyUser from '../../Media/EmptyUserProfile.svg';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function UserProfile({ username, pathname }) {
 
@@ -24,7 +23,7 @@ function UserProfile({ username, pathname }) {
     useEffect(() => {
         const usuario = jwt.decode(JSON.parse(localStorage.getItem('user')));
         if (!usuario) setNoUser(true);
-        axios.get(`${REACT_APP_DATABASE_URL}/users/${username}`)
+        axios.get(`/users/${username}`)
             .then(res => {
                 if (res.data === null) window.location.replace('/error');
                 setUser(res.data);
@@ -42,7 +41,7 @@ function UserProfile({ username, pathname }) {
 
     function validateSkill(skill) {
         if (hasWorked) {
-            axios.post(`${REACT_APP_DATABASE_URL}/skills/${username}/validate`, { skill: skill.label })
+            axios.post(`/skills/${username}/validate`, { skill: skill.label })
                 .then(res => window.location.reload())
                 .catch(err => console.log(err))
         }

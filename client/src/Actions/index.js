@@ -1,9 +1,8 @@
 import axios from 'axios';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 export function setSkills() {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/skills`)
+        return axios.get('/skills')
             .then(skillsData => dispatch({ type: 'SET_GLOBAL_SKILLS', payload: skillsData.data }))
             .catch(err => console.log(err))
     }
@@ -11,7 +10,7 @@ export function setSkills() {
 
 export function setUserInfo(username) {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/users/${username}/`)
+        return axios.get(`/users/${username}/`)
             .then(userData => dispatch({ type: 'SET_USER_DATA', payload: userData.data }))
             .catch(err => console.log(err))
     }
@@ -19,7 +18,7 @@ export function setUserInfo(username) {
 
 export function getNotifications(username) {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/users/${username}/`)
+        return axios.get(`/users/${username}/`)
             .then(userData => {
                 dispatch({ type: 'GET_NOTIFICATIONS', payload: userData.data.notifications })
             })
@@ -29,7 +28,7 @@ export function getNotifications(username) {
 
 export function setProjects() {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/projects`)
+        return axios.get('/projects')
             .then(jobsData => dispatch({ type: 'SET_PROJECTS', payload: jobsData.data }))
             .catch(err => console.log(err))
     }
@@ -37,7 +36,7 @@ export function setProjects() {
 
 export function getUsers() {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/users`)
+        return axios.get('/users')
             .then(usersData => dispatch({ type: 'GET_USERS', payload: usersData.data }))
             .catch(err => console.log(err))
     }
@@ -45,7 +44,7 @@ export function getUsers() {
 
 export function getJobs() {
     return function (dispatch) {
-        return axios.get(`${REACT_APP_DATABASE_URL}/jobs`)
+        return axios.get('/jobs')
             .then(jobsData => {
                 jobsData.data = jobsData.data.sort ((a, b) => {
                     return b.project.isPremium - a.project.isPremium

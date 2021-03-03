@@ -5,7 +5,7 @@ import Verified from '../../Media/Verification.png';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { connect } from 'react-redux';
-const { REACT_APP_DATABASE_URL, REACT_APP_PAYPAL_CLIENTID } = process.env;
+const { REACT_APP_PAYPAL_CLIENTID } = process.env;
 
 function GoPremium({ isAdminPanel, isHomepage, userInfo }) {
 
@@ -19,7 +19,7 @@ function GoPremium({ isAdminPanel, isHomepage, userInfo }) {
             orderID: data.orderID,
             payerID: data.payerID
         }
-        axios.post(`${REACT_APP_DATABASE_URL}/users/${userInfo.id}/premium`, infoToUpdate)
+        axios.post(`/users/${userInfo.id}/premium`, infoToUpdate)
             .then(res => window.location.replace('/success'))
             .catch(err => console.log(err))
     }

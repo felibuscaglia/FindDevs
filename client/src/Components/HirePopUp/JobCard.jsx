@@ -3,7 +3,6 @@ import style from './HirePopUp.module.css';
 import axios from 'axios';
 import Loading from '../../Media/Loading.gif';
 import Invited from '../ApplicantsPopUp/Accepted';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function JobCard({ job, project, applicantUsername, user, close, alreadyInvited }) {
 
@@ -14,7 +13,7 @@ function JobCard({ job, project, applicantUsername, user, close, alreadyInvited 
         setLoading(true);
         var message = `${jobTitle} at ${project.project.name}`;
 
-        axios.post(`${REACT_APP_DATABASE_URL}/users/${applicantUsername}/notifications`, { content: message, type: 'Invitation', projectId: project.project.id, jobTitle: jobTitle, projectLogo: project.project.logo, projectName: project.project.name, ownerUsername: user.username, jobId })
+        axios.post(`/users/${applicantUsername}/notifications`, { content: message, type: 'Invitation', projectId: project.project.id, jobTitle: jobTitle, projectLogo: project.project.logo, projectName: project.project.name, ownerUsername: user.username, jobId })
             .then(res => {
                 setInvited(true);
                 setLoading(false);

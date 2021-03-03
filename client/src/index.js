@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals.js';
 import './index.css';
 import { Provider } from "react-redux";
 import store from "./Store/index";
+import axios from 'axios';
 
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:5001";
 
 ReactDOM.render(
   <Provider store={store}>

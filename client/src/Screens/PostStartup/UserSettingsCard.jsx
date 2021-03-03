@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import style from './PostStartup.module.css';
 import axios from 'axios';
 import Loading from '../../Media/Loading.gif';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function UserSettingsCard({ user, projectID }) {
 
@@ -10,7 +9,7 @@ function UserSettingsCard({ user, projectID }) {
 
     function makeFounder(userId) {
         setBtnTxt (null);
-        axios.post (`${REACT_APP_DATABASE_URL}/users/${user.id}/${projectID}/founders`)
+        axios.post (`/users/${user.id}/${projectID}/founders`)
             .then (res => setBtnTxt (<i class="fas fa-check-circle"></i>))
             .catch (err => setBtnTxt ('Founder'))
     }

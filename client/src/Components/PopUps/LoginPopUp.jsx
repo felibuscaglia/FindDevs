@@ -3,7 +3,6 @@ import Popup from 'reactjs-popup';
 import style from './PopUpStyle.module.css';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function LoginPopUp({ isRegister }) {
 
@@ -20,7 +19,7 @@ function LoginPopUp({ isRegister }) {
     }
 
     function handleSubmit() {
-        axios.post(`${REACT_APP_DATABASE_URL}/auth/login`, input)
+        axios.post('/auth/login', input)
             .then(res => {
                 const user = jwt.decode(res.data);
                 localStorage.setItem('user', JSON.stringify(res.data));

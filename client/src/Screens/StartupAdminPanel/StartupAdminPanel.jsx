@@ -10,7 +10,6 @@ import jwt from 'jsonwebtoken';
 import { setUserInfo } from '../../Actions/index';
 import Loading from '../../Media/Loading.gif';
 import GoPremium from '../../Components/GoPremiumPopUp/GoPremium';
-const { REACT_APP_DATABASE_URL } = process.env;
 
 function StartupAdminPanel({ user, limitOfPosts, setUserInfo }) {
     const [projects, setProjects] = useState([]);
@@ -27,7 +26,7 @@ function StartupAdminPanel({ user, limitOfPosts, setUserInfo }) {
                 asyncUseEffect(user.username);
             } else window.location.replace('/error');
         }
-        axios.get(`${REACT_APP_DATABASE_URL}/users/${user.username}/projects`)
+        axios.get(`/users/${user.username}/projects`)
             .then(projectsData => {
                 projectsData.data = projectsData.data.sort((a, b) => {
                     return b.userXprojects.isFounder - a.userXprojects.isFounder
