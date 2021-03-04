@@ -17,7 +17,7 @@ function UserSettingsCard({ user, projectID }) {
     return (
         <div style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
             <div>
-                <img alt="User profile picture" src={user.profilePic} id={style.PPic} />
+                <img alt="User profile" src={user.profilePic} id={style.PPic} />
                 <span className='font800'>@ {user.username}</span>
             </div>
             <span onClick={() => makeFounder (user.id)} style={{ color: user.color, background: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.founder}>{btnTxt ? btnTxt : <img alt="Loading GIF" id={style.miniLoading} src={Loading} />}</span>

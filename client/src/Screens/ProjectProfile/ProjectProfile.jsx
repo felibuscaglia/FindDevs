@@ -57,10 +57,10 @@ function ProjectProfile({ projectID, user }) {
             <div id={style.presentDiv}>
                 <div id={style.socialMediaDiv}>
                     {hasUpvoted || project.isDeleted ? <button style={{ display: project.isDeleted ? 'none' : 'inline', background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-check-circle"></i></button> : <button onClick={modifyUpvotes} style={{ background: project.mainColor, color: project.brightness === 'bright' ? '#fff' : '#000' }} id={style.upvoteBtn}><i class="fas fa-rocket"></i> Upvote | {project.upvotes}</button>}
-                    {project.productHunt && <a href={project.productHunt} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-product-hunt"></i></a>}
-                    {project.twitter && <a href={project.twitter} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-twitter-square"></i></a>}
-                    {project.linkedIn && <a href={project.linkedIn} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-linkedin"></i></a>}
-                    {project.website && <a href={project.website} target='blank' style={{ textDecoration: 'none', color: project.mainColor }}><i class="fas fa-globe"></i></a>}
+                    {project.productHunt && <a href={project.productHunt} target='blank' rel="noreferrer" style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-product-hunt"></i></a>}
+                    {project.twitter && <a href={project.twitter} target='blank' rel="noreferrer" style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-twitter-square"></i></a>}
+                    {project.linkedIn && <a href={project.linkedIn} target='blank' rel="noreferrer" style={{ textDecoration: 'none', color: project.mainColor }}><i class="fab fa-linkedin"></i></a>}
+                    {project.website && <a href={project.website} target='blank' rel="noreferrer" style={{ textDecoration: 'none', color: project.mainColor }}><i class="fas fa-globe"></i></a>}
                 </div>
                 <div id={style.projectLogo}><img alt="Project logo" src={project.logo} id={style.logo} /></div>
                 <h1 id={style.projectName}>{project.name} {project.isDeleted && <BlueOnGreenTooltip title='This project has been closed by its founders.' arrow><span id={style.closedSpan}>CLOSED</span></BlueOnGreenTooltip>}</h1>
@@ -76,7 +76,7 @@ function ProjectProfile({ projectID, user }) {
                     {project.users && project.users.map(user =>
                         user.userXprojects.endDate === null ?
                             <div key={user.id} style={{ background: user.color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.userDiv}>
-                                <img alt="Profile picture" src={user.profilePic} id={style.profilePic} />
+                                <img alt="Profile" src={user.profilePic} id={style.profilePic} />
                                 <div className='displayFlexColumn' id='alignItemsCenter'>
                                     <h5 className='font800'>@ {user.username}</h5>
                                     <span id={style.lowEnphasis}>{user.userXprojects.role}</span>

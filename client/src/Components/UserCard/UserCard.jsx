@@ -45,7 +45,7 @@ function UserCard({ user, setLoading, selectWorkers, skillSelection }) {
     return (
         <div id={style.userCard}>
             <div className='displayFlexColumn' id='alignItemsCenter'>
-                <img alt="Profile picture" id={style.profilePic} src={user.profilePic} />
+                <img alt="Profile" id={style.profilePic} src={user.profilePic} />
                 <div id='alignItemsCenter' className='displayFlex'>
                     <span className='font800' style={{ alignSelf: 'flex-start' }}><span style={{ color: user.color }}>@ </span>{user.username}</span>
                     {user.isPremium && <img alt="Verification badge" id={style.verification} src={Verification} />}

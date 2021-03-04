@@ -7,13 +7,6 @@ export function getBrightness(bgColor) {
     'dark' : 'bright';
 }
 
-export function verifyPremiumProject(projectUsers) {
-  for (var i = 0; i < projectUsers.length; i++) {
-    if (projectUsers[i].userXprojects.isFounder && projectUsers[i].isPremium) return true;
-  }
-  return false;
-}
-
 export function findSuggestions(array, searchInput) {
   var searchSuggestions = { projects: [], users: [] }
   for (var i = 0; i < array.length; i++) {

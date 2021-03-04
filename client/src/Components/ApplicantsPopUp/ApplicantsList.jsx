@@ -59,9 +59,9 @@ function ApplicantsList({ job, projectName, applicants, close, setDecided, setAp
                             </div>
                             <div id={style.socialMediaDiv}>
                                 <Link to={`/user/${applicant.username}`}><i style={{ color: applicant.color }} class="fas fa-address-card"></i></Link>
-                                {applicant.gitHub && <a target='blank' href={applicant.gitHub} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-github-square"></i></a>}
-                                {applicant.linkedIn && <a target='blank' href={applicant.linkedIn} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-linkedin"></i></a>}
-                                {applicant.twitter && <a target='blank' href={applicant.twitter} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-twitter-square"></i></a>}
+                                {applicant.gitHub && <a target='blank' rel="noreferrer" href={applicant.gitHub} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-github-square"></i></a>}
+                                {applicant.linkedIn && <a target='blank' rel="noreferrer" href={applicant.linkedIn} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-linkedin"></i></a>}
+                                {applicant.twitter && <a target='blank' rel="noreferrer" href={applicant.twitter} style={{ textDecoration: 'none', color: applicant.color }}><i class="fab fa-twitter-square"></i></a>}
                             </div>
                         </div>
                     )}

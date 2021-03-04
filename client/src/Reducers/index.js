@@ -1,5 +1,3 @@
-import WorkersList from "../Screens/WorkersList/WorkersList"
-
 const initialState = {
     allSkills: [],
     userInfo: {},

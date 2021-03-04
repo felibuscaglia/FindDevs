@@ -65,9 +65,9 @@ function UserProfile({ username, pathname }) {
                     <div className='displayFlexColumn' id='alignItemsCenter'>
                         <div id={style.socialMediaDiv} style={{ color: color }}>
                             {isUser ? <Link className='link' to='/edit/user/me'><button style={{ background: color, color: user.brightness === 'bright' ? '#fff' : '#000' }} id={style.btn}>UPDATE PROFILE</button></Link> : noUser ? null : <HirePopUp applicantsNotifications={user.notifications} applicantUsername={user.username} color={color} />}
-                            {user.gitHub && <a target='_blank' href={user.gitHub} style={{ textDecoration: 'none', color: color }}><i class="fab fa-github-square"></i></a>}
-                            {user.linkedIn && <a target='_blank' href={user.linkedIn} style={{ textDecoration: 'none', color: color }}><i class="fab fa-linkedin"></i></a>}
-                            {user.twitter && <a target='_blank' href={user.twitter} style={{ textDecoration: 'none', color: color }}><i class="fab fa-twitter-square"></i></a>}
+                            {user.gitHub && <a target='_blank' rel="noreferrer" href={user.gitHub} style={{ textDecoration: 'none', color: color }}><i class="fab fa-github-square"></i></a>}
+                            {user.linkedIn && <a target='_blank' rel="noreferrer" href={user.linkedIn} style={{ textDecoration: 'none', color: color }}><i class="fab fa-linkedin"></i></a>}
+                            {user.twitter && <a target='_blank' rel="noreferrer" href={user.twitter} style={{ textDecoration: 'none', color: color }}><i class="fab fa-twitter-square"></i></a>}
                         </div>
                         <div style={{ border: `10px solid ${color}`, alignSelf: 'center', backgroundImage: `url(${user.profilePic})` }} id={style.profilePic}></div>
                         <h3 className='font800'><span style={{ color: color }}>@ </span>{user.username}</h3>
