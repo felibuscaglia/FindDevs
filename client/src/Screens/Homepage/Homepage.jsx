@@ -25,7 +25,7 @@ function Homepage() {
                         <h1 id={style.create}>Create the next big thing.</h1>
                     </div>
                     <p className={style.txt}>
-                        Publish your startup idea and gather the team of developers you need to transform it into a reality. Start working with people who want your project to be a total success.
+                        Publish your startup idea and bring together the team of developers you need to transform it into a reality. Start working with people who want your project to be a total success.
                     </p>
                     <p className={style.txt}>
                         Post jobs, find the candidate that best suits your needs and start working. Also, you can always tempt those developers that you consider a perfect fit for your project.
