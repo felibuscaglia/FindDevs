@@ -13,6 +13,22 @@ cloudinary.config({
     api_secret: CLOUDINARY_SECRET
 });
 
+server.delete('/:userId/:projectId', async (req, res, next) => {
+    const { userId, projectId } = req.params;
+
+    try {
+        const userProjectInfo = await UserXProjects.findOne({ where: { userId, projectId } });
+        var thisDate = new Date(Date.now());
+        thisDate = thisDate.toString();
+        thisDate = thisDate.split(' ')
+        var finalDate = `${thisDate[1].toLowerCase()} ${thisDate[3]}`;
+        userProjectInfo.update({ ...userProjectInfo, endDate: finalDate });
+        res.send('User was deleted from project.');
+    } catch (err) {
+        next(err);
+    }
+})
+
 server.post('/:userId/premium', async (req, res, next) => {
     const { userId } = req.params;
 
@@ -42,28 +58,28 @@ server.post('/:userId/profilePic', upload.single('image'), async (req, res, next
 
     let streamUpload = (req) => {
         return new Promise((resolve, reject) => {
-          let stream = cloudinary.uploader.upload_stream(
-            (error, result) => {
-              if (result) {
-                resolve(result);
-              } else {
-                throw new Error('Failed to upload file.')
-              }
-            }
-          );
-    
-          streamifier.createReadStream(req.file.buffer).pipe(stream);
+            let stream = cloudinary.uploader.upload_stream(
+                (error, result) => {
+                    if (result) {
+                        resolve(result);
+                    } else {
+                        throw new Error('Failed to upload file.')
+                    }
+                }
+            );
+
+            streamifier.createReadStream(req.file.buffer).pipe(stream);
         });
-      };
-    
-      async function upload(req) {
+    };
+
+    async function upload(req) {
         let result = await streamUpload(req);
         user.update({ ...user, profilePic: result.url });
-      }
-    
-      upload(req);
-    
-      res.send ('File uploaded.')
+    }
+
+    upload(req);
+
+    res.send('File uploaded.')
 })
 
 server.put('/:userId', async (req, res, next) => {
@@ -144,26 +160,41 @@ server.delete('/:userId/notifications/:notificationId', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-server.post('/:username/project/:projectId', (req, res, next) => {
+server.post('/:username/project/:projectId', async (req, res, next) => {
     const { username, projectId } = req.params;
     const { jobTitle } = req.body;
 
-    var copyOfUser;
+    // var copyOfUser;
 
-    User.findOne({ where: { username: username } })
-        .then(user => {
-            copyOfUser = user;
-            return Project.findByPk(projectId)
-        })
-        .then(project => {
-            var thisDate = new Date(Date.now());
-            thisDate = thisDate.toString();
-            thisDate = thisDate.split(' ')
-            var finalDate = `${thisDate[1].toLowerCase()} ${thisDate[3]}`;
-            UserXProjects.create({ userId: copyOfUser.id, projectId: project.id, isFounder: false, isWorking: true, role: jobTitle, startDate: finalDate })
-        })
-        .then(response => res.status(200).send('The user is now part of your project!'))
-        .catch(next)
+    // User.findOne({ where: { username: username } })
+    //     .then(user => {
+    //         copyOfUser = user;
+    //         return Project.findByPk(projectId)
+    //     })
+    //     .then(project => {
+    //         var thisDate = new Date(Date.now());
+    //         thisDate = thisDate.toString();
+    //         thisDate = thisDate.split(' ')
+    //         var finalDate = `${thisDate[1].toLowerCase()} ${thisDate[3]}`;
+    //         UserXProjects.create({ userId: copyOfUser.id, projectId: project.id, isFounder: false, isWorking: true, role: jobTitle, startDate: finalDate })
+    //     })
+    //     .then(response => res.status(200).send('The user is now part of your project!'))
+    //     .catch(next)
+
+    try {
+        const user = await User.findOne({ where: { username: username } })
+        const userInfo = await UserXProjects.findOne({ where: { userId: user.id, projectId: projectId } });
+        var thisDate = new Date(Date.now());
+        thisDate = thisDate.toString();
+        thisDate = thisDate.split(' ')
+        var finalDate = `${thisDate[1].toLowerCase()} ${thisDate[3]}`;
+        if (userInfo) await userInfo.update({ ...userInfo, startDate: finalDate, endDate: null, role: jobTitle, isFounder: false, isWorking: true  });
+        else await UserXProjects.create({ userId: user.id, projectId: projectId, isFounder: false, isWorking: true, role: jobTitle, startDate: finalDate });
+
+        res.send('User is now part of the project.');
+    } catch (err) {
+        next (err);
+    }
 })
 
 server.post('/:username/edit', (req, res, next) => {

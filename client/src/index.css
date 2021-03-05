@@ -114,13 +114,12 @@ button {
 
 @media screen and (max-width: 480px) {
   #icon {
-      height: 25px;
+    height: 25px;
   }
   h1 {
     margin-bottom: 0px;
   }
 }
-
 
 #lowEnphasis {
   color: rgba(0, 0, 0, 0.6);
@@ -144,7 +143,6 @@ a {
 #popUpIcn {
   font-size: 25px;
 }
-
 
 #nunito {
   font-family: 'Nunito';
@@ -180,6 +178,7 @@ a {
   margin-top: 25px;
   margin-bottom: 10px;
 }
+
 h5 {
   padding: 0px;
   margin: 0px;
@@ -205,5 +204,5 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-button {
-  display:none;
+  display: none;
 }
