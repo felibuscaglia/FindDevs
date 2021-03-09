@@ -35,12 +35,8 @@ server.post('/:userId/premium', async (req, res, next) => {
     try {
         const user = await User.findByPk(userId);
         await user.update(req.body);
-        const userProjects = await Project.findAll({ where: { ownerId: userId, isDeleted: false } });
-        await Promise.all(
-            userProjects.map(async project => {
-                await project.update({ ...project, isPremium: true })
-            })
-        )
+        const userProjects = await Project.findAll({ where: { ownerId: userId, isDeleted: null } });
+        await userProjects.forEach (async project => await project.update ({ ...project, isPremium: true }));
         res.send('User is now premium.')
     } catch (err) {
         next(err);
